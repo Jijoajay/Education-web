@@ -1,0 +1,34 @@
+.course-slider-container{
+display: flex;
+flex-direction: column;
+margin: 30px 40px 30px 40px;
+}
+.course-slider{
+    display: flex;
+    justify-content: start;
+    overflow: hidden;
+}
+.course-product-containers{
+    padding-left: 15px;
+    transform: translateX(0);
+    transition: all 0.5s ease-in-out;
+}
+.course-img-div {
+    width:300;
+}
+.course-img-div img{
+    width: auto;
+}
+.arrow-left{
+    position: relative;
+    font-size: 30px;
+    top: 130px;
+    left: -20px;
+}
+.arrow-right{
+    position: relative;
+    font-size: 30px;
+    bottom: 170px;
+    left: 1520px;
+}
+

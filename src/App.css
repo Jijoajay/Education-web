@@ -1,38 +1,81 @@
-.App {
-  text-align: center;
+*{
+  scroll-behavior: smooth;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.signup-page{
+  height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  background-color: black;
 }
-
-.App-link {
-  color: #61dafb;
+.signup-container{
+  height: 500px;
+  width: 500px;
+  background-color: rgb(217,52,109);
+  border-radius: 15px;
+  border: none;
 }
+.signup-container h2{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 50px;
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+}
+.signupform{
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+.signupform label{
+  font-size: 20px;
+  font-weight: 800;
+  padding-top: 10px;
+}
+.signupform input{
+  height: 40px;
+  width: 350px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  border: none;
+  border-radius: 25px;
+}
+.signupform input:focus{
+  border: 2px solid pink;
+}
+::placeholder{
+  color: rgb(230, 132, 166);
+  font-weight: 800;
+}
+.signupform button{
+  margin-top: 30px;
+  width: 350px;
+  height: 40px;
+  font-size: 20px;
+  font-weight: 800;
+  border: 2px solid rgb(217,52,109);
+  border-radius: 25px;
+  color: rgb(217,52,109);
+  background-color: black;
+  transition: 0.5s all;
+}
+.signupform button:hover{
+  background-color: rgb(217,52,109);
+  color: black;
+  border: 4px solid black;
+  
+
+}
+.signupH2{
+  margin-bottom: 70px;
+}
+@media screen and (max-width:550px){
+  .signup-container{
+    height: 500px;
+    width: auto;
   }
 }

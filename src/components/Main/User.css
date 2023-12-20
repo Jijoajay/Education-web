@@ -1,0 +1,205 @@
+.user-page{
+    height: 100vh;
+    background-color: black;
+    width: 100vw;
+    display: flex;
+    padding: 2rem 10rem 2rem 10rem;
+    padding-top: 40px;
+}
+.side-content{
+    width: 400px;
+}
+.profile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+
+}
+.profile img{
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    border: 3px solid rgb(217,52,109);
+    /* box-shadow: 3px 3px 5px 5px rgb(217,52,109); */
+}
+.userInfo{
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: center;
+    color: rgb(217,52,109);
+    font-weight: 800;
+}
+.userInfo h1{
+    font-size: 800;
+}
+.dropdown-content{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    color: rgb(217,52,109);
+}
+.dropdown-content ul li{
+    list-style: none;
+    padding: 10px 10px 10px 10px;
+    font-weight: 700;
+    transition: .3s all;
+}
+.dropdown-content ul li:hover{
+    background-color: rgb(217,52,109);
+    color: black;
+}
+.user-info-form{
+    width: 800px;
+}
+.title-div{
+    display: flex;
+    flex-direction: column;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    justify-content: center;
+    align-items: center;
+    color: rgb(217,52,109);
+}
+.profile-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.profile-form input{
+    width: 100%;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    border: none;
+    padding-left: 15px;
+}
+.profile-form label{
+    color: rgb(217,52,109);
+    margin-bottom: 15px;
+}
+.profile-form .div button{
+    width: 160px;
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    color: rgb(217,52,109);
+    transition: .5s all;
+    font-size: 18px;
+    font-weight: 800;
+    margin-top: 10px;
+}
+.profile-form .div button:hover{
+    background-color: rgb(217,52,109);
+    color: black;
+}
+.img-container{
+    margin-top: 20px;
+}
+.photo-img{
+    margin-bottom: 20px;
+    border: 2px solid rgb(217,52,109);
+}
+.photo-img img{
+    width: 400px;
+    height: 300px;
+}
+.view-profile{
+    color: rgb(217,52,109);
+    display: flex;
+    flex-direction: column;
+    transition: .5s all;
+}
+.prof{
+    background-color: black;
+    color: rgb(217,52,109);
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    margin: 0px 80px 0px 80px ;
+}
+.prof h2{
+    font-size: 30px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 900;
+}
+.prof p{
+    padding-top: 15px;
+    font-size: 20px;
+    font-weight: 700;
+}
+.prof-img{
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.prof-img img{
+    width: 200px;
+    height: 200px;
+    border: 2px solid rgb(217,52,109);
+    border-radius: 50%;
+}
+.social-icons{
+    padding-top: 15px;
+    display: flex;
+}
+.social-icons p{
+    width: 30px;
+    height: 20px;
+}
+.prof-tablist{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70vw;
+    padding-top: 30px;
+    cursor: pointer;
+}
+.prof-tablist ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.prof-tablist ul li{
+    list-style: none;
+    padding-left: 15px;
+    font-size: 25px;
+    font-weight: 750;
+}
+.vl{
+    margin: 0px 5px 0px 20px;
+    height: 25px;
+    border: 2px solid rgb(217,52,109);
+}
+.course-container{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.profile-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+    font-size: 30px;
+    font-weight: 900;
+    font-style:italic;
+}
+.edit-icon{
+    position: relative;
+    top: 170px;
+    left: 140px;
+    font-size: 30px;
+    border-radius: 50%;
+    border: 1px 1px solid black;
+    width: 40px;
+}

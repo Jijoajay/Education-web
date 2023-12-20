@@ -1,0 +1,119 @@
+.course-page{
+    padding-top: 2rem;
+    padding-top:2rem ;
+    height: 100vh;
+    background-color: black;
+}
+.course-containers{
+    padding-top: 40px;
+    padding-left: 40px;
+    padding-bottom: 40px;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 10px; 
+    /* background-color: #364F6B;s */
+    
+}
+.product-containers{
+    display: flex;
+    flex-direction: column;
+    transition: .4s all;
+    
+}
+.content-div{
+    color: rgb(217,52,109);
+}
+h4{
+    font-size: 25px;
+    font-weight: 700;
+}
+h5{
+    font-size: 17px;
+    font-weight: 600;
+}
+p{
+    font-size: 18px;
+    font-weight: 800;
+}
+span{
+    text-decoration: line-through;
+    font-size: 15px;
+    font-weight: 800;
+}
+img{
+    height: 200px;
+    width: 400px;
+}
+.add-button{
+    background-color: rgb(217,52,109);
+    color: black;
+    width: 180px;
+    height: 50px;
+    border-radius: 20px;
+    border: none;
+    font-size: 15px;
+    font-weight: 700;
+    box-shadow: 1px 5px 10px 0px rgb(217,52,109);
+}
+.product-con:hover{
+    transform: scale(1.1);
+}
+
+@media screen and (max-width:1300px){
+    .course-container{
+        padding-top: 40px;
+    padding-left: 40px;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px; 
+    background-color: black;
+    }
+    img{
+        height: 200px;
+        width: 80%;
+    }
+}
+@media screen and (max-width:750px){
+    .course-container{
+        padding-top: 40px;
+        padding-left: 70px;
+        height: auto;
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        gap: 10px; 
+        background-color: black;
+    }
+    img{
+        height: 200px;
+        width: 80%;
+    }
+}
+.heart-icon{
+    width: 10px;
+    position: relative;
+    color:white;
+    top:70px;
+    left:350px;
+    font-size: 30px;
+}
+.heart-icon-black{
+    width: 10px;
+    position: relative;
+    color:black;
+    top:70px;
+    left: 350px;
+    font-size: 30px;
+}
+.remove{
+    font-size: 30px;
+    width: 20px;
+    height: 20px;
+    font-weight: bolder;
+    color: black;
+    position: relative;
+    top: 40px;
+    left: 20px;
+
+}

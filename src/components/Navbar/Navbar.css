@@ -1,0 +1,186 @@
+*{
+    font-family: sans-serif;
+}
+.nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(255, 0, 0, 0);
+}
+.logo{
+    font-size: 25px;
+    font-family: sans-serif;
+    font-weight:bolder;
+    color: white;
+    cursor: pointer;
+}
+.nav-items ul{
+    list-style: none;
+    display: flex;
+    padding-bottom: 5px;
+    
+    
+}
+.nav-items ul li {
+    margin-left: 20px;
+    font-size: 15px;
+    font-weight: bolder;
+    cursor: pointer;
+    /* position: relative; Added to allow absolute positioning for the hr element */
+    transition: 0.5s ease-in-out;
+    color: white;
+}
+
+.nav-items.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 80px;
+    left: 0%;
+    width: 100%;
+    background-color: red;
+}
+
+.nav-items .active ul {
+    transition: .4s all;
+    display: flex;
+    flex-direction: row;
+}
+.nav-items ul li:hover{
+    transform: scale(1.3);
+}
+.nav-items ul li:after{
+    transform: scale(1.1);
+}
+
+.nav-items ul li:hover:after {
+    transform: scaleX(1); /* Show the underline on hover */
+}
+
+
+
+.searchbar input{
+    height: 40px;
+    width: 250px;
+    border: 2px solid black;
+    border-radius: 25px;
+    padding-left: 10px;
+}
+.searchbar input:focus{
+   border: none;
+}
+.hamburger-menu .menu{
+    height: 30px;
+    width: 30px;
+    display: none;
+}
+hr{
+    height: 3px;
+    background-color: white;
+}
+.hover-container::before {
+    content: '';
+    position: absolute;
+    top: -20px; /* Adjust this value to position the arrow correctly */
+    left: 10%;
+    margin-left: 30px; /* Half of the arrow's width */
+    border-width: 10px;
+    border-style: solid;
+    /* opacity: 0; */
+    border-color: transparent transparent white transparent; /* Adjust the color as needed */
+}
+.hover-container{
+    position: absolute;
+    background-color: white;
+    border-radius: 12px;
+    width: 200px;
+    height: 200px;
+    top: 4rem;
+    left: 53rem;
+    color: black;
+    z-index: 100;
+    transition: .5s all;
+    cursor: pointer;
+    /* opacity: 0;s */
+    transition:  .2s all;
+}
+.course-items{
+    transition: .5s ease;
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    z-index: 100;
+    transition: .4s all;
+}
+.course-items:hover  .hover-container,
+.hover-container:hover {
+    opacity: 1; /* Show the hover-container on hover */
+}
+.course-items p{
+    z-index: 100;
+    color: black;
+    padding: 10px 0px 0px 10px;
+}
+@media screen and (max-width:850px){
+    .nav{
+        width: auto;
+    }
+    .hamburger-menu .menu{
+        display: block ;
+    }
+    .nav-items{
+        display: none;
+    }
+    .searchbar input{
+        width: 150px;
+    }
+    
+}
+.icon{
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+}
+.user-icon{
+    margin-left: 10px;
+    transition: .4s all;
+}
+.user-icon svg{
+    color: white;
+    font-size: 25px;
+}
+.mylearning-icon{
+    transition: .4s all;
+    font-size: 30px;
+    margin-right: 10px;
+}
+.mylearning-icon svg{
+    color: white;
+
+}
+
+.user-icon:hover{
+    transform: scale(1.3);
+}
+.mylearning-icon:hover{
+    transform: scale(1.3);
+}
+.favourite{
+    font-size: 30px;
+    margin : 0px 10px 0px 10px;
+    transition: .4s all;
+}
+.favourite svg{
+    color: white;
+}
+.favourite:hover{
+    transform: scale(1.3);
+}

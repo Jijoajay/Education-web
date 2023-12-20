@@ -1,0 +1,1178 @@
+{
+  "carousel": [
+    {
+      "id": 1,
+      "img": "https://demo.themnific.com/edulogy/wp-content/uploads/2020/04/selective-focus-photo-of-man-using-laptop-1438081-1920x1000.jpg",
+      "alt": "first img"
+    },
+    {
+      "id": 2,
+      "img": "https://cdn.pixabay.com/photo/2015/09/09/18/22/dictionary-932327_1280.jpg",
+      "alt": "second img"
+    },
+    {
+      "id": 1,
+      "img": "https://demo.themnific.com/edulogy/wp-content/uploads/2020/04/group-of-people-sitting-inside-room-2422294-1920x1000.jpg",
+      "alt": "third img"
+    }
+  ],
+  "courses": [
+    {
+      "id": 1,
+      "img": "https://dme2wmiz2suov.cloudfront.net/User(89248849)/CourseBundles(35003)/2330030-Untitled_(42_%C3%97_42_cm)_(23)1.png",
+      "name": "UI/UX designing",
+      "author": "sathish kumar",
+      "newPrice": 3999,
+      "oldPrice": 4999,
+      "courseOffers": "https://dme2wmiz2suov.cloudfront.net/websitebuilder/792/utils/2329757-What_we_offer_in_this_program_(6).png",
+      "whatYouLearn": [
+        {
+          "title": "How to begin working as a UX Designer using Figma"
+        },
+        {
+          "title": "How to make fully interactive prototypes"
+        },
+        {
+          "title": "How to use Figma for Essential UX Design & UI Design"
+        }
+      ],
+      "videoContent": [
+        {
+          "title": "Introduction to UI/UX",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/xtTX69JZ92w?si=TUoLoDfuUtsOag9N"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "wireFraming",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/KzQQCtgzQbw?si=AVfnRw0SDL0-A1jG"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/xtTX69JZ92w?si=TUoLoDfuUtsOag9N"
+            }
+          ]
+        },
+        {
+          "title": "Types,Colors and Icon information",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/xtTX69JZ92w?si=TUoLoDfuUtsOag9N"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "Pages",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "Protyping level-1",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "prototype type-2",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "img": "https://dme2wmiz2suov.cloudfront.net/User(89248849)/CourseBundles(35003)/2330030-Untitled_(42_%C3%97_42_cm)_(23)1.png",
+      "name": "Full stack (MERN) web development ",
+      "author": "vaishnavi",
+      "newPrice": 4499,
+      "oldPrice": 5599,
+      "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK",
+      "courseOffers": "https://dme2wmiz2suov.cloudfront.net/websitebuilder/792/utils/2329757-What_we_offer_in_this_program_(6).png",
+      "whatYouLearn": [
+        {
+          "title": "Learn how to build big full stack app from scratch"
+        },
+        {
+          "title": "Learn how to implement JWT for authentication and authorization"
+        },
+        {
+          "title": "Learn how to implement ES6 in Node"
+        },
+        {
+          "title": "Learn best practices of Front-End and Server applications"
+        },
+        {
+          "title": "Learn how to connect Front-End application (React) with Backend application (Express, MongoDB, NodeJS)"
+        }
+      ],
+      "videoContent": [
+        {
+          "title": "Introduction to UI/UX",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "wireFraming",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "Types,Colors and Icon information",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "Pages",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "Protyping level-1",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "prototype type-2",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "img": "https://dme2wmiz2suov.cloudfront.net/User(89248849)/CourseBundles(25039)/2316797-1721.png",
+      "name": "Data Analytics",
+      "author": "aaron",
+      "newPrice": 3999,
+      "oldPrice": 4999,
+      "videoLink": "https://www.youtube.com/watch?v=_g5roKHj95o",
+      "courseOffers": "https://dme2wmiz2suov.cloudfront.net/websitebuilder/792/utils/2329757-What_we_offer_in_this_program_(6).png",
+      "whatYouLearn": [
+        {
+          "title": "Learn how to build big full stack app from scratch"
+        },
+        {
+          "title": "Learn how to implement JWT for authentication and authorization"
+        },
+        {
+          "title": "Learn how to implement ES6 in Node"
+        },
+        {
+          "title": "Learn best practices of Front-End and Server applications"
+        },
+        {
+          "title": "Learn how to connect Front-End application (React) with Backend application (Express, MongoDB, NodeJS)"
+        }
+      ],
+      "videoContent": [
+        {
+          "title": "Introduction to UI/UX",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "wireFraming",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "Types,Colors and Icon information",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "Pages",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "Protyping level-1",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "prototype type-2",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "img": "https://dme2wmiz2suov.cloudfront.net/User(89248849)/CourseBundles(35003)/2330030-Untitled_(42_%C3%97_42_cm)_(23)1.png",
+      "name": "UI/UX designing",
+      "author": "sathish kumar",
+      "newPrice": 3999,
+      "oldPrice": 4999,
+      "videoLink": "https://www.youtube.com/watch?v=b7CxLVHMLOc",
+      "courseOffers": "https://dme2wmiz2suov.cloudfront.net/websitebuilder/792/utils/2329757-What_we_offer_in_this_program_(6).png",
+      "whatYouLearn": [
+        {
+          "title": "How to begin working as a UX Designer using Figma"
+        },
+        {
+          "title": "How to make fully interactive prototypes"
+        },
+        {
+          "title": "How to use Figma for Essential UX Design & UI Design"
+        }
+      ],
+      "videoContent": [
+        {
+          "title": "Introduction to UI/UX",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "wireFraming",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "Types,Colors and Icon information",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "Pages",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "Protyping level-1",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "prototype type-2",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "img": "https://dme2wmiz2suov.cloudfront.net/User(89248849)/CourseBundles(35003)/2330030-Untitled_(42_%C3%97_42_cm)_(23)1.png",
+      "name": "Full stack (MERN) web development ",
+      "author": "vaishnavi",
+      "newPrice": 4499,
+      "oldPrice": 5599,
+      "videoLink": "https://www.youtube.com/watch?v=b7CxLVHMLOc",
+      "courseOffers": "https://dme2wmiz2suov.cloudfront.net/websitebuilder/792/utils/2329757-What_we_offer_in_this_program_(6).png",
+      "whatYouLearn": [
+        {
+          "title": "Learn how to build big full stack app from scratch"
+        },
+        {
+          "title": "Learn how to implement JWT for authentication and authorization"
+        },
+        {
+          "title": "Learn how to implement ES6 in Node"
+        },
+        {
+          "title": "Learn best practices of Front-End and Server applications"
+        },
+        {
+          "title": "Learn how to connect Front-End application (React) with Backend application (Express, MongoDB, NodeJS)"
+        }
+      ],
+      "videoContent": [
+        {
+          "title": "Introduction to UI/UX",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "wireFraming",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "Types,Colors and Icon information",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "Pages",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "Protyping level-1",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "prototype type-2",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "img": "https://dme2wmiz2suov.cloudfront.net/User(89248849)/CourseBundles(25039)/2316797-1721.png",
+      "name": "Data Analytics",
+      "author": "aaron",
+      "newPrice": 3999,
+      "oldPrice": 4999,
+      "videoLink": "https://www.youtube.com/watch?v=_g5roKHj95o",
+      "courseOffers": "https://dme2wmiz2suov.cloudfront.net/websitebuilder/792/utils/2329757-What_we_offer_in_this_program_(6).png",
+      "whatYouLearn": [
+        {
+          "title": "Learn how to build big full stack app from scratch"
+        },
+        {
+          "title": "Learn how to implement JWT for authentication and authorization"
+        },
+        {
+          "title": "Learn how to implement ES6 in Node"
+        },
+        {
+          "title": "Learn best practices of Front-End and Server applications"
+        },
+        {
+          "title": "Learn how to connect Front-End application (React) with Backend application (Express, MongoDB, NodeJS)"
+        }
+      ],
+      "videoContent": [
+        {
+          "title": "Introduction to UI/UX",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "wireFraming",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "Types,Colors and Icon information",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "Pages",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "Protyping level-1",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "prototype type-2",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Python",
+      "author": "jose portallia",
+      "oldPrice": "6000",
+      "newPrice": "4000",
+      "img": "https://images.hdqwalls.com/wallpapers/python-logo-4k-i6.jpg",
+      "courseOffers": "https://dme2wmiz2suov.cloudfront.net/websitebuilder/792/utils/2329757-What_we_offer_in_this_program_(6).png",
+      "whatYouLearn": [
+        {
+          "title": "Basic concepts about web dvelopemt"
+        },
+        {
+          "title": "career guidance"
+        },
+        {
+          "title": "Oops concepts"
+        },
+        {
+          "title": "basic django"
+        }
+      ],
+      "videoContent": [
+        {
+          "title": "Introduction",
+          "subtitle": [
+            {
+              "content": "Python introduction",
+              "videoLink": "pexels_videos_2699 (1080p).mp4"
+            },
+            {
+              "content": "operators",
+              "videoLink": "production_id_3770017 (1080p).mp4"
+            },
+            {
+              "content": "datatypes",
+              "videoLink": null
+            },
+            {
+              "content": "String",
+              "videoLink": null
+            }
+          ]
+        },
+        {
+          "title": "Django",
+          "subtitle": [
+            {
+              "content": "basic",
+              "videoLink": "pexels_videos_2516160 (1080p).mp4"
+            },
+            {
+              "content": "intermediate",
+              "videoLink": null
+            },
+            {
+              "content": "advanced",
+              "videoLink": null
+            }
+          ]
+        },
+        {
+          "title": "Flask",
+          "subtitle": [
+            {
+              "content": "basic",
+              "videoLink": null
+            },
+            {
+              "content": "intermediate",
+              "videoLink": null
+            },
+            {
+              "content": "advance",
+              "videoLink": null
+            }
+          ]
+        },
+        {
+          "title": "Web developement",
+          "subtitle": [
+            {
+              "content": "html",
+              "videoLink": null
+            },
+            {
+              "content": "css",
+              "videoLink": null
+            },
+            {
+              "content": "js",
+              "videoLink": null
+            },
+            {
+              "content": "react",
+              "videoLink": null
+            }
+          ]
+        }
+      ],
+      "id": 7
+    },
+    {
+      "id": 8,
+      "name": "Python",
+      "author": "john",
+      "oldPrice": "4000",
+      "newPrice": "1000",
+      "img": "https://149695847.v2.pressablecdn.com/wp-content/uploads/2019/10/python-1.jpg",
+      "courseOffers": "https://dme2wmiz2suov.cloudfront.net/websitebuilder/792/utils/2329757-What_we_offer_in_this_program_(6).png",
+      "whatYouLearn": [
+        {
+          "title": "Become a professional Python Developer and get hired"
+        },
+        {
+          "title": "Learn Object Oriented Programming"
+        },
+        {
+          "title": "Master modern Python 3.11(latest) fundamentals as well as advanced topics"
+        },
+        {
+          "title": "Build 12+ real world Python projects you can show off"
+        },
+        {
+          "title": "Learn Data Science - Analyze and Visualize Data"
+        },
+        {
+          "title": "Use Python to process: Images, CSVs, PDFs, and other Files"
+        }
+      ],
+      "videoContent": [
+        {
+          "title": "Introduction",
+          "subtitle": [
+            {
+              "content": "Python and its types",
+              "videoLink": "https://youtu.be/Y8Tko2YC5hA?si=FM2E8Di7s7F8dNht"
+            },
+            {
+              "content": "data science",
+              "videoLink": "https://youtu.be/FsSrzmRawUg?si=7x32mzpX3OxjxsoD"
+            },
+            {
+              "content": "Machine Learning",
+              "videoLink": "https://youtu.be/ukzFI9rgwfU?si=drchwdNx5SQYub2c"
+            }
+          ]
+        },
+        {
+          "title": "Exercises",
+          "subtitle": [
+            {
+              "content": "Oops",
+              "videoLink": "https://youtu.be/xTh-ln2XhgU?si=YZf4ZSFoFnhaAT__"
+            },
+            {
+              "content": "inheritance",
+              "videoLink": "https://youtu.be/xTh-ln2XhgU?si=YZf4ZSFoFnhaAT__"
+            },
+            {
+              "content": "polymorphism",
+              "videoLink": null
+            },
+            {
+              "content": "encapsulation",
+              "videoLink": null
+            },
+            {
+              "content": "Oops project",
+              "videoLink": null
+            }
+          ]
+        },
+        {
+          "title": "Data science",
+          "subtitle": [
+            {
+              "content": "Exercise",
+              "videoLink": "https://youtu.be/ukzFI9rgwfU?si=pWNq9i3EmGnY05j6"
+            },
+            {
+              "content": "newOne",
+              "videoLink": "https://youtu.be/ukzFI9rgwfU?si=pWNq9i3EmGnY05j6"
+            },
+            {
+              "content": "pandas",
+              "videoLink": null
+            },
+            {
+              "content": "numpy",
+              "videoLink": null
+            },
+            {
+              "content": "matplotlib",
+              "videoLink": null
+            }
+          ]
+        },
+        {
+          "title": "Machine learning",
+          "subtitle": [
+            {
+              "content": "Linear reg.",
+              "videoLink": null
+            },
+            {
+              "content": "decision tree",
+              "videoLink": "https://youtu.be/ukzFI9rgwfU?si=pWNq9i3EmGnY05j6"
+            },
+            {
+              "content": "knn model",
+              "videoLink": null
+            },
+            {
+              "content": "naives byes",
+              "videoLink": null
+            },
+            {
+              "content": "logistic reg.",
+              "videoLink": null
+            },
+            {
+              "content": "K-means clustering",
+              "videoLink": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "UI/UX designing",
+      "author": "sathish kumar",
+      "oldPrice": 4999,
+      "newPrice": 3999,
+      "img": "https://dme2wmiz2suov.cloudfront.net/User(89248849)/CourseBundles(35003)/2330030-Untitled_(42_%C3%97_42_cm)_(23)1.png",
+      "courseOffers": "https://dme2wmiz2suov.cloudfront.net/websitebuilder/792/utils/2329757-What_we_offer_in_this_program_(6).png",
+      "whatYouLearn": [
+        {
+          "title": "How to begin working as a UX Designer using Figma"
+        },
+        {
+          "title": "How to make fully interactive prototypes"
+        },
+        {
+          "title": "How to use Figma for Essential UX Design & UI Design"
+        }
+      ],
+      "videoContent": [
+        {
+          "title": "Introduction to UI/UX",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "wireFraming",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "Types,Colors and Icon information",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "Pages",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "Protyping level-1",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        },
+        {
+          "title": "prototype type-2",
+          "subtitle": [
+            {
+              "content": "course Outline",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "getting started with figma training",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            },
+            {
+              "content": "what is figma",
+              "videoLink": "https://www.youtube.com/embed/-42K44A1oMA?si=9-zGkXPUXpWSQYDK"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "newUser": [
+    {
+      "id": 1,
+      "name": "Sarah",
+      "email": "sarah@gamil.com",
+      "password": "theago"
+    },
+    {
+      "id": 2,
+      "name": "ajay",
+      "email": "akash@gmail.com",
+      "password": "jijo"
+    },
+    {
+      "id": 3,
+      "name": "arun",
+      "email": "arun@gmail.com",
+      "password": "arunsiraj"
+    },
+    {
+      "id": 4,
+      "name": "ajay",
+      "email": "ajayjijo@gmail.com",
+      "password": "ajayajay"
+    },
+    {
+      "id": 5,
+      "name": "",
+      "email": "akash@gmail.com",
+      "password": "jijo"
+    }
+  ]
+}

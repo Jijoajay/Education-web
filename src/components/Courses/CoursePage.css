@@ -1,0 +1,280 @@
+.coursePage{
+    height: 100vh;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.product-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+}
+.contentDiv{
+    margin-right: 40px;
+}
+
+.contentDiv h4{
+    font-size: 40px;
+    margin-bottom: 5px;
+    font-weight: 800;
+    color: rgb(217,52,109);
+}
+.contentDiv h5{
+    font-size: 25px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: rgb(217,52,109);
+
+}
+.contentDiv .course-instructor{
+    text-decoration: none;
+    font-size: 25px;
+    font-weight: 700;
+}
+.contentDiv p{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 20px;
+    color: rgb(217,52,109);
+
+}
+.buttons{
+    display: flex;
+    gap: 20px;
+}
+
+.buttons .button{
+    border: none;
+    border-radius: 20px;
+    transition: 0.5s all;
+    color: white;
+    font-weight: 600;
+}
+.buttons .buy{
+ width: 80px;
+ height:50px;
+ background-color: rgb(217,52,109);
+}
+.button:hover{
+    background-color: black;
+    color: rgb(217,52,109);
+    border: 2px solid rgb(217,52,109);
+    box-shadow: 3px 3px 10px 3px rgb(217,52,109) ;
+}
+.trail{
+    width: 140px;
+    background-color: rgb(217,52,109);
+    color: black;
+}
+.imgDiv{
+    border: 5px solid white;
+    border-radius: 10px;
+}
+.imgDiv img{
+    height: 400px;
+    width: 550px;
+}
+.offer-detail-page{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+}
+.offer-details{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+.offers{
+    margin-right: 20px;
+}
+.offer h3{
+    font-size: 40px;
+    color: rgb(217,52,109);
+}
+.details{
+    margin-left:20px
+}
+.details img{
+    height:600px
+}
+.course-detail-page{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+}
+.course-detail{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.title{
+    margin-right:20px ;
+}
+.title h3{
+    font-size: 40px;
+    font-weight: 800;
+    color:rgb(217,52,109);
+    
+}
+.detail{
+    margin-left: 20px;
+}
+.detail ul li{
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: rgb(217,52,109);
+}
+.course-video-page{
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: black;  
+}
+.course-video{
+    margin-bottom:50px ;
+}
+.content h4{
+    color: rgb(217,52,109);
+    font-size: 40px;
+    font-weight: 800;
+
+}
+.course-video-link{
+    width: 680px;
+    height: auto;
+}
+.dropdown{
+    height: auto;
+    width: 680px;
+    position: relative;
+}
+.dropdown .dropdown-btn{
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    box-shadow: 3px 3px 10px 6px rgba(248, 8, 128, 0.2);
+    font-weight: bold;
+    color: rgb(217,52,109);
+}
+
+.dropdown .dropdown-content{
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    font-weight: bold;
+    list-style: circle;
+    color: white;
+    padding: 10px;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    border: 1px solid rgb(217,52,109);
+    background-color: rgb(217,52,109);
+}
+
+.dropdown .dropdown-content .dropdown-items{
+    list-style: circle;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+    box-shadow: 0.5px 0.5px 0.7px 0.5px black;
+    transition: 0.5 all;
+} 
+.video{
+    height:auto;
+    width: auto;
+    background-color: white;
+}
+iframe{
+    position: absolute;
+    z-index: 1;
+    height: 500px;
+    width: 500px;
+    
+}
+.blank{
+    height: 40vh;
+    background-color: black;
+}
+.course{
+    margin-top: 10px;
+    width: 140px;
+    background-color: rgb(217,52,109);
+    color: black;
+    height: 40px;  
+}
+@media screen and (max-width:1000px){
+    .imgDiv img{
+        height: 400px;
+        width: 400px;
+    }
+}
+@media screen and (max-width:850px){
+    .imgDiv{
+        margin-right: 10px;
+    }
+    .imgDiv img{
+        height: 300px;
+        width: 300px;
+    }
+    .course-detail{
+        flex-direction: column;
+    }
+    .offer-details{
+        flex-direction: column;
+    }
+    .dropdown,
+    .course-video-link
+    {
+        width: 500px;
+    }
+}
+@media screen and (max-width:730px){
+    .product-container{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .contentDiv{
+        margin-right: 0px;
+    }
+    .imgDiv{
+        margin-top: 20px;
+    }
+    .contentDiv h4{
+        font-size: 25px;
+    }
+    .contentDiv h5{
+        font-size: 17px;
+    }
+    .dropdown,
+    .course-video-link
+    {
+        width: auto;
+        height: auto;
+    }
+    
+}
+
+
+
+
+
+

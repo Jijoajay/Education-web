@@ -1,0 +1,229 @@
+*{
+    scroll-behavior: smooth;
+}
+.carousel{
+    height:100vh;
+    margin: 0;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+}
+.no-carousel{
+    display: none;
+} 
+.left-arrow{
+    cursor: pointer;
+    height: 30px;
+    width: 40px;
+    position: absolute;
+    top: 50%;
+    left: 2.5rem;
+    color: rgb(217,52,109);
+}
+.right-arrow{
+    color: rgb(217,52,109);
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 2.5rem;
+    height: 2rem;
+    width: 3rem;
+}
+.container{
+    cursor: pointer;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.container h3{
+    font-size: 35px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 10px;
+}
+.container .span{
+    font-size: 40px;
+    color: red;
+    font-weight: 800;
+    text-decoration: none;
+}
+.container p{
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: white;
+}
+.button-con{
+    display: flex;
+}
+.button-con button{
+    cursor: pointer;
+    margin-left: 10px;
+    height: 40px;
+    width: 100px;
+    border-radius: 2rem;
+    border: 1px solid red;
+    color: red;
+    transition: 1s all;
+}
+.button-con button:hover{
+    color: white;
+    background-color: red;
+    border: 2px solid white;
+}
+@media screen  and (max-width:1100px){
+
+}
+@media screen and (max-width:500px){
+    .container h3{
+        font-size:20px;
+        height:auto;
+    }
+    .container p{
+        font-size:13px;
+        height: auto;
+    }
+    .container .span{
+        font-size: 25px;
+    }
+}
+.home-course-title{
+    font-size: 20px;
+    font-weight: bolder;
+    padding-top: 20px;
+    background-color: black;
+    color: rgb(217,52,109);
+    padding-left: 30px;
+}
+.home-course-containers{
+    padding-left: 90px;
+    height: auto;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(3 ,1fr);
+    background-color: black;
+    transition: all .5s ease;
+}
+.course-slide{
+    background-color: black;
+    transition: all .5s ease;
+    overflow: hidden; 
+}
+.home-product-containers{
+    color: rgb(217,52,109);
+    height: 400px;
+    transition: all .5s ease;
+    width: 400px;
+    padding: 0px 10px 10px 10px;
+    font-size: 25px;
+}
+.home-product-containers .img-div img{
+    height: auto;
+    width: 100%;
+}
+.oldPrice{
+    text-decoration:line-through;
+    text-decoration-color: white;
+    font-size: 20px;
+}
+
+.left-course-arrow{
+    position: relative;
+    color: rgb(217,52,109);
+    left: 35px;
+    top: 200px;
+    font-size: 30px;
+    transform: translateY(-50%);
+}
+.right-course-arrow{
+    position: relative;
+    background-color: black;
+    color: rgb(217,52,109);
+    font-size: 30px;
+    /* top: 20px; */
+    right: 30px;
+    bottom: 320px;
+    transform: translateY(150%);
+    left: calc(100% - 40px); 
+}
+.page-2{
+    height: 100vh;
+    width: auto;
+    margin: 50px;
+}
+.page-splitter{
+    display: flex;
+}
+.page-content{
+    margin-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    padding-top: 5rem;
+    justify-content: center;
+    align-items: start;
+    width: 50%;
+    margin-top: 5rem;
+    
+}
+.page-img{
+    padding-top: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+}
+.first-box{
+    display: flex;
+    gap: 30px;
+}
+.second-box{
+    padding-top: 30px;
+    gap: 30px;
+    display: flex;
+}
+.first-box img{
+    width: 300px;
+    height: 300px;
+}
+.second-box img{
+    height: 300px;
+    width: 300px;
+}
+
+.splitter{
+    margin:20px 0px 20px 0px
+}
+.page-content h2{
+    font-size: 90px;
+    font-weight: bolder;
+    padding-bottom: 3rem;
+}
+.page-content h5{
+    font-size: 25px;
+    font-weight: 800;
+    padding-bottom: 3rem;
+}
+.page-content p{
+    font-size: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.heart-icon{
+    width: 10px;
+    position: relative;
+    color:white;
+    top:50px;
+    left:330px;
+    font-size: 30px;
+}
+.heart-icon-black{
+    width: 10px;
+    position: relative;
+    color:black;
+    top:50px;
+    left: 330px;
+    font-size: 30px;
+}
+

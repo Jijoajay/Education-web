@@ -1,0 +1,41 @@
+.myLearning-page{
+    height: 120vh;
+    background-color: black;
+    padding-left: 20px;
+}
+.myLearning-page .title{
+    height: 20vh;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-left: 30px;
+}
+.myLearning-page .course{
+    padding-top: 40px;
+    margin-left: 40px;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 10px; 
+    background-color: black;
+    transition: .4s all;
+}
+.extra{
+    height: 200px;
+    background-color: black;
+}
+.product-con{
+    margin-right: 20px;
+    transition: .4s all;
+
+}
+.product-con:hover{
+    transform: scale(1.07);
+}
+.tabList{
+    margin-left: 50px;
+    display: flex;
+}
+ p{
+    color: rgb(217,52,109);
+}
