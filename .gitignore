@@ -21,3 +21,16 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+/instance
+/flask.db
+/__pycache
+/data
+.db.json
+/demo.py
+/demo.jsx
+/package-lock.json
+/package.json
+/demo.py
+/Demo.jsx
+
