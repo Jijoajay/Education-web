@@ -1,5 +1,5 @@
 .user-page{
-    height: 100vh;
+    height: 120vh;
     background-color: black;
     width: 100vw;
     display: flex;
@@ -112,7 +112,9 @@
     color: rgb(217,52,109);
     display: flex;
     flex-direction: column;
+    margin-top: 3rem;
     transition: .5s all;
+    background-color: black;
 }
 .prof{
     background-color: black;
@@ -154,6 +156,9 @@
     width: 30px;
     height: 20px;
 }
+.tablist-courses{
+    background-color: black;
+}
 .prof-tablist{
     display: flex;
     justify-content: center;
@@ -183,6 +188,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: black;
     
 }
 .profile-title{

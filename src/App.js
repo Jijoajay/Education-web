@@ -26,9 +26,10 @@ function App() {
   const [searchResult,setSearchResult] = useState([])
   const [authenticate, setAuthenticate] = useState(false)
   const location =  useLocation();
-
-  
-    const [favour, setFavour] = useState([])
+  const [favourite, setFavourite] = useState([])
+  const [boughtCourses, setBoughtCourses] = useState([]);
+  const [info, setInfo] = useState([]);
+  const [favour, setFavour] = useState([])
 
   useEffect(
     ()=>{
@@ -130,13 +131,48 @@ function App() {
           console.error('Error storing user search result:', error);
         }
       }
-      if(location.pathname !== ( "/" && "/courses")){
+      if(location.pathname !==  "/"  || location.pathname !== "/courses"){
         setSearch("")
       }
     };
   
     fetchData();
   }, [search, courses, user, location.pathname]);
+  useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const response = await flashapi.get(`/get_course/${user["id"]}`);
+            console.log("response",response.data.course);
+            setBoughtCourses(response.data.course ) 
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    fetchData();
+    
+    const fetchFavouriteData = async()=>{
+      try {
+        const response = await flashapi.get(`/get-favourite/${user['id']}`);
+        setFavourite(response.data.favourites)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchFavouriteData();
+  }, [user]);
+  useEffect(() => {
+    const fetchUserInfoData = async()=>{
+        try {
+            const response = await flashapi.get(`/get_user_info/${user["id"]}`)
+            console.log("fetchUserInfo:",Array(response.data));
+            setInfo(Array(response.data))
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    fetchUserInfoData();
+    },[user]); 
+
   return (
     <div className="App">
       <Navbar 
@@ -146,6 +182,11 @@ function App() {
       handleSubmit={handleSubmit}
       authenticate={authenticate}
       setAuthenticate={setAuthenticate}
+      boughtCourses={boughtCourses}
+      favour={favour}
+      handleFavouriteClick={handleClick}
+      favourite={favourite}
+      info={info}
       />
       <Routes>
         <Route path='/' element={<Home 
@@ -210,11 +251,17 @@ function App() {
         favs = {false}
         favour={favour}
         handleClick={handleClick}
+        courses ={boughtCourses}
+        favourite={favourite}
         />} />
         <Route path='/user' element={<User 
         user={user}
         favour={favour}
-        handleClick={handleClick}/>}/>
+        handleClick={handleClick}
+        favourite={favourite}
+        courses={courses}
+        info={info}
+        />}/>
 
         <Route path="/favourites" element={<MyLearning user={user}
         title = {title}
@@ -222,6 +269,8 @@ function App() {
         coursee = {false}
         favour={favour}
         handleClick={handleClick}
+        courses ={boughtCourses}
+        favourite={favourite}
         />}/>
         <Route path='/edit-user' element={<User 
         user={user}

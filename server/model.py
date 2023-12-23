@@ -197,3 +197,16 @@ class Message(db.Model):
             "user":self.user.json(),
             "img":self.img,
         }
+        
+class Carousel(db.Model):
+    id = db.Column(db.String, primary_key=True)
+    img = db.Column(db.String(255), nullable=False)
+    alt = db.Column(db.String(255), nullable=False)
+    def json(self):
+        return{
+            "id": self.id,
+            "img":self.img,
+            "alt":self.alt
+        }
+    
+    

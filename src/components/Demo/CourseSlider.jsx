@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { IoHeart } from "react-icons/io5";
 import {FaArrowLeft, FaArrowRight} from 'react-icons/fa';
 import { useState } from 'react';
 import {motion} from "framer-motion";
+import flashapi from '../api/flashapi';
 
 const CourseSlider = ({courses, title,favour, handleClick,controls}) => {
 
@@ -21,6 +22,7 @@ const CourseSlider = ({courses, title,favour, handleClick,controls}) => {
       whileHover:{scale:1.2},
       visible: { opacity: 1, transition: { duration: delay + 1.5, delay: 1 } },
     })
+   
   return (
     <div className="course-slide" variants={slideVariants} initial="hidden" animate='visible' >
     <div className="home-course-title"> <h2>{title}</h2> </div>

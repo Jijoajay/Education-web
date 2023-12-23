@@ -4,9 +4,10 @@ import { IoHeart } from "react-icons/io5";
 
 
 const IsFavourite = ({favourite, favour, handleClick}) => {
+  console.log("favourite in is", favourite)
   return (
     <>
-            { favourite.length > 0  ? (
+            { favourite.length> 0  ? (
               favourite.map((favourite)=>(
                 <div className="product-con">
                     <div className="img-div">
@@ -25,7 +26,7 @@ const IsFavourite = ({favourite, favour, handleClick}) => {
                   </div>
               ))
             ) : (
-              <div><h1>No Favourites</h1></div>
+              <div className='no-favourite'><h1>No Favourites</h1></div>
             )}
     </>
   )

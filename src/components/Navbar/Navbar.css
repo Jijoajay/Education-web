@@ -184,3 +184,187 @@ hr{
 .favourite:hover{
     transform: scale(1.3);
 }
+.myLearning-hover-container::before {
+    content: '';
+    position: absolute;
+    top: -20px; /* Adjust this value to position the arrow correctly */
+    left: 10%;
+    margin-left: 236px; /* Half of the arrow's width */
+    border-width: 10px;
+    border-style: solid;
+    z-index:100;
+    border-color: transparent transparent white transparent; 
+    border-radius: 20px;
+}
+.myLearning-hover-container{
+    border: none;
+    position: absolute;
+    background-color: white;
+    border-radius: 20px;
+    width: 350px;
+    height: auto;
+    top: 4rem;
+    right: 20rem;
+    color: black;
+    transition: .5s all;
+    cursor: pointer;
+    transition:  .2s all;
+    z-index:99;
+}
+.favourite-hover-container::before {
+    content: '';
+    position: absolute;
+    top: -20px; /* Adjust this value to position the arrow correctly */
+    left: 10%;
+    margin-left: 253px; /* Half of the arrow's width */
+    border-width: 10px;
+    border-style: solid;
+    border-radius: 20px;
+    border-color: transparent transparent white transparent; /* Adjust the color as needed */
+}
+.favourite-hover-container{
+    border-radius: 20px;
+    position: absolute;
+    background-color: white;
+    width: 350px;
+    height: auto;
+    top: 4rem;
+    right: 18rem;
+    color: black;
+    z-index: 100;
+    transition: .5s all;
+    cursor: pointer;
+    /* opacity: 0;s */
+    transition:  .2s all;
+}
+.user-hover-container::before {
+    content: '';
+    position: absolute;
+    top: -20px; /* Adjust this value to position the arrow correctly */
+    left: 10%;
+    margin-left: 210px; /* Half of the arrow's width */
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent white transparent; /* Adjust the color as needed */
+    border-radius: 20px;
+}
+.user-hover-container{
+    position: absolute;
+    background-color: white;
+    border-radius: 20px;
+    width: 300px;
+    height: 200px;
+    top: 4rem;
+    right: 15rem;
+    color: black;
+    z-index: 100;
+    transition: .5s all;
+    cursor: pointer;
+    /* opacity: 0;s */
+    transition:  .2s all;
+}
+.learning-product-con {
+    display: flex;
+    border: none;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    z-index: 100;
+  }
+  
+  .learning-product-con .learning-img-div {
+    margin-right: 10px;
+  }
+  
+  .learning-product-con .learning-img-div img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .learning-product-con .learning-content-div {
+    flex-grow: 1;
+  }
+  
+  .learning-product-con h4 {
+    margin: 0;
+  }
+  
+  .learning-product-con h5 {
+    margin: 5px 0;
+    color: #666;
+  }
+  
+  .learning-product-con p {
+    margin: 5px 0;
+    color: #333;
+  }
+  
+  .learning-product-con .learning-heart-icons{
+    font-size: 10px;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .learning-product-con .learning-heart-icon-blacks{
+    color: black;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .user-profile-title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .user-prof {
+    display: flex;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .user-prof h2 {
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+  
+  .user-prof p {
+    font-size: 16px;
+  }
+  
+  
+  .user-edit-icon:hover {
+    color: rgba(0, 0, 0, 0.7);
+  }
+  .user-prof-img {
+    margin: 0px 20px 0px 20px;
+  }
+  .user-prof-img img {
+    width: 80px;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  .user-social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .user-social-icons p {
+    font-size: 35px;
+    margin: 0;
+  }
+  .user-social-icons p:hover{
+    color: black;
+  }
+  p{
+    color: rgb(217,52,109);
+}
+.user-edit-icon{
+      color: rgb(217,52,109);
+    margin: 20px 0px 0px 20px;
+    font-size: 25px;
+  }

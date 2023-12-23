@@ -6,35 +6,12 @@ import flashapi from './api/flashapi';
 import { IoHeart } from "react-icons/io5";
 
 
-const MyLearning = ({ user, title, coursee, favs, favour, handleClick}) => {
+const MyLearning = ({ user, title, coursee, favs, favour, handleClick,courses, favourite}) => {
   console.log(favour);
-  const [courses, setCourses] = useState([]);
   const [showCourse, setShowCourse ] = useState( coursee );
-  const [favourite, setFavourite] = useState([]);
   const [showFavourite, setShowFavourite] = useState(favs);
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await flashapi.get(`/get_course/${user["id"]}`);
-                console.log("response",response.data.course);
-                setCourses(response.data.course ) 
-            } catch (error) {
-                console.error(error);
-            }
-        };
-        fetchData();
-        
-        const fetchFavouriteData = async()=>{
-          try {
-            const response = await flashapi.get(`/get-favourite/${user['id']}`);
-            setFavourite(response.data.favourites)
-          } catch (error) {
-            console.log(error);
-          }
-        }
-        fetchFavouriteData();
-        
-    }, [user]);
+    
+
     const handleCourseClick = ()=>{
       if(showFavourite){
         setShowFavourite(!showFavourite)
@@ -73,10 +50,10 @@ const MyLearning = ({ user, title, coursee, favs, favour, handleClick}) => {
           showCourse &&
           <>
             {courses.length > 0 ? (
-              courses.map((course) => (
-                <div className="product-con" key={course.id}>
+              courses.map((course, index) => (
+                <div className="product-con" key={index}>
                     <div className="img-div">
-                      <div className={ favour.length > 0 ? favour.includes(course.id) ? "heart-icon-black" : "heart-icon" : ""} onClick={()=>handleClick(course.id)}>
+                      <div className={ favour.length > 0 ? favour.includes(course.id) ? "heart-icon-black" : "heart-icon" : "heart"} onClick={()=>handleClick(course.id)}>
                         <IoHeart />
                       </div>
                     <Link to={`/course/${course.id}`} key={course.id} style={{ textDecoration: 'none', color: 'black' }}>

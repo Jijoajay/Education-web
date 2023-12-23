@@ -36,6 +36,26 @@
     margin-left: 50px;
     display: flex;
 }
- p{
+p{
+    color: rgb(217,52,109);
+}
+
+.heart-icon-black{
+    width: 10px;
+    position: relative;
+    color:black;
+    top:70px;
+    left: 350px;
+    font-size: 30px;
+}
+/* .heart{
+    width: 10px;
+    position: relative;
+    color:white;
+    top:70px;
+    left:350px;
+    font-size: 30px;
+} */
+.no-favourite{
     color: rgb(217,52,109);
 }

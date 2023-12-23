@@ -4,7 +4,7 @@ import flashapi from '../api/flashapi';
 import { useNavigate } from 'react-router-dom';
 import { ViewProfile } from './ViewProfile';
 
-const User = ({user, favour, handleClick}) => {
+const User = ({user, favour, handleClick, favourite,courses,info}) => {
     const navigate = useNavigate();
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
@@ -136,11 +136,14 @@ const User = ({user, favour, handleClick}) => {
         ):(
             <>
                 <ViewProfile 
+                info={info}
                 user={user}
                 favour={favour}
                 handleClick={handleClick}
                 viewProfile = {viewProfile}
                 setViewProfile={setViewProfile}
+                favourite={favourite}
+                courses={courses}
                 />
 
             </>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState,useRef } from 'react'
-import api from '../api/fetch'
+import flashapi from '../api/flashapi';
 import './Home.css'
 import {FaArrowLeft, FaArrowRight} from 'react-icons/fa';
 import CourseSlider from '../Demo/CourseSlider';
@@ -10,7 +10,8 @@ import {motion, useAnimation, AnimatePresence} from "framer-motion";
 const Home = ({courses, favour, handleClick}) => {
   const [slide, setSlide] =useState([])
   const [currentImage, setCurrentImage] = useState(0)
-
+  const [searchHistory, setSearchHistory] = useState([]);
+  const [filteredCourse, setFilteredCourses] = useState([]);
   const [ref, inView] = useInView({
     triggerOnce: true,
   });
@@ -59,10 +60,12 @@ const Home = ({courses, favour, handleClick}) => {
     ()=>{
       const fetchData = async()=>{
         try{
-          const response = await api.get('/carousel')
+          console.log("ooooo")
+          const response = await flashapi.get('/get-carousel')
+          console.log("first", response.data)
           setSlide(response.data)
         }catch(err){
-          console.log(err.message);
+          console.log("error at getting carousel", err.message);
         }
       }
       fetchData();
@@ -109,6 +112,29 @@ const Home = ({courses, favour, handleClick}) => {
     };
   }, [controls]);
   
+  useEffect(()=>{
+    const getUserSearchHistory = async()=>{
+      try {
+        const response = flashapi.post("/get-searchHistory",user_id = user['id']);
+        setSearchHistory(response.data)
+      } catch (error) {
+        console.log("error at getting user history")
+      }
+    }
+    getUserSearchHistory();
+
+    searchHistory.forEach((search)=>{
+      const searchTerm = search.searchTerm.toLowerCase();
+      const matchingCourse = searchTerm.filter((course)=>{
+        course.whatYouLearn.toLowerCase().includes(searchTerm) ||
+        course.videoContent.title.toLowerCase().includes(searchTerm)
+      })
+      setFilteredCourses(matchingCourse)
+    })
+
+  },[user,courses,searchHistory])
+
+
   return (
     <main className='home-page'>
     <div className="home">
@@ -184,7 +210,7 @@ const Home = ({courses, favour, handleClick}) => {
     courses={courses}
     favour={favour}
     handleClick={handleClick}
-    title="You searched for java"
+    title={`You searched for ${searchHistory}`}
     controls={controls}
     ref={containerRef}
     />

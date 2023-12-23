@@ -1,5 +1,5 @@
 from flask import Flask,jsonify,request,session,make_response,abort
-from model import Message,SearchInfo, db,User, Course, Subtitle, VideoContent, WhatYouLearn, UserCourse, UserInfo,FavouriteInfo, Admin
+from model import Carousel, Message, SearchInfo, db,User, Course, Subtitle, VideoContent, WhatYouLearn, UserCourse, UserInfo,FavouriteInfo, Admin
 from flask_cors import CORS,cross_origin
 from flask_jwt_extended import JWTManager, create_access_token,get_jwt_identity,jwt_required
 from jwt.exceptions import ExpiredSignatureError, InvalidTokenError
@@ -260,9 +260,12 @@ def add_courses():
 @app.route('/course/<category>', methods=['GET'])
 def course_by_category(category):
     try:
-        courses = Course.query.filter_by(category=category).all()
-        if(courses):
-            return jsonify([course.json() for course in courses]),200
+        coursesByCategory = Course.query.filter_by(category=category).all()
+        coursesByTags = Course.query.filter_by(tags=category).all()
+        if coursesByCategory :
+            return jsonify([course.json() for course in coursesByCategory]),200
+        elif coursesByTags:
+            return jsonify([course.json() for course in coursesByTags]),200
         else:
             return jsonify({
                 "message":"category not found.."
@@ -281,8 +284,7 @@ def courses():
     except Exception as e:
         return jsonify({
             "error found":str(e)
-        }),500
-        
+        }),500      
 @app.route('/edit-courses/<id>', methods=['POST'])
 def edit_courses(id):
     try:
@@ -436,7 +438,8 @@ def get_user_course(user_id):
 @app.route('/add-user-detail/<id>', methods=['POST'])
 def add_user_info(id):
     user = User.query.filter_by(id=id).first()
-    if user:
+    admin = Admin.query.filter_by(id=id).first()
+    if user or admin:
         try:
             
             fname = request.json['firstName']
@@ -459,18 +462,23 @@ def add_user_info(id):
                 instagram_link = instagram_link,
                 linkedin_link = linkedIn_link,
                 profile_img = profile_img,
-                user_id = user.id
+                user_id = id
             )
             db.session.add(user_detail)
             db.session.commit()
             return jsonify({
                 "message":"user details added successfully"
-            })
+            }),201
         except Exception as e:
             print("error occur in add-info-->",str(e))
             return jsonify({
                 "error":str(e)
             }),500
+    else:
+        return jsonify({
+        "error": "User not found"
+        }), 404
+    
     # end try
 @app.route('/get_user_info')
 def get_user_info():
@@ -479,6 +487,7 @@ def get_user_info():
         return jsonify([user.json() for user in user])
     else:
         abort(404)
+        
 @app.route('/get_user_info/<user_id>',methods=['GET'])
 def get_users(user_id):
     user_details = UserInfo.query.filter_by(user_id=user_id).first()
@@ -594,7 +603,16 @@ def search_result():
         print(str(e))
         
     # end try
-    
+@app.route('/get-searchHistory', methods=['POST'])   
+def get_history():
+    user_id = request.args.get('user_id')
+    try:
+        if user_id:
+            histories= SearchInfo.query.filter_by(user_id=user_id).all()
+            return jsonify([history.json() for history in histories])
+    except Exception as e:
+        print(str(e))
+    # end try
 @app.route('/add-message', methods=['POST'])
 def add_message():
     message = request.json['message']
@@ -632,9 +650,32 @@ def get_message():
             "message":str(e)
         })
     # end try
-    
-    
+@app.route('/add-carousel',methods=["POST"])
+def add_carousel(): 
+    img = request.json['img']
+    alt = request.json['alt']  
+    try:
+       if img and alt:
+           new_image = Carousel(
+               id = str(uuid.uuid4()),
+               img = img,
+               alt = alt
+           )
+           db.session.add(new_image)
+           db.session.commit()
+           return jsonify({
+               "message" : "carousel saved successfully"
+           })
+    except Exception as e:
+        print("error found at carousel adding", str(e))
+        return jsonify ({
+            "message" : str(e)
+        })
 
+@app.route('/get-carousel')
+def get_carousel():
+    images = Carousel.query.all()
+    return jsonify([image.json() for image in images])
 
 with app.app_context():
     db.create_all()
