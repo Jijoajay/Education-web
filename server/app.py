@@ -1,5 +1,5 @@
 from flask import Flask,jsonify,request,session,make_response,abort
-from model import db,User, Course, Subtitle, VideoContent, WhatYouLearn, UserCourse, UserInfo,FavouriteInfo, Admin
+from model import Message,SearchInfo, db,User, Course, Subtitle, VideoContent, WhatYouLearn, UserCourse, UserInfo,FavouriteInfo, Admin
 from flask_cors import CORS,cross_origin
 from flask_jwt_extended import JWTManager, create_access_token,get_jwt_identity,jwt_required
 from jwt.exceptions import ExpiredSignatureError, InvalidTokenError
@@ -214,7 +214,7 @@ def add_courses():
             # Create instances of subtitles for each subtitle item
             video_content = VideoContent(title=item['title'])
             subtitle_data = item.get('subtitle', [])
-            subtitle = [Subtitle(content=sub_item['content'], videoLink=sub_item['videoLink']) for sub_item in subtitle_data]
+            subtitle = [Subtitle(content=sub_item['content'], videoLink=sub_item['videoLink'], videoDescription=sub_item['videoDescription']) for sub_item in subtitle_data]
             video_content.subtitle = subtitle
             # Correct way to associate subtitles
             videoContent_objects.append(video_content)
@@ -260,9 +260,9 @@ def add_courses():
 @app.route('/course/<category>', methods=['GET'])
 def course_by_category(category):
     try:
-        course = Course.query.filter_by(category=category).all()
-        if(course):
-            return jsonify([course.json() for course in courses]),200, {'Content-Type': 'application/json', 'indent': 2}
+        courses = Course.query.filter_by(category=category).all()
+        if(courses):
+            return jsonify([course.json() for course in courses]),200
         else:
             return jsonify({
                 "message":"category not found.."
@@ -294,7 +294,7 @@ def edit_courses(id):
         for item in videoContent_data:
             video_content = VideoContent(title=item['title'])
             subtitle_data = item.get('subtitle', [])
-            subtitle = [Subtitle(content=sub_item['content'], videoLink=sub_item['videoLink']) for sub_item in subtitle_data]
+            subtitle = [Subtitle(content=sub_item['content'], videoLink=sub_item['videoLink'], videoDescription=sub_item['videoDescription']) for sub_item in subtitle_data]
             video_content.subtitle = subtitle
             # Correct way to associate subtitles
             videoContent_objects.append(video_content)
@@ -570,7 +570,70 @@ def admin_register():
         print(str(e))
     # end try
 
+@app.route('/user-searchresult', methods=['POST'])
+def search_result():
+    
+    user_id = request.json['user_id']
+    search_result = request.json['searchResult']
+    
+    try:
+        if user_id and search_result:
+            new_search = SearchInfo(
+                id = str(uuid.uuid4()),
+                user_id = user_id,
+                search_result = search_result
+            )
+            db.session.add(new_search)
+            db.session.commit()
+            return jsonify({
+                "message":"search result added"
+            })
+        else:
+            return jsonify({"message":"no user_id or search_result found"})
+    except Exception as e:
+        print(str(e))
+        
+    # end try
+    
+@app.route('/add-message', methods=['POST'])
+def add_message():
+    message = request.json['message']
+    user_id = request.json['user_id']
+    img = request.json['img']
+    
+    try:
+        if message and user_id:
+            new_message = Message(
+                id = str(uuid.uuid4()),
+                message = message,
+                user_id = user_id,
+                img = img
+            )
+            db.session.add(new_message)
+            db.session.commit()
+            return jsonify({
+                'message': 'Message has been saved'
+            })
+    except Exception as e:
+        print(str(e))
+        return jsonify({
+            "message": str(e)
+        })
 
+@app.route('/get-messages')
+def get_message():
+    messages = Message.query.all()
+    try:
+        if(messages):
+            return jsonify([message.json() for message in messages])
+    except Exception as e:
+        print(str(e))
+        return jsonify({
+            "message":str(e)
+        })
+    # end try
+    
+    
 
 
 with app.app_context():

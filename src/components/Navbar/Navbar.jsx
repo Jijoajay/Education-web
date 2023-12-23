@@ -7,7 +7,7 @@ import { FaUserAlt } from "react-icons/fa";
 import { IoBookSharp } from "react-icons/io5";
 import { IoHeart } from "react-icons/io5";
 
-const Navbar = ({search,setSearch,handleSubmit,authenticate,setAuthenticate}) => {
+const Navbar = ({search,setSearch,handleSubmit,authenticate,setAuthenticate, courses}) => {
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false)
     const [active, setActive] = useState('home')
@@ -42,6 +42,13 @@ const Navbar = ({search,setSearch,handleSubmit,authenticate,setAuthenticate}) =>
             }
         }
     }
+    const categorySet = new Set();
+
+    courses.forEach((course) => {
+    categorySet.add(course.category);
+    });
+    const categoryArray = Array.from(categorySet)
+
   return (
     <nav className='nav'>
         <div className="logo">
@@ -63,12 +70,14 @@ const Navbar = ({search,setSearch,handleSubmit,authenticate,setAuthenticate}) =>
                     <div className='hover-container' onMouseEnter={()=>setIsHover(true)}
                     onMouseLeave={()=>setIsHover(false)}
                     >
-                        <div className="course-items">
-                            <Link><p>IT</p></Link>
-                            <Link><p>Personal Development</p></Link>
-                            <Link><p>communication</p></Link>
-                            <Link><p>IT</p></Link>
-                        </div>
+                        { categoryArray.map((category,index)=>{
+                            return(
+                                <div className="course-items" key={index}>
+                                    <Link to={`/${category}/courses`} style={{textDecoration:"none"}}><p style={{color:"rgb(217,52,109)"}}>{category}</p></Link>
+                                </div>
+                            )
+                            })
+                        }
                     </div>
                 }
                 { authenticate ?(

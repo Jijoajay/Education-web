@@ -2,7 +2,7 @@ import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import Home from './components/Main/Home'
 import Courses from './components/Courses/Courses'
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import Signup from './components/Main/Signup';
 import Signin from './components/Main/Signin';
 import Contact from './components/Main/Contact';
@@ -25,13 +25,10 @@ function App() {
   const [courses, setCourses] = useState([])
   const [searchResult,setSearchResult] = useState([])
   const [authenticate, setAuthenticate] = useState(false)
-  // useEffect(()=>{
-  //   const searchedResult = courses.filter((course)=>{
-  //     return (course.name).toLowerCase().includes(search.toLowerCase())
-  //   })
-  //   setSearchResult(searchedResult)
-  // },[search,courses])
-  const [favour, setFavour] = useState([])
+  const location =  useLocation();
+
+  
+    const [favour, setFavour] = useState([])
 
   useEffect(
     ()=>{
@@ -113,10 +110,38 @@ function App() {
     }
     fetchData();
   },[setFavour])
+  useEffect(() => {
+    const fetchData = async () => {
+      const searchedResult = courses.filter((course) => {
+        return course.name.toLowerCase().includes(search.toLowerCase());
+      });
+      setSearchResult(searchedResult);
+      console.log("oooooh")
+      if (search && user) {
+        const searchDetail = {
+          user_id: user.id,
+          searchResult: search,
+        };
+  
+        try {
+          const response = await flashapi.post('/user-searchresult', searchDetail);
+          console.log('response: ', response);
+        } catch (error) {
+          console.error('Error storing user search result:', error);
+        }
+      }
+      if(location.pathname !== ( "/" && "/courses")){
+        setSearch("")
+      }
+    };
+  
+    fetchData();
+  }, [search, courses, user, location.pathname]);
   return (
     <div className="App">
       <Navbar 
       search={search}
+      courses={courses}
       setSearch={setSearch}
       handleSubmit={handleSubmit}
       authenticate={authenticate}
@@ -129,27 +154,36 @@ function App() {
         handleClick={handleClick}
         favour={favour}/>}/>
         <Route path='/courses'>
-          <Route index element={<Courses
-          handleRemoveCourse={handleRemoveCourse}
-          courses={courses}
-          searchResult={searchResult}
-          favour={favour}
-          handleClick={handleClick}
-          user={user}
-          />}/>
-          <Route path=':id' element={<CoursePage 
-          courses={courses}
-          handleRemoveCourse={handleRemoveCourse}
-          user={user}
-          />}/> 
-          <Route path='addnewcourse' 
-          element={<AddNewCourse 
-          courses={courses}
-          setCourses={setCourses}
-          user = {user}
-          />}
-          />
+            <Route index element={<Courses
+            handleRemoveCourse={handleRemoveCourse}
+            courses={courses}
+            searchResult={searchResult}
+            favour={favour}
+            handleClick={handleClick}
+            user={user}
+            />}/>
+            <Route path=':id' element={<CoursePage 
+            courses={courses}
+            handleRemoveCourse={handleRemoveCourse}
+            user={user}
+            />}/>
+            
+            <Route path='addnewcourse' 
+            element={<AddNewCourse 
+              courses={courses}
+              setCourses={setCourses}
+              user = {user}
+              />}
+            />
         </Route>
+        <Route path='/:category/courses' element={<Courses
+            handleRemoveCourse={handleRemoveCourse}
+            courses={courses}
+            searchResult={searchResult}
+            favour={favour}
+            handleClick={handleClick}
+            user={user}
+            />}/>
         <Route path='/editcourse/:id' 
           courses={courses}
           setCourses={setCourses}
@@ -159,10 +193,9 @@ function App() {
         element={<BuyCourse 
         courses={courses}
         setCourses={setCourses} 
+        user={user}
         />}
         />
-        {/* <Route path='/demo/:id' element={<Demo courses={courses} />}
-        /> */}
         <Route path='/sign-in' element={<Signup
         setAuthenticate={setAuthenticate}
          />}/>

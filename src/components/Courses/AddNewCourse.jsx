@@ -29,6 +29,17 @@ const AddNewCourse = ({courses,setCourses, user}) => {
             setCurrentSection(currentSection + 1)
         }
     }
+    const handleRemoveVideo= (index) =>{
+        const updatedVideoContent = [...videoContent]
+        updatedVideoContent.splice(index,1)
+        setVideoContent(updatedVideoContent)   
+    }
+    const handleRemovePoint = (index)=>{
+        const editedWhatTheyLearn = [...learningPoint]
+        editedWhatTheyLearn.splice(index,1)
+        setLearningPoint(editedWhatTheyLearn)
+    }
+
     const handleSubmit = async(e)=>{
         if(e)e.preventDefault();
         console.log("handleSubmit process started");
@@ -101,7 +112,7 @@ const AddNewCourse = ({courses,setCourses, user}) => {
                     </div>
                 </div>
                 <div className={ currentSection === 3 ? "activeRightLine" : "line"}></div>
-                <div className="videoContent" onClick={()=>setCurrentSection(3)}>
+                <div className="videoContenT Content" onClick={()=>setCurrentSection(3)}>
                     <div className='videoDetail Content'>
                         <h3>Video Details & content </h3>
                     <div className="div">
@@ -137,10 +148,39 @@ const AddNewCourse = ({courses,setCourses, user}) => {
                         videoContent={videoContent}
                         setVideoContent={setVideoContent}
                         handleSubmit={handleSubmit}
+                        handleRemoveVideo = {handleRemoveVideo}
                         />}
                     </form>
                 </div>
             </div>
+            {
+                currentSection === 2 &&
+                <div className="display-container">
+                    <div className="display-videoItems">
+                        {learningPoint.map((point,index)=>{
+                            return <div key={index}>
+                                        <p>{point.title}</p>
+                                        <button  type="button" onClick={() => handleRemovePoint(index)} className='removeButton'>Remove</button>
+                                    </div>
+                            
+                        })}
+                    </div>
+                </div>
+            }
+            {currentSection === 3 &&
+                <div className="display-container">
+                <div className="display-videoItems">
+                    {videoContent.map((point,index)=><div className="videoContent" key={index}>
+                    <div>
+                        <h3>{point.title}</h3>
+                        <p>{point.subtitle[0].content}</p>
+                        <p>{point.subtitle[0].videoDescription}</p>
+                    </div>
+                    <button type="button" onClick={() => handleRemoveVideo(index)} className='removeButton'>Remove</button>
+                    </div>)}
+                </div>
+                </div>
+            }
     </main>
   )
 }

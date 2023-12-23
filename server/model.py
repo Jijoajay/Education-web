@@ -12,6 +12,8 @@ class User(db.Model):
     user_courses = db.relationship('UserCourse', back_populates='user')
     user_info = db.relationship("UserInfo", back_populates="user")
     favourite_info = db.relationship("FavouriteInfo", back_populates="user")
+    search_info = db.relationship("SearchInfo", back_populates="user")
+    message = db.relationship("Message", back_populates="user")
     def json(self):
         tokens_data = []
         if isinstance(self.tokens, list):
@@ -60,7 +62,7 @@ class Course(db.Model):
                 ],
             'videoContent': [{
                 'title': content.title,
-                'subtitle': [{'content': subtitle.content, 'videoLink': subtitle.videoLink} for subtitle in content.subtitle]
+                'subtitle': [{'content': subtitle.content, 'videoLink': subtitle.videoLink , "videoDescription": subtitle.videoDescription} for subtitle in content.subtitle]
             } for content in self.videoContent]
         }
 
@@ -85,6 +87,7 @@ class Subtitle(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(255))
     videoLink = db.Column(db.String(255),nullable=True)
+    videoDescription = db.Column(db.String(255), nullable=True)
     videoContent_id = db.Column(db.Integer, db.ForeignKey('video_content.id'))
 
 class UserCourse(db.Model):
@@ -173,4 +176,24 @@ class Admin(db.Model):
             "tokens":self.tokens,
             "role" : "admin"
         }
+        
+class SearchInfo(db.Model):
+    __tablename__ = "search_info"
+    id = db.Column(db.String, primary_key=True)
+    search_result = db.Column(db.String(255), nullable=False)
+    user_id = db.Column(db.ForeignKey("user.id"), nullable=False)
+    user = db.relationship("User", back_populates= "search_info")  
     
+class Message(db.Model):
+    __tablename__ = "message"
+    id = db.Column(db.String, primary_key=True)
+    message = db.Column(db.String(255), nullable=False)
+    img = db.Column(db.String(255))
+    user_id = db.Column(db.ForeignKey("user.id"),nullable=True)
+    user = db.relationship("User", back_populates= "message")  
+    def json(self):
+        return{
+            "message":self.message,
+            "user":self.user.json(),
+            "img":self.img,
+        }

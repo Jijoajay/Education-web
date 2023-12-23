@@ -115,5 +115,11 @@ img{
     position: relative;
     top: 40px;
     left: 20px;
-
+    transition: .5s ease-in-out;
+}
+.remove:hover{
+    color: white;
+    font-weight: 900;
+    font-size: 35px;
+    transform: scale(1.2);
 }

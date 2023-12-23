@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import "./AddCourse.css"
 
-const LearningDetail = ({learningPoint, setLearningPoint, handleNextSection}) => {
+const LearningDetail = ({learningPoint, setLearningPoint, handleNextSection, handleRemovePoint}) => {
     const [whatTheyLearn, setWhatTheyLearn] = useState("") 
     const handleAddPoint = async()=>{
         try{
@@ -13,22 +13,10 @@ const LearningDetail = ({learningPoint, setLearningPoint, handleNextSection}) =>
             console.log(err.message);
         }
     }
-    const handleRemovePoint = (index)=>{
-        const editedWhatTheyLearn = [...learningPoint]
-        editedWhatTheyLearn.splice(index,1)
-        setLearningPoint(editedWhatTheyLearn)
-    }
+    
   return (
     <>
     <label htmlFor="what they'll learn "> What they'll learn by your course</label>
-    <div className='learningPointContainer'>
-        {learningPoint.map((point,index)=>{
-            return <div className="learningPoint" key={index}>
-                <p>{point.title}</p>
-                <button  type="button" onClick={() => handleRemovePoint(index)} className='removeButton'>Remove</button>
-            </div>
-        })}
-    </div>
     <input className='inputbox'
     type="text"
     value={whatTheyLearn || ""}

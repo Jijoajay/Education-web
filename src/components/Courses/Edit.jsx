@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "./AddCourse.css"
 import { useParams,Link } from 'react-router-dom'
-import api from "../api/fetch"
 import { useNavigate } from 'react-router-dom'
 import EditCourseDetail from './EditCourseDetail'
 import EditLearningDetail from './EditLearningDetail'
@@ -47,39 +46,43 @@ const Edit = () => {
             setCurrentSection(currentSection + 1)
         }
     }
+    const handleRemoveVideo= (index) =>{
+        const updatedVideoContent = [...editVideoContent]
+        updatedVideoContent.splice(index,1)
+        setEditVideoContent(updatedVideoContent)   
+    }
+    const handleRemovePoint = (index)=>{
+        const editedWhatTheyLearn = [...editLearningPoint]
+        editedWhatTheyLearn.splice(index,1)
+        setEditLearningPoint(editedWhatTheyLearn)
+    }
+
 
     const handleSubmit = async(e)=>{
+        e.preventDefault();
+        let editedCourse = null;
         if(editImgFile){
             const imgRef = ref(storage, "course-img/")
             try{
                 await uploadBytes(imgRef, editImgFile);
                 alert("uploaded submitted successfully")
-                const imgUrl = getDownloadURL(imgRef)
-                imgUrl.then((link)=>{
-                    console.log("imgLink",link)
-                    setEditImg(link)
-                })
-                .catch((error)=>{
-                    console.log(error)
-                })
+                const imgUrl = await getDownloadURL(imgRef)
+                editedCourse = {
+                    "name":editName,
+                    "author":editAuthor,
+                    "oldPrice":editOldPrice,
+                    "newPrice":editNewPrice,
+                    "img":imgUrl,
+                    "courseOffers": "https://dme2wmiz2suov.cloudfront.net/websitebuilder/792/utils/2329757-What_we_offer_in_this_program_(6).png",
+                    "whatYouLearn": editLearningPoint, 
+                    "videoContent": editVideoContent,
+                }
             }catch(err){
                 console.log(err)
             }
         }
-        e.preventDefault();
-        const editedCourse = {
-            "name":editName,
-            "author":editAuthor,
-            "oldPrice":editOldPrice,
-            "newPrice":editNewPrice,
-            "img":editImg,
-            "courseOffers": "https://dme2wmiz2suov.cloudfront.net/websitebuilder/792/utils/2329757-What_we_offer_in_this_program_(6).png",
-            "whatYouLearn": editLearningPoint, 
-            "videoContent": editVideoContent,
-            
-        }
         try{
-            console.log("editedCourse",editedCourse)
+            console.log("editedCourse", editedCourse)
             const response = await flashapi.post(`/edit-courses/${id}`, editedCourse)
             console.log("editData",response.data)
             courses.map((course)=>{
@@ -167,11 +170,13 @@ const Edit = () => {
                         {currentSection === 2 && <EditLearningDetail 
                         editLearningPoint={editLearningPoint}
                         setEditLearningPoint={setEditLearningPoint}
+                        handleRemovePoint={handleRemovePoint}
                         handleNextSection = {handleNextSection}/>}
                         {currentSection === 3 &&  <EditVideoContent
                         editVideoContent={editVideoContent}
                         setEditVideoContent={setEditVideoContent}
                         handleSubmit={handleSubmit}
+                        handleRemoveVideo={handleRemoveVideo}
                         />} 
                     </form>
                 </div>
@@ -186,6 +191,34 @@ const Edit = () => {
             </p>
     </div>
         }
+        {
+                currentSection === 2 &&
+                <div className="display-container">
+                    <div className="display-videoItems">
+                        {editLearningPoint.map((point,index)=>{
+                            return <div key={index}>
+                                        <p>{point.title}</p>
+                                        <button  type="button" onClick={() => handleRemovePoint(index)} className='removeButton'>Remove</button>
+                                    </div>
+                            
+                        })}
+                    </div>
+                </div>
+            }
+            {currentSection === 3 &&
+                <div className="display-container">
+                <div className="display-videoItems">
+                    {editVideoContent.map((point,index)=><div className="videoContent" key={index}>
+                    <div>
+                        <h3>{point.title}</h3>
+                        <p>{point.subtitle[0].content}</p>
+                        <p>{point.subtitle[0].videoDescription}</p>
+                    </div>
+                    <button type="button" onClick={() => handleRemoveVideo(index)} className='removeButton'>Remove</button>
+                    </div>)}
+                </div>
+                </div>
+            }
     </main>
   )
 }

@@ -6,17 +6,21 @@ import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ReactPlayer from "react-player";
-const BuyCourse = ({courses}) => {
+import CommentBox from './CommentBox';
+const BuyCourse = ({courses, user}) => {
     const navigate = useNavigate();
     const {id} = useParams();
-    const course = courses.find((course) => (course.id).toString() === id);
+    const course = courses?.find((course) => (course.id).toString() === id);
     const [sectionIndex, setSectionIndex] = useState(0)
     const[subtitleIndex,setSubtitleIndex] = useState(0)
     const [isSideActive, setIsSideActive] = useState(false)
-    const videoContent = course ? course.videoContent : []
+    const videoContent = course?.videoContent || [];
     const [isActive, setIsActive] = useState(Array(videoContent.length).fill(false))
 
-   
+    console.log('course:', courses);
+    console.log('sectionIndex:', sectionIndex);
+    console.log('subtitleIndex:', subtitleIndex);
+
     const handleDropdownToggle = (index) => {
         setSectionIndex(index)
         const newIsActive = [...isActive];
@@ -26,7 +30,6 @@ const BuyCourse = ({courses}) => {
     const handleClick = ()=>{
         setIsSideActive(!isSideActive)
     } 
-
   return (
     <main>
         <div className="buycourse-container">
@@ -72,28 +75,17 @@ const BuyCourse = ({courses}) => {
                         </video>
                     </div>
                 </div>
-                <div className='description-container'>
-                    <div className="title">
-                            {`${course.videoContent[sectionIndex].title}: ${course.videoContent[sectionIndex].subtitle[subtitleIndex].content}`}
-                    </div>
-                    <div className="description">
-                            <div className='title'>Description:</div>
-                            <div className='des-content'>In this chapter we going to see about mern introduction</div>
-                    </div>
-                    <div className="comment-box">
-                            <div className="title">comment:</div>
-                            <div className='comment-form'>
-                                <form>
-                                    <input type="textarea" />
-                                    <input type="file" />
-                                    <button>submit</button>
-                                </form>
-                            </div>
-                    </div>
-                </div>
+                <CommentBox 
+                course={course}
+                videoContent={videoContent}
+                sectionIndex={sectionIndex}
+                subtitleIndex={subtitleIndex}
+                user={user}
+                />
             </div>
             
         </div>
+        <div className="black"></div>
         
            
     </main>

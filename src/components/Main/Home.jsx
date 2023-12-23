@@ -42,12 +42,14 @@ const Home = ({courses, favour, handleClick}) => {
   const animateLeft = (delay)=>({
     initial:{x:-250, opacity: 0},
     animate:{ x: 0 , opacity: 1},
+    exit:{x:-250, opacity:0},
     transition:{ delay: delay, ease: "easeInOut", duration: 1}
   })
 
   const verticalAnimate = (x)=>({
     initial:{x:x, opacity: 0},
     animate:{ x: 0 , opacity: 1},
+    exit:{x:x, opacity:0},
     transition:{ delay: 1, type: "spring",stiffness:10, duration: .5}
   })
   

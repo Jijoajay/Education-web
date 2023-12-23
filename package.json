@@ -8,6 +8,8 @@
     "@testing-library/user-event": "^13.5.0",
     "ajv": "^8.12.0",
     "axios": "^1.6.2",
+    "ffmpeg": "0.0.4",
+    "ffmpeg-static": "^4.3.0",
     "firebase": "^10.7.1",
     "framer-motion": "^10.16.16",
     "hls.js": "^1.4.14",
