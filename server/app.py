@@ -1,5 +1,5 @@
 from flask import Flask,jsonify,request,session,make_response,abort
-from model import Carousel, Message, SearchInfo, db,User, Course, Subtitle, VideoContent, WhatYouLearn, UserCourse, UserInfo,FavouriteInfo, Admin
+from model import AdminInfo,Reply,Carousel, Message, SearchInfo, db,User, Course, Subtitle, VideoContent, WhatYouLearn, UserCourse, UserInfo,FavouriteInfo, Admin
 from flask_cors import CORS,cross_origin
 from flask_jwt_extended import JWTManager, create_access_token,get_jwt_identity,jwt_required
 from jwt.exceptions import ExpiredSignatureError, InvalidTokenError
@@ -127,8 +127,11 @@ def login():
             user.tokens = str(token)
             db.session.commit()     
             return jsonify({
+                "id":user.id,
+                "name":user.name,
+                "email":user.email,
                 'tokens':str(token),
-                "role": "student"
+                "role": "student",
             }),201
     except Exception as e: 
         return jsonify({
@@ -162,12 +165,17 @@ def logout_user():
             }),201
         else:
             admin = Admin.query.filter_by(email=current_user).first()
-        if admin:
-            admin.tokens = ""
-            db.session.commit()
-            return jsonify({
-                "message":"Logout successfully"
-            }),201
+            if admin:
+                admin.tokens = ""
+                db.session.commit()
+                return jsonify({
+                    "message":"Logout successfully"
+                }),201
+            else:
+                # Neither user nor admin found
+                return jsonify({
+                    "message": "User not found"
+                }), 404
     except ExpiredSignatureError as err:
         print(f"JWTError: {str(err)}")
         return jsonify({
@@ -187,7 +195,6 @@ def logout_user():
             "error":str(e)
         })
     
-    # end try
     
 
 
@@ -381,25 +388,30 @@ def checkout():
                 "error":str(e)
             })
        
-@app.route('/purchase_course',methods=['POST'])
+@app.route('/purchase_course', methods=['POST'])
 def purchase():
     try:
         data = request.get_json()
         user_id = data.get('user_id')
         course_id = data.get('course_id')
 
-        # Assuming user and course exist in the database
-        user = User.query.filter_by(id=user_id).first()
+        # Check for an admin first (admin is also a user)
+        admin = Admin.query.filter_by(id=user_id).first()
+
+        if admin:
+            user = admin  # If it's an admin, treat it as a user
+        else:
+            user = User.query.filter_by(id=user_id).first()
+
         course = Course.query.filter_by(id=course_id).first()
+
         if user and course:
             # Create a new UserCourses record
             user_course = UserCourse(
-                id = str(uuid.uuid4()),
-                user_id = user.id,
-                course_id = course.id,
-                # user=user,
-                # course=course
-                )
+                id=str(uuid.uuid4()),
+                user_id=user_id,
+                course_id=course_id
+            )
             db.session.add(user_course)
             db.session.commit()
 
@@ -409,6 +421,7 @@ def purchase():
             return jsonify({"message": "Course purchased successfully", "course_name": course_name}), 200
 
         return jsonify({"message": "User or course not found"}), 404
+
     except Exception as e:
         return jsonify({"error": str(e)}), 500
         
@@ -419,10 +432,10 @@ def get_user_course(user_id):
         user_course = UserCourse.query.filter_by(user_id=user_id).all()
         if user_course:
             return jsonify({
-                  "course": [course.json() for course in user_course]
+                "course" : [course.json() for course in user_course]
             }), 200
         else:
-            admin_course = Course.query.filter_by(admin_id = user_id).all()
+            admin_course = UserCourse.query.filter_by(admin_id = user_id).all()
             if admin_course:
                 return jsonify({
                     "course": [course.json() for course in admin_course]
@@ -435,73 +448,170 @@ def get_user_course(user_id):
             "error": str(e)
         }), 500
 
-@app.route('/add-user-detail/<id>', methods=['POST'])
-def add_user_info(id):
-    user = User.query.filter_by(id=id).first()
-    admin = Admin.query.filter_by(id=id).first()
-    if user or admin:
+@app.route('/add-user-detail/<user_id>', methods=['POST'])
+def add_user_info(user_id):
+    admin = Admin.query.filter_by(id=user_id).first()
+    user = User.query.filter_by(id=user_id).first()
+    print("user",user)
+    if user :
         try:
-            
-            fname = request.json['firstName']
-            lname = request.json['lastName']
-            headline = request.json['headline']
-            phone_number = request.json['phoneNumber']
-            website_link = request.json['websiteLink']
-            youtube_link = request.json['youtubeLink']
-            instagram_link = request.json['instagramLink']
-            linkedIn_link = request.json['LinkedInLink']
-            profile_img = request.json['profileImg']
+            data = request.json
+            fname = data.get('firstName')
+            lname = data.get('lastName')
+            headline = data.get('headline')
+            phone_number = data.get('phoneNumber')
+            website_link = data.get('websiteLink')
+            youtube_link = data.get('youtubeLink')
+            instagram_link = data.get('instagramLink')
+            linkedIn_link = data.get('LinkedInLink')
+            profile_img = data.get('profileImg')
+
             user_detail = UserInfo(
-                id = str(uuid.uuid4()),
-                first_name = fname,
-                last_name = lname,
-                Headline = headline,
-                phone_number = phone_number,
-                website_link = website_link,
-                youtube_link = youtube_link,
-                instagram_link = instagram_link,
-                linkedin_link = linkedIn_link,
-                profile_img = profile_img,
-                user_id = id
+                id=str(uuid.uuid4()),
+                first_name=fname,
+                last_name=lname,
+                Headline=headline,
+                phone_number=phone_number,
+                website_link=website_link,
+                youtube_link=youtube_link,
+                instagram_link=instagram_link,
+                linkedin_link=linkedIn_link,
+                profile_img=profile_img,
+                user_id=user_id
             )
+
             db.session.add(user_detail)
             db.session.commit()
+
             return jsonify({
-                "message":"user details added successfully"
-            }),201
+                "message": "User details added successfully"
+            }), 201
+        
         except Exception as e:
-            print("error occur in add-info-->",str(e))
+            print("Error occurred in add-info -->", str(e))
             return jsonify({
-                "error":str(e)
-            }),500
+                "error": str(e)
+            }), 500
+    elif admin :
+        try:
+            data = request.json
+            fname = data.get('firstName')
+            lname = data.get('lastName')
+            headline = data.get('headline')
+            phone_number = data.get('phoneNumber')
+            website_link = data.get('websiteLink')
+            youtube_link = data.get('youtubeLink')
+            instagram_link = data.get('instagramLink')
+            linkedIn_link = data.get('LinkedInLink')
+            profile_img = data.get('profileImg')
+
+            user_detail = AdminInfo(
+                id=str(uuid.uuid4()),
+                first_name=fname,
+                last_name=lname,
+                Headline=headline,
+                phone_number=phone_number,
+                website_link=website_link,
+                youtube_link=youtube_link,
+                instagram_link=instagram_link,
+                linkedin_link=linkedIn_link,
+                profile_img=profile_img,
+                admin_id=user_id
+            )
+
+            db.session.add(user_detail)
+            db.session.commit()
+
+            return jsonify({
+                "message": "User details added successfully"
+            }), 201
+        
+        except Exception as e:
+            print("Error occurred in add-info -->", str(e))
+            return jsonify({
+                "error": str(e)
+            }), 500
+    
     else:
         return jsonify({
-        "error": "User not found"
+            "error": "User or Admin not found"
         }), 404
     
-    # end try
+@app.route('/add-admin-detail/<admin_id>')
+def add_admin_detail(admin_id):
+    admin = Admin.query.filter_by(id=admin_id).first()
+    if admin :
+        try:
+            data = request.json
+            fname = data.get('firstName')
+            lname = data.get('lastName')
+            headline = data.get('headline')
+            phone_number = data.get('phoneNumber')
+            website_link = data.get('websiteLink')
+            youtube_link = data.get('youtubeLink')
+            instagram_link = data.get('instagramLink')
+            linkedIn_link = data.get('LinkedInLink')
+            profile_img = data.get('profileImg')
+
+            user_detail = AdminInfo(
+                id=str(uuid.uuid4()),
+                first_name=fname,
+                last_name=lname,
+                Headline=headline,
+                phone_number=phone_number,
+                website_link=website_link,
+                youtube_link=youtube_link,
+                instagram_link=instagram_link,
+                linkedin_link=linkedIn_link,
+                profile_img=profile_img,
+                admin_id=user_id
+            )
+
+            db.session.add(user_detail)
+            db.session.commit()
+
+            return jsonify({
+                "message": "User details added successfully"
+            }), 201
+        
+        except Exception as e:
+            print("Error occurred in add-info -->", str(e))
+            return jsonify({
+                "error": str(e)
+            }), 500
+    
+    else:
+        return jsonify({
+            "error": "User or Admin not found"
+        }), 404
+    
 @app.route('/get_user_info')
 def get_user_info():
     user = UserInfo.query.all()
+    admin = AdminInfo.query.all()
     if user:
         return jsonify([user.json() for user in user])
+    elif admin:
+        return jsonify([admin.json() for admin in admin])
     else:
         abort(404)
         
 @app.route('/get_user_info/<user_id>',methods=['GET'])
 def get_users(user_id):
     user_details = UserInfo.query.filter_by(user_id=user_id).first()
-    if (user_details):
-        try:
-            if user_details:
-                return jsonify(user_details.json())
-        except Exception as e:
-            print("error-->",str(e))
-            return jsonify({
-                "error":str(e)
-            }),500
-    else:
-        abort(404)
+    admin_details = AdminInfo.query.filter_by(admin_id=user_id).first();
+    try:
+        if user_details:
+            return jsonify(user_details.json())
+        elif admin_details:
+            return jsonify(admin_details.json())
+        else:
+            abort(404)
+    except Exception as e:
+        print("error-->",str(e))
+        return jsonify({
+            "error":str(e)
+        }),500
         
 @app.route('/add-to-favorite', methods=['POST'])
 def add_favourite():
@@ -603,52 +713,158 @@ def search_result():
         print(str(e))
         
     # end try
-@app.route('/get-searchHistory', methods=['POST'])   
+@app.route('/get-searchHistory', methods=['POST'])
 def get_history():
-    user_id = request.args.get('user_id')
     try:
-        if user_id:
-            histories= SearchInfo.query.filter_by(user_id=user_id).all()
-            return jsonify([history.json() for history in histories])
+        user_id = request.json.get('user_id')  # Use get method to avoid KeyError
+        print(user_id)
+        
+        if user_id is not None:  # Check if user_id is not None or not an empty string
+            histories = SearchInfo.query.filter_by(user_id=user_id).all()
+            
+            if histories:
+                return jsonify([history.json() for history in histories])
+            else:
+                return jsonify({"message": "no history found"}), 404
+        else:
+            return jsonify({"message": "user_id not provided"}), 400  # Bad Request
     except Exception as e:
         print(str(e))
-    # end try
+        return jsonify({"message": "internal server error"}), 500 
 @app.route('/add-message', methods=['POST'])
 def add_message():
-    message = request.json['message']
-    user_id = request.json['user_id']
-    img = request.json['img']
-    
     try:
-        if message and user_id:
+        message = request.json.get('message')
+        user_id = request.json.get('user_id')
+        admin_id = request.json.get('admin_id')
+        img = request.json.get('img')
+        course_id = request.json.get('course_id')
+
+        # Check if 'message' is present and either 'user_id' or 'admin_id' is present
+        if message and (user_id or admin_id) and img:
             new_message = Message(
-                id = str(uuid.uuid4()),
-                message = message,
-                user_id = user_id,
-                img = img
+                id=str(uuid.uuid4()),
+                message=message,
+                user_id=user_id,
+                admin_id=admin_id,
+                img=img,
+                course_id = course_id
             )
             db.session.add(new_message)
             db.session.commit()
+            return jsonify({'message': 'Message has been saved'})
+
+        # Check if 'message' is present and either 'user_id' or 'admin_id' is present
+        elif message and (user_id or admin_id):
+            new_message = Message(
+                id=str(uuid.uuid4()),
+                message=message,
+                user_id=user_id,
+                admin_id=admin_id,
+                course_id = course_id
+            )
+            db.session.add(new_message)
+            db.session.commit()
+            return jsonify({'message': 'Message has been saved'})
+
+        # If none of the conditions matched, return an error response
+        return jsonify({'error': 'Invalid request'})
+
+    except Exception as e:
+        print(str(e))
+        return jsonify({"message": str(e)})
+    
+@app.route('/delete-messages/<comment_id>')
+def delete_message(comment_id):
+    try:
+        message = Message.query.filter_by(id=comment_id).first()
+        db.session.delete(message)
+        db.session.commit()
+        return jsonify({'message': 'messages have been deleted'})
+    except Exception as e:
+        print(str(e))
+        return jsonify({'error': 'An error occurred'})
+
+@app.route('/get-messages/<course_id>')
+def get_message(course_id):
+    try:
+        messages = Message.query.filter_by(course_id = course_id).all()
+        if messages:
+            return jsonify([message.json() for message in messages])
+        else:
+            # If messages list is empty, return an appropriate response
             return jsonify({
-                'message': 'Message has been saved'
+                "message": "No messages found"
+            }), 404
+
+    except Exception as e:
+        print(str(e))
+        return jsonify({
+            "error": str(e),
+            "message": "Internal Server Error"
+        }), 500
+
+@app.route('/add-reply/<comment_id>', methods=['POST'])
+def add_reply(comment_id):
+    comment = Message.query.filter_by(id=comment_id).first()
+    try:
+        if comment :
+            reply = request.json['reply']
+            if "user_id" in request.json:
+                user_id  = request.json['user_id']
+                admin_id = None
+            elif "admin_id" in request.json:
+                admin_id  = request.json['admin_id']
+                user_id = None
+            new_reply = Reply(
+                id = str(uuid.uuid4()),
+                reply = reply,
+                message_id = comment_id,
+                user_id = user_id,
+                admin_id = admin_id
+            )
+            db.session.add(new_reply)
+            db.session.commit()
+            return jsonify({
+                "message":"reply added"
+            }),201
+        else:
+            return jsonify({
+                "message":"no comment found"
+            }) 
+    except Exception as e:
+        print(str(e))
+        return jsonify({
+            "error":str(e)
+        })
+    # end try
+@app.route('/get-reply')
+def get_replies():
+    comments = Reply.query.all()
+    try:
+        if comments:
+            return jsonify([comment.json() for comment in comments])
+        else:
+            return jsonify({
+                "message":"no reply found"
             })
     except Exception as e:
         print(str(e))
-        return jsonify({
-            "message": str(e)
-        })
-
-@app.route('/get-messages')
-def get_message():
-    messages = Message.query.all()
+    # end try
+@app.route('/get-reply/<comment_id>')
+def get_reply(comment_id): 
+    print("comment_id",comment_id)
+    comments = Reply.query.filter_by(message_id=comment_id).all() 
+    print("comments==>",comments)
     try:
-        if(messages):
-            return jsonify([message.json() for message in messages])
+        if comments:
+            return jsonify([comment.json() for comment in comments])
+        else:
+            return jsonify({
+                "message":"no reply found"
+            })
     except Exception as e:
-        print(str(e))
-        return jsonify({
-            "message":str(e)
-        })
+        raise e
     # end try
 @app.route('/add-carousel',methods=["POST"])
 def add_carousel(): 

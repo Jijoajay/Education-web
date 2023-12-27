@@ -181,4 +181,115 @@
     height: 300px;
     background-color: black;
 }
+.message-shower {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid rgb(217,52,109); /* Adjust the border color */
+    border-radius: 8px;
+}
 
+.profile-image img {
+    width: 60px; /* Adjust the width of the profile image */
+    height: 60px; /* Adjust the height of the profile image */
+    border-radius: 50%; /* Make it a circle */
+    margin-right: 10px;
+    border: none; /* Add some space between the profile image and the content */
+}
+
+.user-name {
+    font-weight: 800;
+    margin-right: 15px;
+    color: rgb(217,52,109);
+}
+
+.user-message {
+    color: rgb(217,52,109);
+    flex-grow: 1; /* Allow the user-message to grow and take available space */
+}
+.user-message p{
+    font-size: 25px;
+}
+.form input {
+    margin-top: 10px;
+    padding: 8px;
+    width: 70%; /* Adjust the width as needed */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px; /* Add margin to the bottom */
+    color: rgb(217,52,109); /* Text color */
+}
+.rply{
+    cursor: pointer;
+    margin: 10px 0px 10px 40px;
+}
+.rply p{
+    color: rgb(217,52,109);
+}
+.message-shower-reply{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid rgb(217,52,109); /* Adjust the border color */
+    border-radius: 8px;
+}
+.ratingContainer{
+    position: absolute;
+    top: 35%;
+    left: 35%;
+    height: 230px;
+    width: 500px;
+    z-index:99;
+    background-color: white;
+}
+.rating-content{
+    padding: 50px 0px 0px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: rgb(217,52,109);
+}
+.rating-content h3{
+    padding-bottom: 5px;
+}
+.rating-content p{
+    padding: 10px 0px 10px 0px;
+}
+.rating-content .stars{
+    font-size: 40px;
+    cursor: pointer;
+}
+.rating-content .stars:hover {
+    background-color: black; /* Set the background color on hover */
+    color: white; /* Change text color on hover if needed */
+  }
+.rating-cross{
+    position: absolute;
+    right: 5%;
+    top: 5%;
+    font-size: 25px;
+    color: black;
+}
+.progress{
+    display: flex;
+    font-size: 20px;
+    padding-right: 100px;
+}
+.review{
+    padding-right: 40px;
+    opacity: 0.5;
+    transition: .5s all;
+}
+.progress p{
+    padding-top: 5px;
+}
+.review:hover{
+    opacity: 1;
+    font-size: 21px;
+}

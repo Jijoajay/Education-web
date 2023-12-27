@@ -36,7 +36,7 @@ const Navbar = ({search,setSearch,handleSubmit,authenticate,setAuthenticate, cou
             navigate('/')
         }catch(err){
             if(err.response){
-                if(err.response.status === 401){
+                if(err.response.status === 401 || err.response.status === 404){
                     localStorage.removeItem("token")
                     setAuthenticate(false)
                     navigate('/sign-in')

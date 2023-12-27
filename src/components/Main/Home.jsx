@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 import {motion, useAnimation, AnimatePresence} from "framer-motion";
 
-const Home = ({courses, favour, handleClick}) => {
+const Home = ({courses, favour, handleClick,user}) => {
   const [slide, setSlide] =useState([])
   const [currentImage, setCurrentImage] = useState(0)
   const [searchHistory, setSearchHistory] = useState([]);
@@ -115,7 +115,7 @@ const Home = ({courses, favour, handleClick}) => {
   useEffect(()=>{
     const getUserSearchHistory = async()=>{
       try {
-        const response = flashapi.post("/get-searchHistory",user_id = user['id']);
+        const response = flashapi.post("/get-searchHistory",{user_id : user['id']});
         setSearchHistory(response.data)
       } catch (error) {
         console.log("error at getting user history")
@@ -123,7 +123,7 @@ const Home = ({courses, favour, handleClick}) => {
     }
     getUserSearchHistory();
 
-    searchHistory.forEach((search)=>{
+    searchHistory?.forEach((search)=>{
       const searchTerm = search.searchTerm.toLowerCase();
       const matchingCourse = searchTerm.filter((course)=>{
         course.whatYouLearn.toLowerCase().includes(searchTerm) ||

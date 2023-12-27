@@ -30,7 +30,7 @@ function App() {
   const [boughtCourses, setBoughtCourses] = useState([]);
   const [info, setInfo] = useState([]);
   const [favour, setFavour] = useState([])
-
+  console.log("courses:",courses)
   useEffect(
     ()=>{
       const fetchCourseData = async()=>{
@@ -131,7 +131,7 @@ function App() {
           console.error('Error storing user search result:', error);
         }
       }
-      if(location.pathname !==  "/"  || location.pathname !== "/courses"){
+      if(location.pathname !==  "/"  && location.pathname !== "/courses"){
         setSearch("")
       }
     };
@@ -160,6 +160,7 @@ function App() {
     }
     fetchFavouriteData();
   }, [user]);
+
   useEffect(() => {
     const fetchUserInfoData = async()=>{
         try {
@@ -192,6 +193,7 @@ function App() {
         <Route path='/' element={<Home 
         courses = {courses}
         search={search} 
+        user={user}
         handleClick={handleClick}
         favour={favour}/>}/>
         <Route path='/courses'>
@@ -207,6 +209,7 @@ function App() {
             courses={courses}
             handleRemoveCourse={handleRemoveCourse}
             user={user}
+            boughtCourse={boughtCourses}
             />}/>
             
             <Route path='addnewcourse' 

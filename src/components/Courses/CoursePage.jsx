@@ -8,15 +8,13 @@ import flashapi from '../api/flashapi';
 import { useNavigate } from 'react-router-dom';
 import {motion, useMotionValue, useTransform} from "framer-motion";
 
-const CoursePage = ({courses,user, handleRemoveCourse}) => {
+const CoursePage = ({courses, user, handleRemoveCourse, boughtCourse}) => {
 
     const navigate = useNavigate();
-    const [paidUser, setPaidUser] = useState(null);
-    const [loading, setLoading] = useState(true)
+    const [paidUser, setPaidUser] = useState(null)
+    const [loading, setLoading] = useState(false)
     const {id} = useParams();
-    // courses.find((course=>{
-    //     console.log("course_id",course.videoContent)
-    // }))
+  
     
     const course = courses.find((course)=> (course.id).toString() === id)
     const videoContent = course ? course.videoContent : [];
@@ -28,25 +26,19 @@ const CoursePage = ({courses,user, handleRemoveCourse}) => {
         setIsActive(newIsActive);
     };
     
-      useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await flashapi.get(`/get_course/${user["id"]}`);
-                setPaidUser(response.data.course_id.toString())  
-            } catch (error) {
-                console.error(error);
-            } finally {
-                setLoading(false)
-            }
-        };
-        fetchData();
-    }, [user]);
+    useEffect(() => {
+        boughtCourse.forEach((course) => {
+          if (course.course_id === id) setPaidUser(course.course_id);
+        });
+      }, [boughtCourse, id]);
 
-    
-
-    if(!course || !user){
-        return <p>Loading.... </p>
-    }
+    useEffect(() => {
+        if (!course || !user) {
+          setLoading(true);
+        } else {
+          setLoading(false);
+        }
+      }, [course, user]);
 
     const handlePayment = async (e) => {
         e.preventDefault();
@@ -85,9 +77,13 @@ const CoursePage = ({courses,user, handleRemoveCourse}) => {
                 },
                 checkout_behavior: 'NO_CONTACTLESS',
             }
-            const pay = new window.Razorpay(options)
-            console.log("pay",pay)
-            pay.open()
+            if (window.Razorpay) {
+                const razorpayInstance = new window.Razorpay(options);
+                console.log("razorpayInstance",razorpayInstance)
+                razorpayInstance.open();
+              } else {
+                console.error('Razorpay script not loaded.');
+              }
         }
         catch(err){
             console.log(err)
@@ -153,7 +149,7 @@ const CoursePage = ({courses,user, handleRemoveCourse}) => {
                                         { paidUser === course.id || course.admin_id === user['id'] ? (
                                             <motion.button {...buttonAnimation("-100vw")} className='button buy' onClick={handlePayment}>Continue</motion.button>
                                             ):(
-                                                <motion.button  {...buttonAnimation("-100vw")}className='button buy' onClick={handlePayment}>Buy Now</motion.button>
+                                                <motion.button  {...buttonAnimation("-100vw")}className='button buy' onClick={(e)=>handlePayment(e)}>Buy Now</motion.button>
                                                 )
                                             }
                                         <motion.button {...buttonAnimation("10vw")} className='button trail'>Add to Favourite</motion.button>

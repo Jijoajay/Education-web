@@ -60,7 +60,7 @@ const User = ({user, favour, handleClick, favourite,courses,info}) => {
 
   return (
     <main className='user-page'>
-        { !viewProfile  ?(
+        { viewProfile  ?(
         <>
         <div className="side-content">
             <div className="profile">

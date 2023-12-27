@@ -3,7 +3,7 @@ import Video from './Video';
 import Demo from '../../Demo';
 import {motion,AnimatePresence} from "framer-motion";
 
-const VideoDropDown = ({courses,isActive,videoIndex,setSubtitleIndex}) => {
+const VideoDropDown = ({courses,isActive,videoIndex,setSubtitleIndex,}) => {
     const [activeVideo,setActiveVideo] = useState(Array(courses.subtitle.length).fill(false));
     const handleClick = (index)=>{
         console.log(`videoIndex:${index}`)
@@ -13,6 +13,7 @@ const VideoDropDown = ({courses,isActive,videoIndex,setSubtitleIndex}) => {
         setActiveVideo(newActivevideo)
     }
     
+
     
   return (
     <AnimatePresence>
