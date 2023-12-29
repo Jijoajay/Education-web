@@ -3,7 +3,7 @@ import {BsFillCaretDownFill} from 'react-icons/bs'
 import VideoDropDown from './VideoDropDown';
 import {motion} from 'framer-motion';
 
-const CourseVideopage = ({course,handleDropdownToggle,isActive,setSubtitleIndex,sectionIndex}) => {
+const CourseVideopage = ({course,handleDropdownToggle,isActive,setSubtitleIndex,sectionIndex, setVideoIndex}) => {
    
   return (
     
@@ -23,6 +23,7 @@ const CourseVideopage = ({course,handleDropdownToggle,isActive,setSubtitleIndex,
                             <span className='arrow'><BsFillCaretDownFill /></span>
                         </div>
                         <VideoDropDown 
+                        setVideoIndex={setVideoIndex}
                         sectionIndex={sectionIndex}
                         courses={courses}
                         videoIndex={videoIndex}

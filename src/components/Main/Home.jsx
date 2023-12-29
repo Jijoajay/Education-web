@@ -115,26 +115,25 @@ const Home = ({courses, favour, handleClick,user}) => {
   useEffect(()=>{
     const getUserSearchHistory = async()=>{
       try {
-        const response = flashapi.post("/get-searchHistory",{user_id : user['id']});
+        const response = await flashapi.post("/get-searchHistory",{user_id : user['id']});
+        console.log("searchHistory", response.data)
         setSearchHistory(response.data)
+        console.log("searchHistory", response.status)
       } catch (error) {
         console.log("error at getting user history")
       }
     }
     getUserSearchHistory();
+    
+    
+  },[user,courses])
 
-    searchHistory?.forEach((search)=>{
-      const searchTerm = search.searchTerm.toLowerCase();
-      const matchingCourse = searchTerm.filter((course)=>{
-        course.whatYouLearn.toLowerCase().includes(searchTerm) ||
-        course.videoContent.title.toLowerCase().includes(searchTerm)
-      })
-      setFilteredCourses(matchingCourse)
-    })
-
-  },[user,courses,searchHistory])
-
-
+  useEffect(() => {
+    const allSearchResults = searchHistory.flatMap(history => history.search_result);
+    setFilteredCourses(allSearchResults);
+  }, [searchHistory]);
+  console.log("searchHisory",searchHistory)
+  console.log("filteredCourse",filteredCourse)
   return (
     <main className='home-page'>
     <div className="home">

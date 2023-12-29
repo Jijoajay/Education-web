@@ -89,7 +89,7 @@ const Navbar = ({search,setSearch,handleSubmit,authenticate,setAuthenticate, cou
             <ul>
                 <li onClick={()=>setActive('home')}><Link to='/' style={{textDecoration:'none',color:'white'}}>Home</Link>{active === 'home' ? <hr />:<></>}</li>
                 <li onMouseEnter={()=>handleMouseEnter("course")}
-                onMouseLeave={()=>handleMouseLeave()}
+                onMouseLeave={()=>handleMouseLeave}
                 onClick={()=>{setActive('courses'); setIsHover(false)}
                 }><Link to='/courses' style={{textDecoration:'none',color:'white', transition: .4 }}>Courses</Link>{active === 'courses' ? <hr />:<></> }</li>
                 {

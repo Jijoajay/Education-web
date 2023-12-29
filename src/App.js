@@ -15,7 +15,7 @@ import flashapi from './components/api/flashapi';
 import MyLearning from './components/MyLearning';
 import User from './components/Main/User';
 import Demo from './Demo';
-
+import { ViewProfile } from './components/Main/ViewProfile';
 
 function App() {
   const navigate = useNavigate();
@@ -118,7 +118,7 @@ function App() {
       });
       setSearchResult(searchedResult);
       console.log("oooooh")
-      if (search && user) {
+      if (search && user && location.pathname === "/courses") {
         const searchDetail = {
           user_id: user.id,
           searchResult: search,
@@ -131,13 +131,13 @@ function App() {
           console.error('Error storing user search result:', error);
         }
       }
-      if(location.pathname !==  "/"  && location.pathname !== "/courses"){
-        setSearch("")
+  
+      if (location.pathname !== "/" && location.pathname !== "/courses") {
+        setSearch("");
       }
     };
-  
     fetchData();
-  }, [search, courses, user, location.pathname]);
+  }, [courses, user, location.pathname]);
   useEffect(() => {
     const fetchData = async () => {
         try {
@@ -265,6 +265,15 @@ function App() {
         courses={courses}
         info={info}
         />}/>
+        <Route path='/user/:id' element={ <ViewProfile
+                ViewProfile={false} 
+                user={user}
+                favour={favour}
+                handleClick={handleClick}
+                favourite={favourite}
+                courses={courses}
+                />}/>
+
 
         <Route path="/favourites" element={<MyLearning user={user}
         title = {title}

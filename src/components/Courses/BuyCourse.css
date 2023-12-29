@@ -15,7 +15,7 @@
     width: 100%;
     margin-left: 30px;
     margin-right: 30px;
-    margin-top: 20px;
+    margin-top: 40px;
     font-size: 25px;
     font-weight: 800;
     cursor: pointer; 
@@ -149,21 +149,28 @@
 
 }
 .comment-form form input{
+    color: rgb(217,52,109);
+    border: none;
+    background-color: black;
     margin-bottom: 10px;
-    height: 50px;
+    height: 40px;
     width: 600px;
     padding-left: 10px;
     font-size: 20px;
     scroll-margin: 600px;
 }
+.comment-form form input:focus{
+    outline: none;
+}
+
 .comment-form form label{
     color: rgb(217,52,109);
     
 }
 .comment-form form button{
     color: rgb(217,52,109);
+    border: none;
     background-color: black;
-    border: 2px solid rgb(217,52,109);
     font-weight: 800;
     font-size: 15px;
     height: 80px;
@@ -192,6 +199,7 @@
 }
 
 .profile-image img {
+    cursor: pointer;
     width: 60px; /* Adjust the width of the profile image */
     height: 60px; /* Adjust the height of the profile image */
     border-radius: 50%; /* Make it a circle */
@@ -200,6 +208,7 @@
 }
 
 .user-name {
+    cursor: pointer;
     font-weight: 800;
     margin-right: 15px;
     color: rgb(217,52,109);
@@ -265,9 +274,8 @@
     font-size: 40px;
     cursor: pointer;
 }
-.rating-content .stars:hover {
-    background-color: black; /* Set the background color on hover */
-    color: white; /* Change text color on hover if needed */
+.rating-content .stars svg:hover {
+    color: black;
   }
 .rating-cross{
     position: absolute;
@@ -285,11 +293,64 @@
     padding-right: 40px;
     opacity: 0.5;
     transition: .5s all;
+    padding-top: 10px;
 }
+
 .progress p{
-    padding-top: 5px;
+    padding-top: 15px;
 }
 .review:hover{
     opacity: 1;
     font-size: 21px;
 }
+.progress-bar{
+    height: 60px;
+}
+
+.certificate{
+    color: white;
+}
+.stars {
+    font-size: 24px;
+    color: black;
+    transition: 0.5s ease;
+  }
+  
+  .star-hovered {
+    padding-left: 10px;
+    color: gold; /* or any other color you desire for the hovered stars */
+  }
+  .hoveredProgressContainer::before {
+    content: '';
+    position: absolute;
+    top: -10px; /* Adjust this value to control the distance between the container and the arrow */
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 0 10px 10px;
+    border-style: solid;
+    border-color: transparent transparent white transparent;
+  }
+  .hoveredProgressContainer{
+    background-color: white;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    height: 100px;
+    top: 10.8rem;
+    z-index: 99;
+    border: none;
+    border-radius: 20px;
+    right: 30px;
+  }
+  .input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  .submitButton{
+    padding-top: 5px;
+    padding-left: 90px;
+  }

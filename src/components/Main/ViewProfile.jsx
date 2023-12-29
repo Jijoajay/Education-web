@@ -1,5 +1,6 @@
 import "./User.css"
 import React, {Fragment} from 'react'
+import { useParams } from "react-router-dom";
 import { FaInstagram , FaLinkedin, FaYoutube } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { Link} from "react-router-dom";
@@ -7,13 +8,16 @@ import IsFavourite from "./IsFavourite";
 import { MdEdit } from "react-icons/md";
 import { IoHeart } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-import {motion} from "framer-motion";
+import flashapi from "../api/flashapi";
 
 export const ViewProfile = ({user, handleClick, favour, viewProfile, setViewProfile, favourite,courses, info}) => {
     const navigate = useNavigate();
     const saveMyLearning = JSON.parse(localStorage.getItem("myLearning")) || false ;
     const [myLearning, setMyLearning] = useState(saveMyLearning)
     const [fav, setFav] = useState(false);
+    const [profile, setProfile] = useState([]);
+
+    const {id} = useParams();
 
     console.log(user ? user['id']:"null");
 
@@ -23,20 +27,43 @@ export const ViewProfile = ({user, handleClick, favour, viewProfile, setViewProf
         }
         fetchStorageData();
 
-    },[myLearning])
-
-    const editProfile = async()=>{
+      },[myLearning])
+      
+      const editProfile = async () => {
+        if (viewProfile && viewProfile.length > 0) {
         try {
-            setViewProfile(!viewProfile)
+          setViewProfile(!viewProfile);
         } catch (error) {
-            console.log(error);
+          console.log(error);
         }
-    }
-    console.log("info",info)
+      }
+      };
     
+
+    if(info){
+      console.log("info",info)
+    }
+    if(profile){
+      console.log("profile",profile)
+    }
+    useEffect(()=>{
+      if(id){
+          try {
+              const fetchUserInfo = async()=>{
+                  const response = await flashapi.get(`/get_user_info/${id}`)
+                  console.log("paramsId", response.data)
+                  setProfile([response.data])
+              }
+              fetchUserInfo();
+          } catch (error) {
+              console.log("error at getting param id",error)
+          }
+      }
+  },[id])
+
     return (
         <main className="view-profile">
-          {info.map((item, index) => (
+          {(profile ? profile : info).map((item, index) => (
             <div key={index}>
               <div className="profile-title">
                 <h2>My Profile</h2>
@@ -47,9 +74,11 @@ export const ViewProfile = ({user, handleClick, favour, viewProfile, setViewProf
               </div>
               <div className="prof-img">
                 <div>
+                  { viewProfile && 
                   <div className="edit-icon" onClick={() => editProfile()}>
                     <MdEdit />
                   </div>
+                  }
                   <img src={item.profile_img} alt="" />
                 </div>
                 <div className="social-icons">

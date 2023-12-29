@@ -1,5 +1,5 @@
 from flask import Flask,jsonify,request,session,make_response,abort
-from model import AdminInfo,Reply,Carousel, Message, SearchInfo, db,User, Course, Subtitle, VideoContent, WhatYouLearn, UserCourse, UserInfo,FavouriteInfo, Admin
+from model import AdminInfo,Reply,Carousel, Message, SearchInfo, UserVideoProgress, db, User, Course, Subtitle, VideoContent, WhatYouLearn, UserCourse, UserInfo,FavouriteInfo, Admin
 from flask_cors import CORS,cross_origin
 from flask_jwt_extended import JWTManager, create_access_token,get_jwt_identity,jwt_required
 from jwt.exceptions import ExpiredSignatureError, InvalidTokenError
@@ -268,11 +268,11 @@ def add_courses():
 def course_by_category(category):
     try:
         coursesByCategory = Course.query.filter_by(category=category).all()
-        coursesByTags = Course.query.filter_by(tags=category).all()
+        # coursesByTags = Course.query.filter_by(tags=category).all()
         if coursesByCategory :
             return jsonify([course.json() for course in coursesByCategory]),200
-        elif coursesByTags:
-            return jsonify([course.json() for course in coursesByTags]),200
+        # elif coursesByTags:
+        #     return jsonify([course.json() for course in coursesByTags]),200
         else:
             return jsonify({
                 "message":"category not found.."
@@ -430,18 +430,17 @@ def purchase():
 def get_user_course(user_id):
     try:
         user_course = UserCourse.query.filter_by(user_id=user_id).all()
+        admin_course = UserCourse.query.filter_by(admin_id = user_id).first()
         if user_course:
             return jsonify({
                 "course" : [course.json() for course in user_course]
             }), 200
+        elif admin_course:
+            return jsonify({
+                "course": [course.json() for course in admin_course]
+            })
         else:
-            admin_course = UserCourse.query.filter_by(admin_id = user_id).all()
-            if admin_course:
-                return jsonify({
-                    "course": [course.json() for course in admin_course]
-                })
-            else:
-                return jsonify({"message": "No courses found"}), 404
+            return jsonify({"message": "No courses found"}), 404
     except Exception as e:
         print(str(e))
         return jsonify({
@@ -723,7 +722,7 @@ def get_history():
             histories = SearchInfo.query.filter_by(user_id=user_id).all()
             
             if histories:
-                return jsonify([history.json() for history in histories])
+                return jsonify([ history.json() for history in histories])
             else:
                 return jsonify({"message": "no history found"}), 404
         else:
@@ -893,6 +892,65 @@ def get_carousel():
     images = Carousel.query.all()
     return jsonify([image.json() for image in images])
 
+@app.route('/delete-searchHistory/<user_id>')
+def delete_history(user_id):
+    try:
+        user = SearchInfo.query.filter_by(user_id=user_id).first()
+        print(user.json())
+        if user:
+            db.session.delete(user)
+            db.session.commit()
+            return jsonify({
+                "message":"searchHistory deleted successfully"
+            }),201
+        else:
+            return jsonify({
+                "message":"no user found"
+            })
+    except Exception as e:
+        print(str(e))
+    # end try
+
+@app.route('/add-completed-video/<int:video_id>/<user_id>', methods=['POST'])
+def add_completed_video(video_id, user_id):
+    try:
+        course_id = request.json['course_id']
+        video = UserVideoProgress.query.filter_by(id=video_id, user_id=user_id).all()
+        if video:
+            return jsonify({
+                "message":"video_id already found with same user"
+            }),201
+        else:
+            new_video = UserVideoProgress(
+                video_id=video_id, 
+                user_id=user_id,
+                course_id = course_id,
+                completed=True
+                )
+            db.session.add(new_video)
+            db.session.commit()
+            return jsonify({
+                "message":"completed video added sucessfully"
+            })
+    except Exception as e:
+        print(str(e))
+        return jsonify({"message":str(e)})
+    # end try
+
+@app.route('/get-completed-video/<user_id>/<course_id>')
+def get_video(user_id,course_id):
+    try:
+        video = UserVideoProgress.query.filter_by(user_id=user_id,course_id=course_id).all()
+        if video:
+            return jsonify([v.json() for v in video]), 201
+        else:
+            return jsonify({
+                "message": "no video found"
+            }), 404
+    except Exception as e:
+        print(str(e))
+        return jsonify({"message": str(e)})
+    
 with app.app_context():
     db.create_all()
 if __name__  == "__main__":

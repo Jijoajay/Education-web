@@ -15,6 +15,7 @@ class User(db.Model):
     search_info = db.relationship("SearchInfo", back_populates="user")
     message = db.relationship("Message", back_populates="user")
     reply = db.relationship("Reply", back_populates="user")
+    
     def json(self):
         user_info_data = None
         if isinstance(self.user_info, list):
@@ -64,7 +65,7 @@ class Course(db.Model):
                 ],
             'videoContent': [{
                 'title': content.title,
-                'subtitle': [{'content': subtitle.content, 'videoLink': subtitle.videoLink , "videoDescription": subtitle.videoDescription} for subtitle in content.subtitle]
+                'subtitle': [{"id":subtitle.id, 'content': subtitle.content, 'videoLink': subtitle.videoLink , "videoDescription": subtitle.videoDescription} for subtitle in content.subtitle]
             } for content in self.videoContent]
         }
 
@@ -196,9 +197,6 @@ class Admin(db.Model):
     admin_info = db.relationship("AdminInfo", back_populates="admin")
     user_courses = db.relationship("UserCourse", back_populates="admin")
     def json(self):
-        # tokens_data = []
-        # if isinstance(self.tokens, list):
-        #     tokens_data = self.tokens
         admin_info_data = []
         if isinstance(self.admin_info, list):
             admin_info_data = [info.json() for info in self.admin_info]
@@ -274,5 +272,20 @@ class Reply(db.Model):
             "admin":self.admin.json() if self.admin else None,
             "user":self.user.json() if self.user else None,
             "message_id":self.message_id
+        }
+        
+class UserVideoProgress(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.String, nullable=False)
+    course_id = db.Column(db.String, nullable=False)
+    video_id = db.Column(db.Integer, nullable=False)
+    completed = db.Column(db.Boolean, default=False)
+    def json(self):
+        return{
+            "id":self.id,
+            "user_id":self.user_id,
+            "course_id":self.course_id,
+            "video_id":self.video_id,
+            "completed":self.completed
         }
     

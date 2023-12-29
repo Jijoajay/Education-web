@@ -3,11 +3,12 @@ import Video from './Video';
 import Demo from '../../Demo';
 import {motion,AnimatePresence} from "framer-motion";
 
-const VideoDropDown = ({courses,isActive,videoIndex,setSubtitleIndex,}) => {
+const VideoDropDown = ({courses,isActive,videoIndex,setSubtitleIndex,setVideoIndex}) => {
     const [activeVideo,setActiveVideo] = useState(Array(courses.subtitle.length).fill(false));
     const handleClick = (index)=>{
         console.log(`videoIndex:${index}`)
         let newActivevideo = Array(courses.subtitle.length).fill(false);
+        console.log("newActivevideo",newActivevideo);
         newActivevideo[index] = !newActivevideo[index]
         setSubtitleIndex(index)
         setActiveVideo(newActivevideo)
@@ -27,7 +28,8 @@ const VideoDropDown = ({courses,isActive,videoIndex,setSubtitleIndex,}) => {
             {courses.subtitle.map((course,index)=>
                <motion.li className='dropdown-items' 
                key={index}
-               onClick={(e)=>handleClick(index)}
+               onClick={(e)=>{handleClick(index); 
+                 setVideoIndex(course.id) }}
                transition={{ duration: 0.5 }}
                >
                    {course.content} 

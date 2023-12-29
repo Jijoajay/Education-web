@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import './User.css';
 import flashapi from '../api/flashapi';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ViewProfile } from './ViewProfile';
 
 const User = ({user, favour, handleClick, favourite,courses,info}) => {
@@ -15,10 +15,10 @@ const User = ({user, favour, handleClick, favourite,courses,info}) => {
     const [instagramLink, setInstagramLink] = useState("")
     const [facebookLink, setFacebookLink] = useState("")
     const [profileImg, setProfileImg] = useState("")
-
     const [currentSection, setCurrentSection] = useState(0);
     const saveProfile = JSON.parse(localStorage.getItem("viewProfile")) || false;
     const [viewProfile, setViewProfile] = useState(saveProfile)
+    
     useEffect(()=>{
         const fetchLocalData = ()=>{
             localStorage.setItem("viewProfile",JSON.stringify(viewProfile))
@@ -57,10 +57,11 @@ const User = ({user, favour, handleClick, favourite,courses,info}) => {
             console.log(error);
         }
     }
+    
 
   return (
     <main className='user-page'>
-        { viewProfile  ?(
+        { !viewProfile  ?(
         <>
         <div className="side-content">
             <div className="profile">
@@ -136,6 +137,7 @@ const User = ({user, favour, handleClick, favourite,courses,info}) => {
         ):(
             <>
                 <ViewProfile 
+
                 info={info}
                 user={user}
                 favour={favour}

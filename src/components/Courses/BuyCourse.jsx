@@ -1,17 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { GiHamburgerMenu } from "react-icons/gi";
 import "./BuyCourse.css"
 import CourseVideopage from './CourseVideopage';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ReactPlayer from "react-player";
 import CommentBox from './CommentBox';
 import { FaStar } from "react-icons/fa";
-import { LuStar } from "react-icons/lu";
 import { RxCross2 } from "react-icons/rx";
-// import { CircularProgressbar } from 'react-circular-progressbar';
-// import 'react-circular-progressbar/dist/styles.css';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+import flashapi from '../api/flashapi';
 
 const BuyCourse = ({courses, user}) => {
     const navigate = useNavigate();
@@ -24,6 +23,51 @@ const BuyCourse = ({courses, user}) => {
     const [isActive, setIsActive] = useState(Array(videoContent.length).fill(false))
     const [activeRating, setActiveRating] = useState(false)
     const [videoCount, setVideoCount] = useState(0);
+    const [videoWatched, setVideoWatched] = useState(0)
+    const [count, setCount] = useState([]);
+    const [hoverStar, setHoverStar] = useState(null);
+    const [hoverProgress, setProgress] = useState(false);
+    const [courseCompleted, setCourseCompleted] = useState(false);
+    const [videoIndex, setVideoIndex] = useState(0);
+
+    const videoRef = useRef(null);
+    const watchedFully = useRef(false);
+    
+    const handleVideoEnded = ()=>{
+        watchedFully.current = true;
+    }
+
+    useEffect(()=>{
+        const fetchVideoCount = async()=>{
+            const response = await flashapi.get(`/get-completed-video/${user['id']}/${course.id}`)
+            console.log(response.data)
+            setCount(response.data)
+        }
+        fetchVideoCount();
+    },[]);
+
+    useEffect(()=>{
+        const updateVideoProgress = async()=>{
+            try {
+                console.log("first.....,")
+                const response = await flashapi.post(`/add-completed-video/${videoIndex}/${user['id']}`,{course_id:course.id})
+                console.log("response of adding completed video: ",response.data)
+            } catch (error) {
+                console.log('error at adding: ',error)
+            }
+        }
+        if(watchedFully && videoWatched > videoCount){
+            setVideoWatched((prevCount)=> prevCount + 1)
+            updateVideoProgress();
+        }
+    },[watchedFully,setVideoCount,setVideoWatched, subtitleIndex]);
+
+    const handleStarHover = (index)=>{
+        setHoverStar(index)
+    }
+    const handleStarLeave = () => {
+        setHoverStar(null);
+      };
 
 
     const handleDropdownToggle = (index) => {
@@ -38,6 +82,8 @@ const BuyCourse = ({courses, user}) => {
     const handleActiveRating = ()=>{
             setActiveRating(!activeRating)
         }
+
+    
     useEffect(() => {
         const fetchVideoCount = () => {
           let count = 0;
@@ -60,12 +106,14 @@ const BuyCourse = ({courses, user}) => {
       
         fetchVideoCount();
       }, [courses, subtitleIndex, sectionIndex]); 
+
   return (
     <main>
         <div className="buycourse-container">
             <div className='sidebar-content'>
                 {   isSideActive && course &&
-                        <CourseVideopage 
+                        <CourseVideopage
+                        setVideoIndex={setVideoIndex}
                         course={course}
                         handleDropdownToggle={handleDropdownToggle}
                         isActive={isActive}
@@ -88,7 +136,15 @@ const BuyCourse = ({courses, user}) => {
                         <div className="review" onClick={()=>handleActiveRating()}>
                             <FaStar /> Leave a rating
                         </div>
-                        <p>Your Progress</p>
+                        {console.log("videovount:",videoCount)}
+                        <div className='progress-bar-container'><CircularProgressbar className='progress-bar' value={count.length} maxValue={videoCount} text={`${Math.ceil((count.length/videoCount) * 100)}%`} /></div>
+                        <p onMouseEnter={()=>setProgress(true)} onMouseLeave={()=>setProgress(false)}>Your Progress</p>
+                        {course && hoverProgress &&
+                            <div className='hoveredProgressContainer'>
+                                <p>{ count.length + " of " + videoCount + " complete" }</p>
+                                <p>Finish course to get your certificate</p>
+                            </div>                        
+                        }
                      </div>
                 </nav>
                 { activeRating && course &&
@@ -97,14 +153,27 @@ const BuyCourse = ({courses, user}) => {
                         <div className="rating-content">
                             <h3>How would you rate this course?</h3>
                             <p>Select rating</p>
-                            <p className='stars'><LuStar /> <LuStar /> <LuStar /> <LuStar /> <LuStar /></p>
+                            <p className='stars' onMouseLeave={()=>handleStarLeave}>
+                                {console.log(hoverStar)}
+                                {[...Array(5)].map((_,index)=>(
+                                    <FaStar 
+                                    key={index}
+                                    onMouseEnter={()=>handleStarHover(index)}
+                                    className={index <= hoverStar ? 'star-hovered' : ''}
+                                    />
+                                ))}
+                            </p>
                         </div>
                     </div>
                 }
                 <div className={`video-display ${isSideActive ? 'video-display-active':"video-display-notActive"}`}>
                     <div className='video'>
-                        <video src={course.videoContent[sectionIndex].subtitle[subtitleIndex].videoLink} title={course.name} controls>
-
+                        <video src={course.videoContent[sectionIndex].subtitle[subtitleIndex].videoLink} 
+                        title={course.name}
+                        ref={videoRef}
+                        onEnded={handleVideoEnded}
+                        controls
+                        >
                         </video>
                     </div>
                 </div>

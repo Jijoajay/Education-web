@@ -9,33 +9,23 @@ import { useState } from 'react';
 
 
 const Courses = ({ courses, searchResult, favour, handleClick, user , handleRemoveCourse}) => {
-  if(user){
-    console.log("---->courses:",user);
-  }
-  console.log("searchResult",searchResult)
   const [courseByCategory, setCourseByCategory] = useState([]);
   const {category} = useParams();
-  console.log("param",category);
   useEffect(() => {
     if (category) {
       const coursesByCategory = courses.find((course) => course.category === category);
-      console.log("categoryTitle", coursesByCategory)
       const fetchCourse = async () => {
         try {
           const response = await flashapi.get(`/course/${category}`);
-          console.log(response.data);
           setCourseByCategory(response.data);
         } catch (error) {
           console.log(error);
         }
       };
-  
       fetchCourse();
     }
   }, [category, courses, setCourseByCategory]);
-  console.log("courseByCategory",courseByCategory)
-  const filteredCourses = searchResult.length > 0 ? searchResult : courseByCategory;
-  console.log("filteredCourses: ", filteredCourses )
+  const filteredCourses = courseByCategory.length > 0 ? courseByCategory : searchResult;
   return (
     <main className='course-page'>
       <div className="course-containers">
@@ -96,22 +86,6 @@ const Courses = ({ courses, searchResult, favour, handleClick, user , handleRemo
             ))
           )
         }
-        { 
-          // courses.map((course) => (
-          //   <Link key={course.id} to={`${course.id}`} style={{ textDecoration: 'none', color: 'black' }}>
-          //     <div className="product-con">
-          //       <div className="img-div">
-          //         <img src={course.img} alt={course.name} />
-          //       </div>
-          //       <div className="content-div">
-          //         <h4>{course.name}</h4>
-          //         <h5>{course.author}</h5>
-          //         <p>₹{course.newPrice} <span>₹{course.oldPrice}</span></p>
-          //       </div>
-          //     </div>
-          //   </Link>
-          //  ))
-          }
           { user ? (
             user['role'] === 'admin' &&
             <Link to='addnewcourse'><button className='add-button'>Add new Course</button></Link>

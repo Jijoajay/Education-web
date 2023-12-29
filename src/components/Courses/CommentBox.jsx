@@ -1,8 +1,9 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect, useRef} from "react";
 import React from 'react'
 import { storage } from "../../firebase";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import flashapi from "../api/flashapi";
+import { Link } from "react-router-dom";
 const CommentBox = ({course, sectionIndex, subtitleIndex, user}) => {
     const [allMessage, setAllMessage] = useState([]);
     const [message, setMessage] = useState("");
@@ -10,6 +11,8 @@ const CommentBox = ({course, sectionIndex, subtitleIndex, user}) => {
     const [img, setImg] = useState(null);
     const [reply, setReply] = useState("");
     const [allReply, setAllReply] = useState([]);
+    
+    
     const handleSubmit = async(e)=>{
         e.preventDefault();
         let newMessage = null;
@@ -124,8 +127,9 @@ const CommentBox = ({course, sectionIndex, subtitleIndex, user}) => {
             console.log("error found at reply sender", error)
         }
     }
-   console.log("first",allReply)
-  return (
+
+
+    return (
     <div className='description-container'>
         <div className="title">
             {`${course.videoContent[sectionIndex].title}: ${course.videoContent[sectionIndex].subtitle[subtitleIndex].content}`}
@@ -141,22 +145,30 @@ const CommentBox = ({course, sectionIndex, subtitleIndex, user}) => {
                         <form>
                         {allMessage?.map((message, index) => (
                          <div className="message-shower" key={index}>
-                                    <div className="profile-image">
-                                        {message.admin && message.admin.user_info && (
-                                            <img src={message.admin.user_info[0].profile_img} alt="" />
-                                        )}
-                                        {message.user && message.user.user_info && (
-                                            <img src={message.user.user_info[0].profile_img} alt="" />
-                                        )}
-                                    </div>
+                                        <div className="profile-image">
+                                            {message.admin && message.admin.user_info && (
+                                                <Link to={`/user/${message.admin.id}`}><img src={message.admin.user_info[0].profile_img} alt="" /></Link>
+                                            )}
+                                            {message.user && message.user.user_info && (
+                                                <Link to={`/user/${message.user.id}`}><img src={message.user.user_info[0].profile_img} alt="" /></Link>
+                                            )}
+                                        </div>
                                     <div>
                                     <div className="user-name">
-                                        {message.admin && message.admin.user_info && (
-                                        <p>{message.admin.user_info[0].first_name} {"  "} {message.admin.user_info[0].last_name}</p>
-                                        )}
-                                        {message.user && message.user.user_info && (
-                                        <p>{message.user.user_info[0].first_name} {"  "} {message.user.user_info[0].last_name}</p>
-                                        )}
+                                        {   
+                                            message.user?.id === user['id'] ||
+                                            message.admin?.id === user['id'] ?
+                                            <p>You</p>
+                                            :
+                                            <>
+                                                {message.admin && message.admin.user_info && (
+                                                <p>{message.admin.user_info[0].first_name} {"  "} {message.admin.user_info[0].last_name}</p>
+                                                )}
+                                                {message.user && message.user.user_info && (
+                                                <p>{message.user.user_info[0].first_name} {"  "} {message.user.user_info[0].last_name}</p>
+                                                )}
+                                            </>
+                                        }
                                     </div>
                                     <div className="user-message">
                                         <p>{message.message}</p>
@@ -193,23 +205,29 @@ const CommentBox = ({course, sectionIndex, subtitleIndex, user}) => {
                                                 </div>
                                             )
                                             })}
-                                            <input type="text" 
-                                            placeholder="Enter the message here" 
-                                            value={reply}
-                                            onChange={(e)=>setReply(e.target.value)}
-                                            />
-                                            <p onClick={(e)=>handleReplySubmit(message.id,e)}>submit</p>
+                                            <div className="profile-image input">
+                                                <img src={user.user_info[0].profile_img} alt="" />
+                                                <input type="text" 
+                                                placeholder="Enter the message here" 
+                                                value={reply}
+                                                onChange={(e)=>setReply(e.target.value)}
+                                                />
+                                            </div>
+                                            <p onClick={(e)=>handleReplySubmit(message.id,e)} className="submitButton">submit</p>
                                             </div>
                                         }
                                     </div>
                                 </div>
                             </div>
                          ))}
-                            <input type="textarea" 
-                            placeholder="Enter the message here" 
-                            value={message}
-                            onChange={(e)=>setMessage(e.target.value)}
-                            />
+                            <div className="profile-image input">
+                                <img src={user.user_info[0].profile_img} alt="" />
+                                <input type="textarea" 
+                                placeholder="Enter the message here" 
+                                value={message}
+                                onChange={(e)=>setMessage(e.target.value)}
+                                />
+                            </div>
                             <label>Add a File:</label>
                             <input type="file" 
                             onChange={(e)=>setImg(e.target.files[0])}

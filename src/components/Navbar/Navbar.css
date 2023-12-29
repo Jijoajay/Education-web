@@ -104,7 +104,7 @@ hr{
     top: 4rem;
     left: 53rem;
     color: black;
-    z-index: 100;
+    z-index: 1000;
     transition: .5s all;
     cursor: pointer;
     /* opacity: 0;s */

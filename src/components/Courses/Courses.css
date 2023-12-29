@@ -92,6 +92,7 @@ img{
 }
 .heart-icon{
     width: 10px;
+    z-index: 0;
     position: relative;
     color:white;
     top:70px;
