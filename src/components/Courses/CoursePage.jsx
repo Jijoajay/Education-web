@@ -7,8 +7,9 @@ import CourseVideopage from './CourseVideopage';
 import flashapi from '../api/flashapi';
 import { useNavigate } from 'react-router-dom';
 import {motion, useMotionValue, useTransform} from "framer-motion";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
-const CoursePage = ({courses, user, handleRemoveCourse, boughtCourse}) => {
+const CoursePage = ({courses, user, handleRemoveCourse, boughtCourse,favour,handleClick}) => {
 
     const navigate = useNavigate();
     const [paidUser, setPaidUser] = useState(null)
@@ -133,10 +134,21 @@ const CoursePage = ({courses, user, handleRemoveCourse, boughtCourse}) => {
             duration:1
         }
     })
+    const favourId = favour.includes(id);
   return (
-    <main >
+    <main>
             { loading ? (
-                 <p> Loading... </p>
+                    <div className='loadingContainer'>
+                        <motion.p initial={{rotate:0}} animate={{rotate:360}} transition={{duration:2, repeat: Infinity,ease:"linear"}}>
+                            <AiOutlineLoading3Quarters />
+                        </motion.p>
+                        <p className='loading'> Loading</p>
+                        <motion.p className='loading-dots' initial={{opacity:0, x:-20}} animate={{opacity:1,x:10}} transition={{repeat:Infinity, ease:"linear", duration:2}}>
+                            {[...Array(4)].map((_, index)=>(
+                                <p>.</p>
+                            ))}
+                        </motion.p>
+                    </div>
                  ): course ? (
                     <>
                             <div className="coursePage">
@@ -152,7 +164,12 @@ const CoursePage = ({courses, user, handleRemoveCourse, boughtCourse}) => {
                                                 <motion.button  {...buttonAnimation("-100vw")}className='button buy' onClick={(e)=>handlePayment(e)}>Buy Now</motion.button>
                                                 )
                                             }
-                                        <motion.button {...buttonAnimation("10vw")} className='button trail'>Add to Favourite</motion.button>
+                                        {
+                                            favourId ?
+                                            <motion.button {...buttonAnimation("400vw")} className='button trail' onClick={()=>handleClick(id)}>Remove to Favourite</motion.button>
+                                            :
+                                            <motion.button {...buttonAnimation("400vw")} className='button trail' onClick={()=>handleClick(id)}>Add to Favourite</motion.button>
+                                        }
                                     </div>
                                     <div className='buttons'>
                                         { 

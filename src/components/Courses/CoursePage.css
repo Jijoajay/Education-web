@@ -190,13 +190,19 @@
     list-style: circle;
     cursor: pointer;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     padding: 10px;
     width: 100%;
     box-shadow: 0.5px 0.5px 0.7px 0.5px black;
     transition: 0.5 all;
 } 
+.dropdown-items input{
+    margin-right: 10px;
+}
+.dropdown-items p {
+    color: white;
+}
 .video{
     height:auto;
     width: auto;
@@ -220,6 +226,28 @@ iframe{
     color: black;
     height: 40px;  
 }
+
+.loadingContainer{
+    height: 100vh;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loadingContainer svg{
+    font-size: 25px;
+}
+.loading{
+    margin-left: 10px;
+    font-size: 20px;
+}
+.loading-dots{
+    display: flex;
+    margin-left: 5px;
+    font-size: 25px;
+}
+
 @media screen and (max-width:1000px){
     .imgDiv img{
         height: 400px;

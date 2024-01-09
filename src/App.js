@@ -67,50 +67,52 @@ function App() {
       }
       fetchUserData();
   },[])
-    if(user)console.log("makka users:",user['id']);
+    // if(user)console.log("makka users:",user['id']);
 
     const handleSubmit = (e)=>{
       e.preventDefault();
       navigate('/courses')
     }
-  const handleClick = async(course_id)=>{
-    if(favour.includes(course_id)){
-      const response = await flashapi.post('/remove-from-favourite', {course_id:course_id, user_id:user['id']})
-      const removeFavourite = favour.filter((data) => data !== course_id);
-      setFavour(removeFavourite);
-    }
-    else{
-      try{
-        const response = await flashapi.post('/add-to-favorite', {course_id:course_id, user_id:user['id']})
-        setFavour([...favour, course_id])
-      }catch(err){
-        console.log(err);
+    const handleClick = async(course_id)=>{
+      if(favour.includes(course_id)){
+        const response = await flashapi.post('/remove-from-favourite', {course_id:course_id, user_id:user['id']})
+        console.log("response at removing",response.data)
+        console.log("favour",favour)
+        const removeFavourite = favour.filter((data) => data !== course_id);
+        setFavour(removeFavourite);
+      }
+      else{
+        try{
+          const response = await flashapi.post('/add-to-favorite', {course_id:course_id, user_id:user['id']})
+          console.log("response at adding",response.data)
+          setFavour([...favour, course_id])
+        }catch(err){
+          console.log(err);
+        }
       }
     }
-  } 
+   
   const handleRemoveCourse = async(course_id)=>{
     const response = await flashapi.get(`/remove-course/${course_id}`)
     alert("Course deleted successfully");
   }
 
   
-
-  useEffect(()=>{
-    const fetchData = async()=>{
-      try{
-        const response = await flashapi.get(`/get-favourite/${user['id']}`);
-        console.log(response.data.favourites)
-        const favourite = response.data.favourites
-        console.log("favourite",favourite)
-        const favorCourseIds = favourite.map((data) => data.course.id);
-        setFavour(favorCourseIds);
-        console.log("favourIds:",favorCourseIds);
-      }catch(err){
-        console.log(err);
-      }
-    }
-    fetchData();
-  },[setFavour])
+  // useEffect(()=>{
+  //   const fetchData = async()=>{
+  //     try{
+  //       const response = await flashapi.get(`/get-favourite/${user['id']}`);
+  //       console.log("favuuu...",response.data.favourites)
+  //       setFavourite(response.data.favourites)
+  //       const favorCourseIds = favourite?.map((data) => data.course.id);
+  //       setFavour((previd)=> [...previd, favorCourseIds]);
+  //       console.log("favourIds:",favorCourseIds);
+  //     }catch(err){
+  //       console.log(err);
+  //     }
+  //   }
+  //   fetchData();
+  // },[setFavour])
   useEffect(() => {
     const fetchData = async () => {
       const searchedResult = courses.filter((course) => {
@@ -149,17 +151,22 @@ function App() {
         }
     };
     fetchData();
-    
     const fetchFavouriteData = async()=>{
       try {
         const response = await flashapi.get(`/get-favourite/${user['id']}`);
-        setFavourite(response.data.favourites)
+        setFavourite(response.data.favourites);
+        console.log("favourites--->",response.data.favourites)
+        const favorCourseIds = response.data.favourites
+        .flatMap((data) => data.course.id)
+        .filter((id) => id); 
+        setFavour(favorCourseIds);
+        console.log("favourIds:",favorCourseIds);
       } catch (error) {
         console.log(error);
       }
     }
     fetchFavouriteData();
-  }, [user]);
+  }, [user,setFavour,setFavourite]);
 
   useEffect(() => {
     const fetchUserInfoData = async()=>{
@@ -173,6 +180,8 @@ function App() {
     }
     fetchUserInfoData();
     },[user]); 
+
+    console.log("favourites",favourite)
 
   return (
     <div className="App">
@@ -200,15 +209,18 @@ function App() {
             <Route index element={<Courses
             handleRemoveCourse={handleRemoveCourse}
             courses={courses}
-            searchResult={searchResult}
             favour={favour}
+            searchResult={searchResult}
+            favourite={favourite}
             handleClick={handleClick}
             user={user}
             />}/>
             <Route path=':id' element={<CoursePage 
             courses={courses}
+            handleClick={handleClick}
             handleRemoveCourse={handleRemoveCourse}
             user={user}
+            favour={favour}
             boughtCourse={boughtCourses}
             />}/>
             
@@ -224,6 +236,7 @@ function App() {
             handleRemoveCourse={handleRemoveCourse}
             courses={courses}
             searchResult={searchResult}
+            favourite={favourite}
             favour={favour}
             handleClick={handleClick}
             user={user}

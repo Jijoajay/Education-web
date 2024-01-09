@@ -1,21 +1,19 @@
 import React, { useState } from 'react'
-import Video from './Video';
-import Demo from '../../Demo';
 import {motion,AnimatePresence} from "framer-motion";
 
-const VideoDropDown = ({courses,isActive,videoIndex,setSubtitleIndex,setVideoIndex}) => {
+const VideoDropDown = ({courses,isActive,videoIndex,setSubtitleIndex,setVideoIndex,count}) => {
     const [activeVideo,setActiveVideo] = useState(Array(courses.subtitle.length).fill(false));
     const handleClick = (index)=>{
-        console.log(`videoIndex:${index}`)
         let newActivevideo = Array(courses.subtitle.length).fill(false);
-        console.log("newActivevideo",newActivevideo);
         newActivevideo[index] = !newActivevideo[index]
         setSubtitleIndex(index)
         setActiveVideo(newActivevideo)
     }
-    
-
-    
+    let completedVideo = []
+    if(count){
+      const complete = count.map(completedCourse=>completedCourse.video_index.map(video=>video))
+      completedVideo = complete[0].map(video=>video.video_id)
+    }
   return (
     <AnimatePresence>
     { isActive[videoIndex] && 
@@ -28,11 +26,23 @@ const VideoDropDown = ({courses,isActive,videoIndex,setSubtitleIndex,setVideoInd
             {courses.subtitle.map((course,index)=>
                <motion.li className='dropdown-items' 
                key={index}
-               onClick={(e)=>{handleClick(index); 
-                 setVideoIndex(course.id) }}
                transition={{ duration: 0.5 }}
                >
-                   {course.content} 
+                {count ? (
+                  <>
+                    <input type="checkbox" checked={completedVideo.includes(course.id)}/>
+                    <p onClick={(e)=>{handleClick(index); 
+                    setVideoIndex(course.id) }}>{course.content} </p>
+                    <p>1:00</p>
+                  </>
+                ):(
+                  <>
+                    <p onClick={(e)=>{handleClick(index); 
+                    setVideoIndex(course.id) }}>{course.content} </p>
+                    <p>1:00</p>
+                  </>
+
+                )}
                </motion.li> 
             )}
         </motion.div>

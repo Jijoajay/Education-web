@@ -1,11 +1,9 @@
 import { Link, useParams } from 'react-router-dom';
 import "./Courses.css";
-import { IoHeart } from "react-icons/io5";
-import {motion} from "framer-motion";
-import { RxCross2 } from "react-icons/rx";
 import { useEffect } from 'react';
 import flashapi from '../api/flashapi';
 import { useState } from 'react';
+import { CourseItem } from './CourseItem';
 
 
 const Courses = ({ courses, searchResult, favour, handleClick, user , handleRemoveCourse}) => {
@@ -26,64 +24,29 @@ const Courses = ({ courses, searchResult, favour, handleClick, user , handleRemo
     }
   }, [category, courses, setCourseByCategory]);
   const filteredCourses = courseByCategory.length > 0 ? courseByCategory : searchResult;
+  console.log("favour",favour)
   return (
     <main className='course-page'>
       <div className="course-containers">
         {
           filteredCourses  ? (
-            filteredCourses.map((course,index) => (
-              <motion.div className="product-containers" initial={{opacity:0}} animate={{opacity:1}} transition={{delay:.5,duration:index + .5 , ease:"easeInOut"}}>
-                  <div className="img-div">
-                    <div className={ favour.includes(course.id) ? "heart-icon-black" : "heart-icon"} onClick={()=>handleClick(course.id)}>
-                      <IoHeart />
-                    </div>
-                    { user ? (
-                      user['role'] === "admin" &&
-                      <div className="remove" onClick={()=>handleRemoveCourse(course.id)}>
-                        <RxCross2 />
-                      </div>
-                    ):(
-                      <div className="dv"></div>
-                    )
-                    }
-                  <Link to={`/courses/${course.id}`} key={course.id} style={{ textDecoration: 'none', color: 'black' }}>
-                    <img src={course.img} alt={course.name} />
-                  </Link> 
-                  </div>
-                  <div className="content-div">
-                    <h4>{course.name}</h4>
-                    <h5>{course.author}</h5>
-                    <p>₹{course.newPrice} <span>₹{course.oldPrice}</span></p>
-                  </div>
-                </motion.div>
-            ))
-          ):(
-            courses.map((course,index) => (
-              <motion.div className="product-containers" initial={{opacity:0}} animate={{opacity:1}} transition={{delay:.5,duration:index + .5 , ease:"easeInOut"}}>
-                  <div className="img-div">
-                    <div className={ favour.includes(course.id) ? "heart-icon-black" : "heart-icon"} onClick={()=>handleClick(course.id)}>
-                      <IoHeart />
-                    </div>
-                    { user ? (
-                      user['role'] === "admin" &&
-                      <div className="remove" onClick={()=>handleRemoveCourse(course.id)}>
-                        <RxCross2 />
-                      </div>
-                    ):(
-                      <div className="dv"></div>
-                    )
-                    }
-                  <Link to={`/courses/${course.id}`} key={course.id} style={{ textDecoration: 'none', color: 'black' }}>
-                    <img src={course.img} alt={course.name} />
-                  </Link>
-                  </div>
-                  <div className="content-div">
-                    <h4>{course.name}</h4>
-                    <h5>{course.author}</h5>
-                    <p>₹{course.newPrice} <span>₹{course.oldPrice}</span></p>
-                  </div>
-                </motion.div>
-            ))
+            <CourseItem 
+            courses={filteredCourses}
+            handleClick={handleClick}
+            user={user}
+            favour={favour}
+            handleRemoveCourse={handleRemoveCourse}
+            isLearning={false}
+            />
+            ):(
+            <CourseItem 
+            courses={courses}
+            handleClick={handleClick}
+            user={user}
+            favour={favour}
+            handleRemoveCourse={handleRemoveCourse}
+            isLearning={false}
+            />
           )
         }
           { user ? (

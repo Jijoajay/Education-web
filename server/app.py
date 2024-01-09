@@ -1,5 +1,5 @@
 from flask import Flask,jsonify,request,session,make_response,abort
-from model import AdminInfo,Reply,Carousel, Message, SearchInfo, UserVideoProgress, db, User, Course, Subtitle, VideoContent, WhatYouLearn, UserCourse, UserInfo,FavouriteInfo, Admin
+from model import VideoIndex,AdminInfo,Reply,Carousel, Message, SearchInfo, UserReview, UserVideoProgress, db, User, Course, Subtitle, VideoContent, WhatYouLearn, UserCourse, UserInfo,FavouriteInfo, Admin
 from flask_cors import CORS,cross_origin
 from flask_jwt_extended import JWTManager, create_access_token,get_jwt_identity,jwt_required
 from jwt.exceptions import ExpiredSignatureError, InvalidTokenError
@@ -10,7 +10,7 @@ from datetime import timedelta
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import storage
-
+from flask_migrate import Migrate
 
 stripe.api_key = "sk_test_51No0dvSJ3G54P1mW5EShkwMsialXkmB0TpxKyuh6y2c9bSHI0996lFjDsUUY0tmCtz0BhpimCZs8RAu8Of7SZz0w00BYPOiUFB"
 app = Flask(__name__)
@@ -19,6 +19,7 @@ app.config['SESSION_TYPE'] = 'memcached'
 app.config['SECRET_KEY'] = 'super secret key'
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///flask.db"
 db.init_app(app)
+migrate = Migrate(app, db)
 
 
 # session.init_app(app)
@@ -915,14 +916,27 @@ def delete_history(user_id):
 def add_completed_video(video_id, user_id):
     try:
         course_id = request.json['course_id']
-        video = UserVideoProgress.query.filter_by(id=video_id, user_id=user_id).all()
-        if video:
+        completedCouresUser = UserVideoProgress.query.filter_by(user_id = user_id).first()
+        video = UserVideoProgress.query.filter(UserVideoProgress.video_index.any(video_id = video_id),UserVideoProgress.user_id == user_id).all()
+        print(video)
+        if completedCouresUser:
+            new_video_id = VideoIndex(
+                id = str(uuid.uuid4()),
+                video_id = video_id,
+                user_video_progress_id = completedCouresUser.id
+            )
+            db.session.add(new_video_id)
+            db.session.commit()
+            return jsonify({
+                "message":"completed video added successfully"
+            })
+        elif video:
             return jsonify({
                 "message":"video_id already found with same user"
             }),201
         else:
             new_video = UserVideoProgress(
-                video_id=video_id, 
+                video_index= VideoIndex( id = str(uuid.uuid4()),video_id=video_id), 
                 user_id=user_id,
                 course_id = course_id,
                 completed=True
@@ -951,6 +965,48 @@ def get_video(user_id,course_id):
         print(str(e))
         return jsonify({"message": str(e)})
     
+@app.route('/add-user-review', methods=['POST'])
+def add_star_review():
+    course_id = request.json['course_id']
+    user_id = request.json['user_id']
+    review = request.json['review']
+    rating = request.json['rating']
+    existing_review = UserReview.query.filter_by(course_id=course_id, user_id=user_id).first()
+    try:
+        if existing_review:
+            return jsonify({
+                "message":"review already found with the same user"
+            })
+        else:
+            new_video = UserReview(
+                id = str(uuid.uuid4()),
+                course_id = course_id,
+                user_id = user_id,
+                review = review,
+                rating = rating
+            )
+            db.session.add(new_video)
+            db.session.commit()
+            return jsonify({
+                "message":"review added successfully"
+            })
+    except Exception as e:
+            print(str(e))
+            return jsonify({"message": str(e)})
+        
+@app.route('/get-user-review/<user_id>/<course_id>')
+def get_review(user_id, course_id):
+    review = UserReview.query.filter_by(user_id=user_id,course_id=course_id).first()
+    try:
+        if review:
+            return jsonify(review.json())
+        else:
+            return jsonify({
+                "message":"no review found"
+            })
+    except Exception as e:
+        print(str(e))
+     
 with app.app_context():
     db.create_all()
 if __name__  == "__main__":

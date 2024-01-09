@@ -6,56 +6,25 @@ import CourseSlider from '../Demo/CourseSlider';
 import { Link } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 import {motion, useAnimation, AnimatePresence} from "framer-motion";
+// import { useInView } from 'framer-motion';
+import {animateLeft, container, item, verticalAnimate} from '../AnimationUtils';
+
+
 
 const Home = ({courses, favour, handleClick,user}) => {
   const [slide, setSlide] =useState([])
+  const [isVisible, setIsVisible] = useState(false);
   const [currentImage, setCurrentImage] = useState(0)
   const [searchHistory, setSearchHistory] = useState([]);
   const [filteredCourse, setFilteredCourses] = useState([]);
   const [ref, inView] = useInView({
     triggerOnce: true,
   });
+  
 
   const containerRef = useRef(null);
   const controls = useAnimation();
-
-  const container = {
-    hidden: { opacity: 1, scale: 0 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        delayChildren: 0.5,
-        staggerChildren: 0.4,
-        duration: 1
-      },
-    },
-  };
   
-  const item = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-    },
-  };
-
-  const animateLeft = (delay)=>({
-    initial:{x:-250, opacity: 0},
-    animate:{ x: 0 , opacity: 1},
-    exit:{x:-250, opacity:0},
-    transition:{ delay: delay, ease: "easeInOut", duration: 1}
-  })
-
-  const verticalAnimate = (x)=>({
-    initial:{x:x, opacity: 0},
-    animate:{ x: 0 , opacity: 1},
-    exit:{x:x, opacity:0},
-    transition:{ delay: 1, type: "spring",stiffness:10, duration: .5}
-  })
-  
-
-
   useEffect(
     ()=>{
       const fetchData = async()=>{
@@ -80,21 +49,12 @@ const Home = ({courses, favour, handleClick,user}) => {
       setCurrentImage(currentImage === 0 ? slide.length - 1 : currentImage - 1)
     },10)
   }
-  const animateFromLeft = (delay) => ({
-    initial: { opacity: 0, x: -50 },
-    animate: { opacity: 1, x: 0 },
-    transition: { duration: 0.5, delay },
-  });
-
-
-  
-  
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries)=>{
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            controls.start({x:0, opacity:1, transition:{delay:.3, duration:.5}});
+            controls.start({x:0, opacity:1, transition:{delay:.5, duration:2}});
           } else {
             controls.start({ opacity: 0, x: -50 });
           }
@@ -104,8 +64,8 @@ const Home = ({courses, favour, handleClick,user}) => {
     )
     if (containerRef.current) {
       observer.observe(containerRef.current);
-      console.log(containerRef.current);
     }
+    
 
     return () => {
       observer.disconnect();
@@ -170,34 +130,34 @@ const Home = ({courses, favour, handleClick,user}) => {
           <motion.h5 {...animateLeft(1)}>Build your library for your career <br />  and personal growth</motion.h5>
           <motion.p {...animateLeft(1.2)}><Link to={'/courses'}> View Courses -&gt; </Link></motion.p>
         </motion.div>
-        <motion.div className="page-img" variants={container} initial="hidden" animate="visible" >
-          <div className="first-box">
-            <motion.img
-              src="https://cdn.pixabay.com/photo/2015/04/23/17/41/javascript-736400_1280.png"
-              alt=""
-              width="400px"
-              height="400px"
-              variants={item}
-            />
-            <motion.img
-              src="https://cdn.pixabay.com/photo/2017/09/08/19/05/a-2729781_1280.png"
-              alt=""
-              variants={item}
-            />
-          </div>
-          <div className="second-box">
-            <motion.img
-              src="https://cdn.pixabay.com/photo/2017/09/08/19/05/a-2729781_1280.png"
-              alt=""
-              variants={item}
-            />
-            <motion.img
-              src="https://cdn.pixabay.com/photo/2015/04/23/17/41/javascript-736400_1280.png"
-              alt=""
-              variants={item}
-            />
-          </div>
-        </motion.div>
+          <motion.div className="page-img" variants={container} initial="hidden" animate="visible">
+            <div className="first-box">
+              <motion.img
+                src="https://cdn.pixabay.com/photo/2015/04/23/17/41/javascript-736400_1280.png"
+                alt=""
+                width="400px"
+                height="400px"
+                variants={item}
+              />
+              <motion.img
+                src="https://cdn.pixabay.com/photo/2017/09/08/19/05/a-2729781_1280.png"
+                alt=""
+                variants={item}
+              />
+            </div>
+            <div className="second-box">
+              <motion.img
+                src="https://cdn.pixabay.com/photo/2017/09/08/19/05/a-2729781_1280.png"
+                alt=""
+                variants={item}
+              />
+              <motion.img
+                src="https://cdn.pixabay.com/photo/2015/04/23/17/41/javascript-736400_1280.png"
+                alt=""
+                variants={item}
+              />
+            </div>
+          </motion.div>
       </motion.div>
     </motion.section>
     <CourseSlider 

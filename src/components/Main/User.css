@@ -1,8 +1,10 @@
 .user-page{
-    height: 120vh;
+    height: auto;
     background-color: black;
     width: 100vw;
     display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 2rem 10rem 2rem 10rem;
     padding-top: 40px;
 }
@@ -21,7 +23,6 @@
     width: 150px;
     border-radius: 50%;
     border: 3px solid rgb(217,52,109);
-    /* box-shadow: 3px 3px 5px 5px rgb(217,52,109); */
 }
 .userInfo{
     display: flex;
@@ -159,14 +160,16 @@
 .tablist-courses{
     background-color: black;
 }
-.prof-tablist{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 70vw;
-    padding-top: 30px;
-    cursor: pointer;
+.tablist-courses .favourite{
+    margin-left: 10px;
 }
+.tablist-courses .course{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+
+
 .prof-tablist ul{
     display: flex;
     justify-content: center;

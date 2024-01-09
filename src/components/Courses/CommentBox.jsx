@@ -132,11 +132,11 @@ const CommentBox = ({course, sectionIndex, subtitleIndex, user}) => {
     return (
     <div className='description-container'>
         <div className="title">
-            {`${course.videoContent[sectionIndex].title}: ${course.videoContent[sectionIndex].subtitle[subtitleIndex].content}`}
+            {`${course?.videoContent[sectionIndex].title}: ${course?.videoContent[sectionIndex].subtitle[subtitleIndex].content}`}
         </div>
         <div className="description">
             <div className='title'>Description:</div>
-            <p style={{color:"rgb(217,52,109)"}}>{`${course.videoContent[sectionIndex].subtitle[subtitleIndex].videoDescription}`}</p> 
+            <p style={{color:"rgb(217,52,109)"}}>{`${course?.videoContent[sectionIndex].subtitle[subtitleIndex].videoDescription}`}</p> 
         </div>
         <div className="comment-box">
             <div className="title">comment:</div>
@@ -146,11 +146,11 @@ const CommentBox = ({course, sectionIndex, subtitleIndex, user}) => {
                         {allMessage?.map((message, index) => (
                          <div className="message-shower" key={index}>
                                         <div className="profile-image">
-                                            {message.admin && message.admin.user_info && (
-                                                <Link to={`/user/${message.admin.id}`}><img src={message.admin.user_info[0].profile_img} alt="" /></Link>
+                                            {message.admin && message.admin?.user_info && (
+                                                <Link to={`/user/${message.admin.id}`}><img src={message.admin?.user_info[0].profile_img} alt="" /></Link>
                                             )}
-                                            {message.user && message.user.user_info && (
-                                                <Link to={`/user/${message.user.id}`}><img src={message.user.user_info[0].profile_img} alt="" /></Link>
+                                            {message.user && message.user?.user_info && (
+                                                <Link to={`/user/${message.user.id}`}><img src={message.user?.user_info[0].profile_img} alt="" /></Link>
                                             )}
                                         </div>
                                     <div>
@@ -161,11 +161,11 @@ const CommentBox = ({course, sectionIndex, subtitleIndex, user}) => {
                                             <p>You</p>
                                             :
                                             <>
-                                                {message.admin && message.admin.user_info && (
-                                                <p>{message.admin.user_info[0].first_name} {"  "} {message.admin.user_info[0].last_name}</p>
+                                                {message.admin && message.admin?.user_info && (
+                                                <p>{message.admin?.user_info[0].first_name} {"  "} {message.admin?.user_info[0].last_name}</p>
                                                 )}
                                                 {message.user && message.user.user_info && (
-                                                <p>{message.user.user_info[0].first_name} {"  "} {message.user.user_info[0].last_name}</p>
+                                                <p>{message.user?.user_info[0].first_name} {"  "} {message.user?.user_info[0].last_name}</p>
                                                 )}
                                             </>
                                         }
@@ -182,20 +182,20 @@ const CommentBox = ({course, sectionIndex, subtitleIndex, user}) => {
                                             return(
                                                 <div className="message-shower-reply" key={replyIndex}>
                                                     <div className="profile-image">
-                                                        {filteredReply.admin && filteredReply.admin.user_info && (
-                                                            <img src={filteredReply.admin.user_info[0].profile_img} alt="" />
+                                                        {filteredReply.admin && filteredReply.admin?.user_info && (
+                                                            <img src={filteredReply.admin?.user_info[0].profile_img} alt="" />
                                                         )}
-                                                        {filteredReply.user && filteredReply.user.user_info && (
-                                                            <img src={filteredReply.user.user_info[0].profile_img} alt="" />
+                                                        {filteredReply.user && filteredReply.user?.user_info && (
+                                                            <img src={filteredReply.user?.user_info[0].profile_img} alt="" />
                                                         )}
                                                     </div>
                                                     <div>
                                                         <div className="user-name">
-                                                            {filteredReply.admin && filteredReply.admin.user_info &&(
-                                                                <p>{filteredReply.admin.user_info[0].first_name}{" "}{filteredReply.admin.user_info[0].last_name}</p>
+                                                            {filteredReply.admin && filteredReply.admin?.user_info &&(
+                                                                <p>{filteredReply.admin?.user_info[0].first_name}{" "}{filteredReply.admin?.user_info[0].last_name}</p>
                                                             )}
-                                                            {filteredReply.user && filteredReply.user.user_info && (
-                                                            <p>{filteredReply.user.user_info[0].first_name} {"  "} {filteredReply.user.user_info[0].last_name}</p>
+                                                            {filteredReply.user && filteredReply.user?.user_info && (
+                                                            <p>{filteredReply.user?.user_info[0].first_name} {"  "} {filteredReply.user?.user_info[0].last_name}</p>
                                                             )}
                                                         </div>
                                                         <div className="user-message">
@@ -206,7 +206,7 @@ const CommentBox = ({course, sectionIndex, subtitleIndex, user}) => {
                                             )
                                             })}
                                             <div className="profile-image input">
-                                                <img src={user.user_info[0].profile_img} alt="" />
+                                                <img src={user?.user_info[0].profile_img} alt="" />
                                                 <input type="text" 
                                                 placeholder="Enter the message here" 
                                                 value={reply}
@@ -221,7 +221,7 @@ const CommentBox = ({course, sectionIndex, subtitleIndex, user}) => {
                             </div>
                          ))}
                             <div className="profile-image input">
-                                <img src={user.user_info[0].profile_img} alt="" />
+                                <img src={user?.user_info[0].profile_img} alt="" />
                                 <input type="textarea" 
                                 placeholder="Enter the message here" 
                                 value={message}

@@ -3,7 +3,7 @@
     padding-top: 4rem;
     display: flex;
     height: 100%;
-    transition: margin-left 0.5s ease;
+    transition: padding-top 1s ease, width 1s ease;
 }
 .buycourse-menu{
    width: 100%;
@@ -38,7 +38,18 @@
     align-items: center;
     justify-content: space-between;
     height: 100%;
+    transition: 2s all;
+    opacity: 0;
 }
+.sidebar-content.active {
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    opacity: 1;
+  }
+
 .sidebar-content .course-video-page{
     width: 500px;
     padding-top: 20px;
@@ -64,15 +75,18 @@
     margin: 40px;
     width: 90vw;
     height: 70vh;
+    transition:  1s ease-in-out;
 }
 .video-display-active{
     display: flex;
     padding-top: 40px;
     margin: 20px;
     width: 60vw;
+    transition:  1s ease;
 }
 .video-display-active .video video{
     width: 100%;
+    transition: .5s ease;
 }
 .video{
     margin-left: 30px;
@@ -92,6 +106,7 @@
 }
 .description-container{
     display: flex;
+    /* transition: 3s ease-in;s */
     flex-direction: column;
     margin: 0px 30px 30px 30px;
 }
@@ -136,12 +151,12 @@
     display: flex;
     justify-content: center;
     height: auto;
-    width: 900px;
+    width: 1000px;
     border: 1px solid rgb(217,52,109);
     
 }
 .comment-form form{
-    margin: 20px 0px 20px 0px;
+    margin: 40px 40px 40px 40px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -251,10 +266,23 @@
     position: absolute;
     top: 35%;
     left: 35%;
-    height: 230px;
+    min-height: 250px;
+    width: 500px;
+    z-index:1;
+    background-color: white;
+    transition: 7s all;
+    opacity: 0;
+}
+.ratingContainer-active{
+    position: absolute;
+    top: 35%;
+    left: 35%;
+    min-height: 250px;
     width: 500px;
     z-index:99;
     background-color: white;
+    /* transition: .5s all; */
+    opacity: 1;
 }
 .rating-content{
     padding: 50px 0px 0px 0px;
@@ -264,6 +292,16 @@
     flex-direction: column;
     color: rgb(217,52,109);
 }
+.rating-content button{
+    width: 80px;
+    height: 30px;
+    border: none;
+    border-radius: 20px;
+    color: gold;
+    font-weight: 800;
+    background-color: black;
+    margin-bottom: 20px;
+}
 .rating-content h3{
     padding-bottom: 5px;
 }
@@ -272,6 +310,7 @@
 }
 .rating-content .stars{
     font-size: 40px;
+    padding-right: 10px;
     cursor: pointer;
 }
 .rating-content .stars svg:hover {
@@ -317,7 +356,7 @@
   }
   
   .star-hovered {
-    padding-left: 10px;
+    padding-left: 5px;
     color: gold; /* or any other color you desire for the hovered stars */
   }
   .hoveredProgressContainer::before {
@@ -354,3 +393,18 @@
     padding-top: 5px;
     padding-left: 90px;
   }
+
+.rating-content textarea{
+    margin: 10px 0px 10px 0px;
+    height: 50px;
+    width: 350px;
+    font-size: 20px;
+    padding: 5px 0px 0px 10px;
+    resize: vertical;
+    overflow-x: hidden;
+}
+.userReview{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

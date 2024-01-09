@@ -1,16 +1,15 @@
 import "./User.css"
-import React, {Fragment} from 'react'
+import React from 'react'
 import { useParams } from "react-router-dom";
-import { FaInstagram , FaLinkedin, FaYoutube } from "react-icons/fa";
 import { useState, useEffect } from "react";
-import { Link} from "react-router-dom";
 import IsFavourite from "./IsFavourite";
 import { MdEdit } from "react-icons/md";
-import { IoHeart } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import flashapi from "../api/flashapi";
+import { SocialIcons } from "./SocialIcons";
+import MyLearning from "../MyLearning";
 
-export const ViewProfile = ({user, handleClick, favour, viewProfile, setViewProfile, favourite,courses, info}) => {
+export const ViewProfile = ({user, handleClick, favour, viewProfile, setViewProfile, favourite,courses, info, handleRemoveCourse}) => {
     const navigate = useNavigate();
     const saveMyLearning = JSON.parse(localStorage.getItem("myLearning")) || false ;
     const [myLearning, setMyLearning] = useState(saveMyLearning)
@@ -30,22 +29,12 @@ export const ViewProfile = ({user, handleClick, favour, viewProfile, setViewProf
       },[myLearning])
       
       const editProfile = async () => {
-        if (viewProfile && viewProfile.length > 0) {
-        try {
-          setViewProfile(!viewProfile);
-        } catch (error) {
-          console.log(error);
-        }
-      }
+          try {
+            setViewProfile(!viewProfile);
+          } catch (error) {
+            console.log(error);
+          }
       };
-    
-
-    if(info){
-      console.log("info",info)
-    }
-    if(profile){
-      console.log("profile",profile)
-    }
     useEffect(()=>{
       if(id){
           try {
@@ -60,10 +49,11 @@ export const ViewProfile = ({user, handleClick, favour, viewProfile, setViewProf
           }
       }
   },[id])
-
-    return (
+  console.log(profile)
+  console.log(info)
+  return (
         <main className="view-profile">
-          {(profile ? profile : info).map((item, index) => (
+          {(profile.length > 0 ? profile : info).map((item, index) => (
             <div key={index}>
               <div className="profile-title">
                 <h2>My Profile</h2>
@@ -75,91 +65,32 @@ export const ViewProfile = ({user, handleClick, favour, viewProfile, setViewProf
               <div className="prof-img">
                 <div>
                   { viewProfile && 
-                  <div className="edit-icon" onClick={() => editProfile()}>
+                  <div className="edit-icon" onClick={editProfile}>
                     <MdEdit />
                   </div>
                   }
                   <img src={item.profile_img} alt="" />
                 </div>
                 <div className="social-icons">
-                  <Link to={item.youtube_link}>
-                    <p>
-                      <FaYoutube />
-                    </p>
-                  </Link>
-                  <Link to={item.instagram_link}>
-                    <p>
-                      <FaInstagram />
-                    </p>
-                  </Link>
-                  <Link to={item.linkedIn_link}>
-                    <p>
-                      <FaLinkedin />
-                    </p>
-                  </Link>
+                  <SocialIcons  item={item}/>
                 </div>
-              </div>
-              <div className="prof-tablist">
-                <ul>
-                  <li onClick={() => setMyLearning(!myLearning)}>My Learning</li>
-                  <div className="vl"></div>
-                  <li onClick={() => setFav(!fav)}>My Favourites</li>
-                </ul>
               </div>
             </div>
           ))}
           <div className="tablist-courses">
-            <div className="course-container">
-              {myLearning && (
-                <>
-                  {courses.length > 0 ? (
-                    courses.map((course) => (
-                      <div className="product-con" key={course.id}>
-                        <div className="img-div">
-                          <div
-                            className={
-                              favour.includes(course.id)
-                                ? "heart-icon-black"
-                                : "heart-icon"
-                            }
-                            onClick={() => handleClick(course.id)}
-                          >
-                            <IoHeart />
-                          </div>
-                          <Link
-                            to={`/course/${course.id}`}
-                            style={{ textDecoration: "none", color: "black" }}
-                          >
-                            <img src={course.img} alt={course.name} />
-                          </Link>
-                        </div>
-                        <div className="content-div">
-                          <h4>{course.name}</h4>
-                          <h5>Author: {course.author}</h5>
-                          <p>
-                            Discounted Price: ₹{course.newPrice} Old Price:{" "}
-                            <span> ₹{course.oldPrice} </span>
-                          </p>
-                        </div>
-                      </div>
-                    ))
-                    ) : (
-                        <div>
-                      <h1>No Course Found</h1>
-                    </div>
-                  )}
-                </>
-              )}
-              {fav && (
-                <IsFavourite
-                  favourite={favourite}
-                  favour={favour}
-                  handleClick={handleClick}
-                />
-              )}
-            </div>
+            <MyLearning 
+              user={user}
+              courses={courses}
+              favour={favour}
+              favourite={favourite}
+              favs={false}
+              coursee={true}
+              title={false}
+              handleClick={handleClick}
+              handleRemoveCourse={handleClick}
+            />
           </div>
-          <div className="black"></div>
+          {/* <div className="black"></div> */}
         </main>
       );
     };

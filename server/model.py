@@ -49,6 +49,7 @@ class Course(db.Model):
     favourite_info = db.relationship("FavouriteInfo",back_populates="course")
     admin = db.relationship("Admin",back_populates="course")
     message = db.relationship("Message", back_populates="course")
+    user_review = db.relationship("UserReview", back_populates="course")
     def json(self):
         return {
             'id': self.id,
@@ -275,17 +276,47 @@ class Reply(db.Model):
         }
         
 class UserVideoProgress(db.Model):
+    __tablename__ = "user_video_progress"
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.String, nullable=False)
     course_id = db.Column(db.String, nullable=False)
-    video_id = db.Column(db.Integer, nullable=False)
+    video_index = db.relationship("VideoIndex", back_populates="user_video_progress")
     completed = db.Column(db.Boolean, default=False)
     def json(self):
         return{
             "id":self.id,
             "user_id":self.user_id,
             "course_id":self.course_id,
-            "video_id":self.video_id,
+            "video_index": [{"id": video.id, "video_id": video.video_id} for video in self.video_index],
             "completed":self.completed
         }
+class VideoIndex(db.Model):
+    __tablename__ = "video_index"
+    id = db.Column(db.String, primary_key=True)
+    video_id = db.Column(db.Integer, nullable=False)
+    user_video_progress_id = db.Column(db.ForeignKey("user_video_progress.id"),nullable=False)
+    user_video_progress = db.relationship("UserVideoProgress", back_populates="video_index",uselist=False)
+    
+
+class UserReview(db.Model):
+    __tablename__ = "user_review"
+    id = db.Column(db.String, primary_key=True)
+    user_id = db.Column(db.String, nullable=False)
+    course_id = db.Column(db.String,db.ForeignKey("course.id"), nullable=False)
+    rating = db.Column(db.Integer, nullable=False)
+    review = db.Column(db.String(255))
+    course = db.relationship("Course", back_populates="user_review")
+    def json(self):
+        return{
+            "id": self.id,
+            "course_id":self.course_id,
+            "user_id":self.user_id,
+            "review":self.review,
+            "rating":self.rating
+        }
+        
+    
+        
+    
+    
     

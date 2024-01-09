@@ -11,6 +11,7 @@ import { RxCross2 } from "react-icons/rx";
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import flashapi from '../api/flashapi';
+import {motion, AnimatePresence} from  "framer-motion";
 
 const BuyCourse = ({courses, user}) => {
     const navigate = useNavigate();
@@ -24,27 +25,34 @@ const BuyCourse = ({courses, user}) => {
     const [activeRating, setActiveRating] = useState(false)
     const [videoCount, setVideoCount] = useState(0);
     const [videoWatched, setVideoWatched] = useState(0)
-    const [count, setCount] = useState([]);
     const [hoverStar, setHoverStar] = useState(null);
+    const [review, setReview] = useState("");
     const [hoverProgress, setProgress] = useState(false);
     const [courseCompleted, setCourseCompleted] = useState(false);
     const [videoIndex, setVideoIndex] = useState(0);
-
+    const [userReview, setUserReview] = useState(false); 
+    const [progressDetail, setProgressDetail] = useState([])
     const videoRef = useRef(null);
     const watchedFully = useRef(false);
-    
+    const count = progressDetail.map(progress => progress.video_index.length)
+    console.log("count",count)
     const handleVideoEnded = ()=>{
         watchedFully.current = true;
     }
 
     useEffect(()=>{
         const fetchVideoCount = async()=>{
-            const response = await flashapi.get(`/get-completed-video/${user['id']}/${course.id}`)
-            console.log(response.data)
-            setCount(response.data)
+            if(user){
+                const response = await flashapi.get(`/get-completed-video/${user['id']}/${id}`)
+                console.log("completed-video-list",response.data)
+                setProgressDetail(response.data)
+            }
         }
         fetchVideoCount();
-    },[]);
+        if(count === videoCount){
+            setCourseCompleted(true);
+        }
+    },[setProgressDetail,watchedFully]);
 
     useEffect(()=>{
         const updateVideoProgress = async()=>{
@@ -77,7 +85,7 @@ const BuyCourse = ({courses, user}) => {
         setIsActive(newIsActive);
       }; 
     const handleClick = ()=>{
-        setIsSideActive(!isSideActive)
+            setIsSideActive(!isSideActive)
     }
     const handleActiveRating = ()=>{
             setActiveRating(!activeRating)
@@ -87,12 +95,12 @@ const BuyCourse = ({courses, user}) => {
     useEffect(() => {
         const fetchVideoCount = () => {
           let count = 0;
-            if (course.videoContent && Array.isArray(course.videoContent)) {
+            if (course?.videoContent && Array.isArray(course.videoContent)) {
             for (let subIndex = 0; subIndex < course.videoContent.length; subIndex++) {
-                const videoContent = course.videoContent[subIndex];
-                if( videoContent.subtitle && Array.isArray(videoContent.subtitle)){
-                    for (let videoIndex = 0; videoIndex < videoContent.subtitle.length; videoIndex++) {
-                        const videoLink = course.videoContent[subIndex].subtitle[videoIndex]?.videoLink;
+                const videoContent = course?.videoContent[subIndex];
+                if( videoContent.subtitle && Array.isArray(videoContent?.subtitle)){
+                    for (let videoIndex = 0; videoIndex < videoContent?.subtitle.length; videoIndex++) {
+                        const videoLink = course?.videoContent[subIndex]?.subtitle[videoIndex]?.videoLink;
                         if (videoLink) {
                             count++;
                         }
@@ -107,21 +115,40 @@ const BuyCourse = ({courses, user}) => {
         fetchVideoCount();
       }, [courses, subtitleIndex, sectionIndex]); 
 
+      const handleReviewSubmit = async()=>{
+        const review_detail = {
+            user_id : user['id'],
+            course_id :course.id,
+            rating : hoverStar,
+            review : review
+        }
+        try {
+            const response = await flashapi.post('/add-user-review',review_detail);
+            console.log(response.data)
+            setUserReview(true);
+            setHoverStar(0);
+            setReview('');
+        } catch (error) {
+            console.log("error found at posting user",error)
+        }
+      }
+      count.map((complete => console.log("complete->", complete.completed)));
   return (
     <main>
         <div className="buycourse-container">
-            <div className='sidebar-content'>
-                {   isSideActive && course &&
-                        <CourseVideopage
-                        setVideoIndex={setVideoIndex}
-                        course={course}
-                        handleDropdownToggle={handleDropdownToggle}
-                        isActive={isActive}
-                        sectionIndex={sectionIndex}
-                        setSubtitleIndex={setSubtitleIndex}
-                        />
+        <div  className={`sidebar-content ${isSideActive ? 'active' : ''}`}>
+            {   isSideActive && course &&
+                    <CourseVideopage
+                    count = {progressDetail}
+                    setVideoIndex={setVideoIndex}
+                    course={course}
+                    handleDropdownToggle={handleDropdownToggle}
+                    isActive={isActive}
+                    sectionIndex={sectionIndex}
+                    setSubtitleIndex={setSubtitleIndex}
+                    />
                 }
-            </div>
+        </div>
             <div className='buycourse-menu'>
                 <nav className='buycourse-nav'>
                     <div className="hamburger-menu">
@@ -137,39 +164,80 @@ const BuyCourse = ({courses, user}) => {
                             <FaStar /> Leave a rating
                         </div>
                         {console.log("videovount:",videoCount)}
-                        <div className='progress-bar-container'><CircularProgressbar className='progress-bar' value={count.length} maxValue={videoCount} text={`${Math.ceil((count.length/videoCount) * 100)}%`} /></div>
+                        <div className='progress-bar-container'><CircularProgressbar className='progress-bar' value={count} maxValue={videoCount} text={`${Math.ceil((count/videoCount) * 100)}%`} /></div>
                         <p onMouseEnter={()=>setProgress(true)} onMouseLeave={()=>setProgress(false)}>Your Progress</p>
-                        {course && hoverProgress &&
+                        {
+                        course && hoverProgress &&
                             <div className='hoveredProgressContainer'>
-                                <p>{ count.length + " of " + videoCount + " complete" }</p>
-                                <p>Finish course to get your certificate</p>
+                                {courseCompleted ?  
+                                    <p>Click to get your certificate</p>
+                                :
+                                <>
+                                    <p>{ count + " of " + videoCount + " complete" }</p>
+                                    <p>Finish course to get your certificate</p>
+                                </>
+                                }
                             </div>                        
                         }
                      </div>
                 </nav>
-                { activeRating && course &&
-                    <div className='ratingContainer'>
-                        <p className='rating-cross' onClick={()=>setActiveRating(false)}><RxCross2 /></p>
-                        <div className="rating-content">
+                {activeRating && course && (
+                <AnimatePresence>
+                    <motion.div
+                    key="ratingContainer"
+                    initial={{ opacity: 0, y:0}}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 100 }}
+                    transition={{ duration: 1, delay:.4 }}
+                    className={`ratingContainer ${activeRating ? "ratingContainer-active" : ""}`}
+                    >
+                    <p className='rating-cross' onClick={() => setActiveRating(false)}><RxCross2 /></p>
+                    <motion.div
+                        key="ratingContent"
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 20 }}
+                        transition={{ duration: 0.3, delay:.3 }}
+                        className={`rating-content ${userReview ? "userReview" : ""}`}
+                    >
+                        {userReview ? (
+                        <h3>Thanks for the review and the rating...</h3>
+                        ) : (
+                        <>
                             <h3>How would you rate this course?</h3>
                             <p>Select rating</p>
-                            <p className='stars' onMouseLeave={()=>handleStarLeave}>
-                                {console.log(hoverStar)}
-                                {[...Array(5)].map((_,index)=>(
-                                    <FaStar 
-                                    key={index}
-                                    onMouseEnter={()=>handleStarHover(index)}
-                                    className={index <= hoverStar ? 'star-hovered' : ''}
-                                    />
-                                ))}
+                            <p className='stars' onMouseLeave={() => handleStarLeave}>
+                            {console.log(hoverStar)}
+                            {[...Array(5)].map((_, index) => (
+                                <FaStar
+                                key={index}
+                                onMouseEnter={() => handleStarHover(index)}
+                                className={hoverStar !== null && index <= hoverStar ? 'star-hovered' : ''}
+                                />
+                            ))}
                             </p>
-                        </div>
-                    </div>
-                }
-                <div className={`video-display ${isSideActive ? 'video-display-active':"video-display-notActive"}`}>
+                            {hoverStar > 0 && (
+                            <>
+                                <label>Review</label>
+                                <textarea
+                                type="text"
+                                value={review}
+                                placeholder='add a review'
+                                onChange={(e) => setReview(e.target.value)}
+                                />
+                            </>
+                            )}
+                            <button role='submit' onClick={() => handleReviewSubmit()}>submit</button>
+                        </>
+                        )}
+                    </motion.div>
+                    </motion.div>
+                </AnimatePresence>
+                )}
+                <div className={`video-display ${isSideActive ? 'video-display-active':"video-display"}`}>
                     <div className='video'>
-                        <video src={course.videoContent[sectionIndex].subtitle[subtitleIndex].videoLink} 
-                        title={course.name}
+                        <video src={course?.videoContent[sectionIndex]?.subtitle[subtitleIndex]?.videoLink} 
+                        title={course?.name}
                         ref={videoRef}
                         onEnded={handleVideoEnded}
                         controls

@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, {useState } from 'react';
 import IsFavourite from './Main/IsFavourite';
 import './MyLearning.css';
 import flashapi from './api/flashapi';
-import { IoHeart } from "react-icons/io5";
+import { CourseItem } from './Courses/CourseItem';
 
 
-const MyLearning = ({ user, title, coursee, favs, favour, handleClick,courses, favourite}) => {
-  console.log(favour);
+const MyLearning = ({ user, title, coursee, favs, favour, handleClick, courses, favourite, handleRemoveCourse}) => {
+  
   const [showCourse, setShowCourse ] = useState( coursee );
   const [showFavourite, setShowFavourite] = useState(favs);
-    
+  const course = courses.map((course)=>course.course)  
 
     const handleCourseClick = ()=>{
       if(showFavourite){
@@ -50,23 +49,15 @@ const MyLearning = ({ user, title, coursee, favs, favour, handleClick,courses, f
           showCourse &&
           <>
             {courses.length > 0 ? (
-              courses.map((course, index) => (
-                <div className="product-con" key={index}>
-                    <div className="img-div">
-                      <div className={ favour.length > 0 ? favour.includes(course.id) ? "heart-icon-black" : "heart-icon" : "heart"} onClick={()=>handleClick(course.id)}>
-                        <IoHeart />
-                      </div>
-                    <Link to={`/course/${course.id}`} key={course.id} style={{ textDecoration: 'none', color: 'black' }}>
-                      <img src={course.img} alt={course.name} />
-                    </Link>
-                    </div>
-                    <div className="content-div">
-                      <h4>{course.name}</h4>
-                      <h5>Author: {course.author}</h5>
-                      <p>Discounted Price: ₹{course.newPrice} Old Price: <span> ₹{course.oldPrice} </span></p>
-                    </div>
-                  </div>
-              ))
+                <CourseItem 
+                  myLearning={true}
+                  user={user}
+                  courses={course}
+                  favour={favour}
+                  handleClick={handleClick}
+                  isLearning={false}
+                  handleRemoveCourse={handleRemoveCourse}
+                  />
             ) : (
               <div><h1>No Course Found</h1></div>
             )}

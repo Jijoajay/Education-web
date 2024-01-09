@@ -102,7 +102,7 @@ hr{
     width: 200px;
     height: 200px;
     top: 4rem;
-    left: 53rem;
+    left: 49rem;
     color: black;
     z-index: 1000;
     transition: .5s all;
@@ -157,12 +157,12 @@ hr{
     color: white;
     font-size: 25px;
 }
-.mylearning-icon{
+.myLearning-icon{
     transition: .4s all;
     font-size: 30px;
     margin-right: 10px;
 }
-.mylearning-icon svg{
+.myLearning-icon svg{
     color: white;
 
 }
@@ -170,18 +170,19 @@ hr{
 .user-icon:hover{
     transform: scale(1.3);
 }
-.mylearning-icon:hover{
+.myLearning-icon:hover{
     transform: scale(1.3);
 }
-.favourite{
+.favourites-icon{
     font-size: 30px;
     margin : 0px 10px 0px 10px;
     transition: .4s all;
-}
-.favourite svg{
     color: white;
+  }
+.favourites-icon svg{
+  color: white;
 }
-.favourite:hover{
+.favourites-icon:hover{
     transform: scale(1.3);
 }
 .myLearning-hover-container::before {
@@ -204,32 +205,32 @@ hr{
     width: 350px;
     height: auto;
     top: 4rem;
-    right: 20rem;
+    right: 17rem;
     color: black;
     transition: .5s all;
     cursor: pointer;
     transition:  .2s all;
     z-index:99;
 }
-.favourite-hover-container::before {
+.favourites-hover-container::before {
     content: '';
     position: absolute;
     top: -20px; /* Adjust this value to position the arrow correctly */
     left: 10%;
-    margin-left: 253px; /* Half of the arrow's width */
+    margin-left: 255px; /* Half of the arrow's width */
     border-width: 10px;
     border-style: solid;
     border-radius: 20px;
     border-color: transparent transparent white transparent; /* Adjust the color as needed */
 }
-.favourite-hover-container{
+.favourites-hover-container{
     border-radius: 20px;
     position: absolute;
     background-color: white;
     width: 350px;
     height: auto;
     top: 4rem;
-    right: 18rem;
+    right: 15rem;
     color: black;
     z-index: 100;
     transition: .5s all;
@@ -255,7 +256,7 @@ hr{
     width: 300px;
     height: 200px;
     top: 4rem;
-    right: 15rem;
+    right: 12rem;
     color: black;
     z-index: 100;
     transition: .5s all;
@@ -278,7 +279,7 @@ hr{
   
   .learning-product-con .learning-img-div img {
     max-width: 100%;
-    height: auto;
+    height: 85px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
@@ -289,6 +290,7 @@ hr{
   
   .learning-product-con h4 {
     margin: 0;
+    font-size: 20px;
   }
   
   .learning-product-con h5 {
@@ -301,17 +303,18 @@ hr{
     color: #333;
   }
   
-  .learning-product-con .learning-heart-icons{
-    font-size: 10px;
+  .learning-product-con .heart-icons{
+    font-size: 20px;
     color: #ccc;
     cursor: pointer;
-    transition: color 0.3s ease-in-out;
+    transition: color 0.5s ease-in-out;
   }
   
   .learning-product-con .learning-heart-icon-blacks{
     color: black;
     font-size: 20px;
     cursor: pointer;
+    transition: color 0.5s ease-in-out;
   }
   .user-profile-title {
     text-align: center;
@@ -342,7 +345,7 @@ hr{
   }
   .user-prof-img img {
     width: 80px;
-    height: auto;
+    height: 120px;
     border-radius: 10px;
   }
   
@@ -365,6 +368,15 @@ hr{
 }
 .user-edit-icon{
       color: rgb(217,52,109);
-    margin: 20px 0px 0px 20px;
-    font-size: 25px;
+      margin-top: 20px ;
+      margin-right: 20px;
+      font-size: 25px;
   }
+.prof-info{
+  display: flex;
+  padding-bottom: 30px;
+}
+.link{
+  text-decoration: none;
+  color: white;
+}

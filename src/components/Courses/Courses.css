@@ -12,7 +12,6 @@
     display: grid;
     grid-template-columns: repeat(3,1fr);
     gap: 10px; 
-    /* background-color: #364F6B;s */
     
 }
 .product-containers{
@@ -44,6 +43,8 @@ span{
 img{
     height: 200px;
     width: 400px;
+    border: none;
+    border-radius: 20px;
 }
 .add-button{
     background-color: rgb(217,52,109);
