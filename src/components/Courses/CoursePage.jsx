@@ -1,21 +1,21 @@
 import { useParams } from 'react-router-dom'
 import './CoursePage.css'
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import {Link} from 'react-router-dom';
 import { useState } from 'react';
 import CourseVideopage from './CourseVideopage';
 import flashapi from '../api/flashapi';
 import { useNavigate } from 'react-router-dom';
-import {motion, useMotionValue, useTransform} from "framer-motion";
+import {motion} from "framer-motion";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { DataContext } from '../context/DataContext';
 
-const CoursePage = ({courses, user, handleRemoveCourse, boughtCourse,favour,handleClick}) => {
-
+const CoursePage = () => {
+    const {courses, user, handleRemoveCourse, boughtCourses,favour,handleClick} = useContext(DataContext)
     const navigate = useNavigate();
     const [paidUser, setPaidUser] = useState(null)
     const [loading, setLoading] = useState(false)
     const {id} = useParams();
-  
     
     const course = courses.find((course)=> (course.id).toString() === id)
     const videoContent = course ? course.videoContent : [];
@@ -28,10 +28,10 @@ const CoursePage = ({courses, user, handleRemoveCourse, boughtCourse,favour,hand
     };
     
     useEffect(() => {
-        boughtCourse.forEach((course) => {
+        boughtCourses?.forEach((course) => {
           if (course.course_id === id) setPaidUser(course.course_id);
         });
-      }, [boughtCourse, id]);
+      }, [boughtCourses, id]);
 
     useEffect(() => {
         if (!course || !user) {

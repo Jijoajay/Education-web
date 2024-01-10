@@ -1,17 +1,19 @@
 import { Link, useParams } from 'react-router-dom';
 import "./Courses.css";
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import flashapi from '../api/flashapi';
 import { useState } from 'react';
 import { CourseItem } from './CourseItem';
+import { DataContext } from '../context/DataContext';
 
 
-const Courses = ({ courses, searchResult, favour, handleClick, user , handleRemoveCourse}) => {
+const Courses = () => {
+  const { courses, searchResult, favour, handleClick, user , handleRemoveCourse} = useContext(DataContext)
   const [courseByCategory, setCourseByCategory] = useState([]);
   const {category} = useParams();
   useEffect(() => {
     if (category) {
-      const coursesByCategory = courses.find((course) => course.category === category);
+      const coursesByCategory = courses?.find((course) => course.category === category);
       const fetchCourse = async () => {
         try {
           const response = await flashapi.get(`/course/${category}`);
@@ -53,7 +55,7 @@ const Courses = ({ courses, searchResult, favour, handleClick, user , handleRemo
             user['role'] === 'admin' &&
             <Link to='addnewcourse'><button className='add-button'>Add new Course</button></Link>
           ):(
-            <div className="dv"></div>
+            <div className="dv">No course</div>
           )
           }
       </div>

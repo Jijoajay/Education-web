@@ -19,14 +19,18 @@ class User(db.Model):
     def json(self):
         user_info_data = None
         if isinstance(self.user_info, list):
-            user_info_data = [info.json() for info in self.user_info]   
+            user_info_data = [info.json() for info in self.user_info]
+        # user_courses_data = None
+        # if isinstance(self.user_courses, list):
+        #     user_courses_data = [cou.json(user=False) for cou in self.user_courses]
+               
         return{
             "id":self.id,
             "name":self.name,
             "email":self.email,
             "tokens":self.tokens,
             "role":"student",
-            "user_info":user_info_data,
+            "user_info":user_info_data
         }
     
         
@@ -41,7 +45,6 @@ class Course(db.Model):
     oldPrice = db.Column(db.Float)
     courseOffers = db.Column(db.String(255))
     category = db.Column(db.String(255))
-    # user = db.relationship("User",back_populates='course')
     # Relationship with WhatYouLearn and VideoContent models
     whatYouLearn = db.relationship('WhatYouLearn', backref='course', lazy=True,  cascade='all, delete-orphan')
     videoContent = db.relationship('VideoContent', backref='course', lazy=True, cascade='all, delete-orphan')

@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import flashapi from '../api/flashapi'
-const Signin = ({setAuthenticate}) => {
+import { useContext } from 'react'
+import { DataContext} from '../context/DataContext'
+const Signin = () => {
+  const {setAuthenticate} = useContext(DataContext)
   const [loginEmail, setLoginEmail] = useState("")
   const [loginPassword, setLoginPassword] = useState("")
   const navigate = useNavigate();

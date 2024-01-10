@@ -6,10 +6,9 @@ import { SocialIcons } from '../Main/SocialIcons';
 import { IoHeart } from "react-icons/io5";
 import { CourseItem } from '../Courses/CourseItem';
 
-const Hover = ({courses,favour,isHover,menu,setIsHover,title,handleMouseEnter,
+const Hover = ({boughtCourses,favour,isHover,menu,setIsHover,title,handleMouseEnter,
     handleMouseLeave,setActive,handleFavouriteClick, handleRemoveCourse}) => {
-  
-        const course = courses.map((course)=>course.course)
+        const course = boughtCourses.map((course)=>course.course)
     return (
     <>
     <div 

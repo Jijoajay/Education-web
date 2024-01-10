@@ -1,8 +1,10 @@
-import React, { useState ,useEffect} from 'react'
+import React, { useState ,useEffect, useContext} from 'react'
 // import api from "../api/fetch2"
 import { useNavigate } from 'react-router-dom'
 import flashapi from '../api/flashapi'
-const Signup = ({user,setAuthenticate}) => {
+import { DataContext } from '../context/DataContext'
+const Signup = () => {
+  const {user,setAuthenticate} = useContext(DataContext)
   const [userName,setUserName] = useState("")
   const [userEmail,setUserEmail] = useState("")
   const [userPassword,setUserPassword] = useState("")

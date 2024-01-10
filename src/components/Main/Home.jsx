@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef } from 'react'
+import React, { useEffect, useState,useRef, useContext } from 'react'
 import flashapi from '../api/flashapi';
 import './Home.css'
 import {FaArrowLeft, FaArrowRight} from 'react-icons/fa';
@@ -8,10 +8,12 @@ import { useInView } from 'react-intersection-observer';
 import {motion, useAnimation, AnimatePresence} from "framer-motion";
 // import { useInView } from 'framer-motion';
 import {animateLeft, container, item, verticalAnimate} from '../AnimationUtils';
+import { DataContext } from '../context/DataContext';
 
 
 
-const Home = ({courses, favour, handleClick,user}) => {
+const Home = () => {
+  const {courses, favour, handleClick,user} = useContext(DataContext)
   const [slide, setSlide] =useState([])
   const [isVisible, setIsVisible] = useState(false);
   const [currentImage, setCurrentImage] = useState(0)

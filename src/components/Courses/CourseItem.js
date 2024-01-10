@@ -2,12 +2,12 @@ import React from 'react'
 import { IoHeart } from "react-icons/io5";
 import { Link } from 'react-router-dom';
 import { RxCross2 } from "react-icons/rx";
-import MyLearning from '../MyLearning';
+import { useState } from "react";
 
 export const CourseItem = ({courses,favour,isLearning, handleClick, handleRemoveCourse,user, myLearning}) => {
     return (
     <>
-        {courses.map((course,index) => (
+        {courses?.map((course,index) => (
             <div className={`${isLearning ? "learning-product-con" : "product-containers "}`} key={index}>
                 <div className={` ${isLearning ? "learning-img-div" : "img-div"}`}>
                 <div className={ favour.includes(course.id) 
@@ -24,14 +24,15 @@ export const CourseItem = ({courses,favour,isLearning, handleClick, handleRemove
                     ""
                 )
                 }
-                <Link to={`${ myLearning ? `/course/${course.id}` : `/courses/${course.id}`}`} key={course.id} style={{ textDecoration: 'none', color: 'black' }}>
+                <Link to={`${!user? "/" : myLearning ? `/course/${course.id}` : `/courses/${course.id}`}`} key={course.id} style={{ textDecoration: 'none', color: 'black' }}
+                >
                 <img src={course.img} alt={course.name} />
                 </Link> 
                 </div>
                 <div className={`content-div ${isLearning ? "learning-content-div" : ""}`}>
-                <h4>{course.name}</h4>
-                <h5>{course.author}</h5>
-                <p>₹{course.newPrice} <span>₹{course.oldPrice}</span></p>
+                    <h4>{course.name}</h4>
+                    <h5>{course.author}</h5>
+                    <p>₹{course.newPrice} <span>₹{course.oldPrice}</span></p>
                 </div>
             </div>
         ))}

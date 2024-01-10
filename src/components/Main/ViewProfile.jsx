@@ -1,5 +1,5 @@
 import "./User.css"
-import React from 'react'
+import React, { useContext } from 'react'
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import IsFavourite from "./IsFavourite";
@@ -8,8 +8,10 @@ import { useNavigate } from "react-router-dom";
 import flashapi from "../api/flashapi";
 import { SocialIcons } from "./SocialIcons";
 import MyLearning from "../MyLearning";
+import { DataContext} from "../context/DataContext";
 
-export const ViewProfile = ({user, handleClick, favour, viewProfile, setViewProfile, favourite,courses, info, handleRemoveCourse}) => {
+export const ViewProfile = ({ viewProfile}) => {
+    const {user, handleClick, favour, setViewProfile, favourite,courses, info, handleRemoveCourse} = useContext(DataContext)
     const navigate = useNavigate();
     const saveMyLearning = JSON.parse(localStorage.getItem("myLearning")) || false ;
     const [myLearning, setMyLearning] = useState(saveMyLearning)

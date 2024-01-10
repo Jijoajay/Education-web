@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import "./AddCourse.css"
 import CourseDetail from './CourseDetail'
 import LearningDetail from './LearningDetail'
@@ -7,8 +7,10 @@ import { useNavigate } from 'react-router-dom'
 import flashapi from '../api/flashapi'
 import { storage } from '../../firebase'
 import { ref, getDownloadURL, uploadBytes } from 'firebase/storage'
+import { DataContext} from '../context/DataContext'
 
-const AddNewCourse = ({courses,setCourses, user}) => {
+const AddNewCourse = () => {
+    const {courses,setCourses, user} = useContext(DataContext)
     const navigate = useNavigate();
     const [currentSection, setCurrentSection] = useState(1)
     const [courseName , setCourseName] = useState("")

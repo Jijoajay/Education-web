@@ -1,20 +1,24 @@
 import './Navbar.css'
-import React, { useState} from 'react'
+import React, { useContext, useState} from 'react'
 import {Link, useNavigate} from 'react-router-dom';
 import { GiHamburgerMenu } from "react-icons/gi";
 import flashapi from '../api/flashapi';
 import { FaUserAlt } from "react-icons/fa";
-import { IoHeart } from "react-icons/io5";
 import Hover, { CategoryHover, InfoHover} from './Hover';
-
-const Navbar = ({search,setSearch,handleSubmit,authenticate,setAuthenticate, courses, boughtCourses, favour,handleFavouriteClick, favourite,info}) => {
+import { DataContext } from '../context/DataContext';
+import { RxCross1 } from "react-icons/rx";
+import { motion } from 'framer-motion';
+const Navbar = () => {
+    const {search,setSearch,handleSubmit,authenticate,setAuthenticate, courses, boughtCourses, favour,favourite,info, flashMessage,hideFlashMessage} = useContext(DataContext)
+    console.log("search:", search);
+    console.log("courses:", courses);
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false)
     const [active, setActive] = useState('home')
     const [isHover, setIsHover] = useState(false)
     const [menu, setMenu] = useState("");
 
-    const handleClick = ()=>{
+    const handleMenuClick = ()=>{
         setIsOpen(!isOpen)
     }
     const handleLogOut = async()=>{
@@ -28,6 +32,7 @@ const Navbar = ({search,setSearch,handleSubmit,authenticate,setAuthenticate, cou
                 }
             });
             setAuthenticate(false)
+            localStorage.removeItem("token")
             navigate('/')
         }catch(err){
             if(err.response){
@@ -109,7 +114,7 @@ const Navbar = ({search,setSearch,handleSubmit,authenticate,setAuthenticate, cou
                 <>
                     <Hover 
                     title={"myLearning"}
-                    courses={boughtCourses}
+                    boughtCourses={boughtCourses}
                     favour={favour}
                     handleMouseEnter={handleMouseEnter}
                     handleMouseLeave={handleMouseLeave}
@@ -121,7 +126,7 @@ const Navbar = ({search,setSearch,handleSubmit,authenticate,setAuthenticate, cou
                     />
                     <Hover 
                     title={"favourites"}
-                    courses={favourite}
+                    boughtCourses={favourite}
                     favour={favour}
                     handleMouseEnter={handleMouseEnter}
                     handleMouseLeave={handleMouseLeave}
@@ -153,8 +158,20 @@ const Navbar = ({search,setSearch,handleSubmit,authenticate,setAuthenticate, cou
                 }
             </div>
             <div className="hamburger-menu">
-            <GiHamburgerMenu onClick={handleClick} className='menu'/>
+            <GiHamburgerMenu onClick={handleMenuClick} className='menu'/>
             </div>
+            {console.log("flashMessage.message")}
+            {flashMessage.message &&
+            <motion.div className={`flash ${flashMessage.category}`} 
+            initial={{opacity : 0}}
+            animate={{opacity : 1}}
+            transition={{duration:1, ease:"easeInOut"}}
+            exit={{opacity:0,transition: { duration: 1, ease: 'easeInOut' }}}
+            >
+                <p>{flashMessage.message}</p>
+                <RxCross1 onClick={hideFlashMessage}/>
+            </motion.div>
+            }
     </nav>
   )
 }

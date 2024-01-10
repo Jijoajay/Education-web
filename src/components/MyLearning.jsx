@@ -1,15 +1,16 @@
-import React, {useState } from 'react';
+import React, {useContext, useState } from 'react';
 import IsFavourite from './Main/IsFavourite';
 import './MyLearning.css';
 import flashapi from './api/flashapi';
 import { CourseItem } from './Courses/CourseItem';
+import { DataContext} from './context/DataContext';
 
 
-const MyLearning = ({ user, title, coursee, favs, favour, handleClick, courses, favourite, handleRemoveCourse}) => {
-  
+const MyLearning = ({coursee, favs}) => {
+  const { user, title,favour, handleClick, boughtCourses, favourite, handleRemoveCourse} = useContext(DataContext)
   const [showCourse, setShowCourse ] = useState( coursee );
   const [showFavourite, setShowFavourite] = useState(favs);
-  const course = courses.map((course)=>course.course)  
+  const course = boughtCourses.map((course)=>course.course)  
 
     const handleCourseClick = ()=>{
       if(showFavourite){
@@ -29,7 +30,7 @@ const MyLearning = ({ user, title, coursee, favs, favour, handleClick, courses, 
     }
     console.log('showCourse:', showCourse);
     console.log('showFavourite:', showFavourite);
-    console.log('courses',courses);
+    console.log('courses',boughtCourses);
     return (
     <main className='myLearning-page'>
       <div className="title">
@@ -48,7 +49,7 @@ const MyLearning = ({ user, title, coursee, favs, favour, handleClick, courses, 
         {
           showCourse &&
           <>
-            {courses.length > 0 ? (
+            {boughtCourses.length > 0 ? (
                 <CourseItem 
                   myLearning={true}
                   user={user}

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import { GiHamburgerMenu } from "react-icons/gi";
 import "./BuyCourse.css"
 import CourseVideopage from './CourseVideopage';
@@ -12,8 +12,10 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import flashapi from '../api/flashapi';
 import {motion, AnimatePresence} from  "framer-motion";
+import { DataContext } from '../context/DataContext';
 
-const BuyCourse = ({courses, user}) => {
+const BuyCourse = () => {
+    const {courses, user} = useContext(DataContext)
     const navigate = useNavigate();
     const {id} = useParams();
     const course = courses?.find((course) => (course.id).toString() === id);

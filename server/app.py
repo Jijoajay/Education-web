@@ -70,8 +70,6 @@ def signup():
                 tokens=str(token),
                 
             )
-            # new_token = Token(token=token, user=new_user)
-            # db.session.add(new_token)
             db.session.add(new_user)
             db.session.commit();            
             return jsonify({
@@ -147,10 +145,10 @@ def user_data(token_id):
         return jsonify(user.json()),201
     else:
         admin = Admin.query.filter_by(tokens = token_id ).first()
-    if admin:
-        return jsonify(admin.json())
-    else:
-        abort(404, description="User not found")
+        if admin:
+            return jsonify(admin.json())
+        else:
+            abort(404, description="User not found")
 
 @app.route('/logout', methods=["POST"])
 @jwt_required()

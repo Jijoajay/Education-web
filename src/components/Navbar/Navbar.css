@@ -380,3 +380,34 @@ hr{
   text-decoration: none;
   color: white;
 }
+.flash{
+  position: absolute;
+  top: 80%;
+  left: 35%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 70px;
+  width: 500px;
+  background-color: white;
+  border: none;
+  border-radius: 20px;
+}
+.success{
+  background-color: rgb(57, 215, 57);
+  font-size: 18px;
+  font-weight: 900;
+  color: white;
+}
+.success p{
+  color: white;
+}
+.error p{
+  color: white;
+}
+.error{
+  background-color: rgb(226, 61, 24);
+  font-size: 18px;
+  color: white;
+  font-weight: 900;
+}

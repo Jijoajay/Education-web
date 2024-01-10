@@ -1,10 +1,12 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import './User.css';
 import flashapi from '../api/flashapi';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ViewProfile } from './ViewProfile';
+import { DataContext} from '../context/DataContext';
 
-const User = ({user, favour, handleClick, favourite,courses,info}) => {
+const User = () => {
+    const {user, favour, handleClick, favourite,courses,info} = useContext(DataContext)
     const navigate = useNavigate();
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
